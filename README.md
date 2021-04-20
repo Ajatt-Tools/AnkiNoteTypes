@@ -30,7 +30,7 @@ To export one of your Note Types, run:
 Then write a helpful readme and commit your changes:
 
 ```
-git add templates && git commit
+git add templates fonts && git commit
 ```
 
 After committing your template, please [create a pull request](https://github.com/Ajatt-Tools/AnkiNoteTypes/pulls).
