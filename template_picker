@@ -1,3 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 
-python3 -m antp "$@"
+readonly this=$(readlink -f -- "$0")
+readonly dir=$(dirname -- "$this")
+readonly module=antp
+
+cd -- "$dir" || exit
+
+python3 -m "$module" "$@"
