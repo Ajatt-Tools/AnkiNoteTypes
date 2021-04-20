@@ -1,5 +1,6 @@
-from urllib.error import URLError
 import sys
+from urllib.error import URLError
+
 from antp.exporter import export_note_type
 from antp.importer import import_note_type
 

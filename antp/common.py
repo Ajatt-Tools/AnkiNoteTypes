@@ -23,4 +23,3 @@ def select(items: list[str]) -> Optional[str]:
         print(f"{idx}: {model}")
     idx = read_num("\nSelect model number: ", max_val=len(items) - 1)
     return items[int(idx)]
-
