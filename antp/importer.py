@@ -14,6 +14,9 @@ def read_template(model_name):
 
 
 def send_note_type(template_json):
+    models = invoke('modelNames')
+    while template_json["modelName"] in models:
+        template_json["modelName"] = input("Model with this name already exists. Enter new name: ")
     invoke("createModel", **template_json)
 
 
