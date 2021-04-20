@@ -1,6 +1,6 @@
 from urllib.error import URLError
 
-from antp.template_picker import export_note_type
+from antp.exporter import export_note_type
 
 try:
     export_note_type()
