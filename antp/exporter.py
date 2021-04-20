@@ -6,17 +6,7 @@ from typing import AnyStr
 from urllib.error import URLError
 
 from antp.ankiconnect import invoke
-
-JSON_INDENT = 4
-SCRIPT_DIR = os.path.dirname(__file__)
-NOTE_TYPES_DIR = os.path.join(SCRIPT_DIR, os.pardir, 'templates')
-
-
-def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None) -> int:
-    resp = int(input(msg))
-    if resp < min_val or (max_val and resp > max_val):
-        raise ValueError("Value out of range.")
-    return resp
+from antp.common import NOTE_TYPES_DIR, JSON_INDENT, select, JSON_FILENAME
 
 
 def fetch_card_templates(model_name: str):
@@ -56,7 +46,7 @@ def create_template_dir(template_name) -> AnyStr:
 
 def save_note_type(template_json):
     template_dir = create_template_dir(template_json["modelName"])
-    template_fp = os.path.join(template_dir, 'template.json')
+    template_fp = os.path.join(template_dir, JSON_FILENAME)
     readme_fp = os.path.join(template_dir, 'README.md')
 
     with open(template_fp, 'w') as f:
@@ -67,14 +57,9 @@ def save_note_type(template_json):
 
 
 def export_note_type():
-    models = invoke('modelNames')
-    if not models:
-        print("Nothing to show.")
+    model = select(invoke('modelNames'))
+    if not model:
         return
-    for idx, model in enumerate(models):
-        print(f"{idx}: {model}")
-    idx = read_num("\nSelect model number: ", max_val=len(models) - 1)
-    model = models[int(idx)]
     print(f"Selected model: {model}")
     save_note_type(fetch_template(model))
     print("Done.")
