@@ -1,5 +1,6 @@
 # Exporter exports note types from Anki to ../templates/
 
+import base64
 import json
 import os
 import random
@@ -7,7 +8,7 @@ from typing import AnyStr
 from urllib.error import URLError
 
 from antp.ankiconnect import invoke
-from antp.common import NOTE_TYPES_DIR, JSON_INDENT, select, JSON_FILENAME, README_FILENAME
+from antp.common import NOTE_TYPES_DIR, JSON_INDENT, select, JSON_FILENAME, README_FILENAME, FONTS_DIR, get_used_fonts
 
 
 def fetch_card_templates(model_name: str):
@@ -45,7 +46,7 @@ def create_template_dir(template_name: str) -> AnyStr:
     return dir_path
 
 
-def save_note_type(template_json):
+def save_note_type(template_json: dict):
     template_dir = create_template_dir(template_json["modelName"])
     template_fp = os.path.join(template_dir, JSON_FILENAME)
     readme_fp = os.path.join(template_dir, README_FILENAME)
@@ -58,12 +59,24 @@ def save_note_type(template_json):
             f.write(f"# {template_json['modelName']}\n\n*Description and screenshots here.*")
 
 
+def save_fonts(template_json: dict):
+    linked_fonts = get_used_fonts(template_json['css'])
+    for font in linked_fonts:
+        file_b64 = invoke("retrieveMediaFile", filename=font)
+        if file_b64 is False:
+            continue
+        with open(os.path.join(FONTS_DIR, font), 'bw') as f:
+            f.write(base64.b64decode(file_b64))
+
+
 def export_note_type():
     model = select(invoke('modelNames'))
     if not model:
         return
     print(f"Selected model: {model}")
-    save_note_type(fetch_template(model))
+    template = fetch_template(model)
+    save_fonts(template)
+    save_note_type(template)
     print("Done.")
 
 
