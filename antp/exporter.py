@@ -53,8 +53,9 @@ def save_note_type(template_json):
     with open(template_fp, 'w') as f:
         f.write(json.dumps(template_json, indent=JSON_INDENT))
 
-    with open(readme_fp, 'w') as f:
-        f.write(f"# {template_json['modelName']}\n\n*Description and screenshots here.*")
+    if not os.path.isfile(readme_fp):
+        with open(readme_fp, 'w') as f:
+            f.write(f"# {template_json['modelName']}\n\n*Description and screenshots here.*")
 
 
 def export_note_type():
