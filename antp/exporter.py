@@ -30,14 +30,14 @@ def fetch_template(model_name: str):
     }
 
 
-def create_template_dir(template_name) -> AnyStr:
+def create_template_dir(template_name: str) -> AnyStr:
     dir_path = os.path.join(NOTE_TYPES_DIR, template_name)
     dir_content = os.listdir(NOTE_TYPES_DIR)
 
     if template_name in dir_content:
         ans = input("Template with this name already exists. Overwrite [y/N]? ")
         if ans.lower() != 'y':
-            while template_name in dir_content:
+            while os.path.basename(dir_path) in dir_content:
                 dir_path = os.path.join(NOTE_TYPES_DIR, f"{template_name}_{random.randint(0, 9999)}")
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
