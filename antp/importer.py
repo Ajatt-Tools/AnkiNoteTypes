@@ -1,3 +1,5 @@
+# Importer imports note types from ../templates/ to Anki.
+
 import json
 import os
 from urllib.error import URLError

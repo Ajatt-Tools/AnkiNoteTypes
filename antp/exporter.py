@@ -1,4 +1,5 @@
-# Anki Note Type Picker
+# Exporter exports note types from Anki to ../templates/
+
 import json
 import os
 import random
