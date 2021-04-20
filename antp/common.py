@@ -3,6 +3,7 @@ from typing import Optional
 
 JSON_INDENT = 4
 JSON_FILENAME = 'template.json'
+README_FILENAME = 'README.md'
 SCRIPT_DIR = os.path.dirname(__file__)
 NOTE_TYPES_DIR = os.path.join(SCRIPT_DIR, os.pardir, 'templates')
 

@@ -7,7 +7,7 @@ from typing import AnyStr
 from urllib.error import URLError
 
 from antp.ankiconnect import invoke
-from antp.common import NOTE_TYPES_DIR, JSON_INDENT, select, JSON_FILENAME
+from antp.common import NOTE_TYPES_DIR, JSON_INDENT, select, JSON_FILENAME, README_FILENAME
 
 
 def fetch_card_templates(model_name: str):
@@ -48,7 +48,7 @@ def create_template_dir(template_name) -> AnyStr:
 def save_note_type(template_json):
     template_dir = create_template_dir(template_json["modelName"])
     template_fp = os.path.join(template_dir, JSON_FILENAME)
-    readme_fp = os.path.join(template_dir, 'README.md')
+    readme_fp = os.path.join(template_dir, README_FILENAME)
 
     with open(template_fp, 'w') as f:
         f.write(json.dumps(template_json, indent=JSON_INDENT))
