@@ -36,3 +36,30 @@ For further explanation, see [Writing Japanese guide](https://tatsumoto-ren.gith
 
 Adding `{cloze-prefix}<b>{cloze-body}</b>{cloze-suffix}` to the settings
 lets you automatically highlight the target word.
+
+## Japanese Support settings
+
+To configure the [Japanese support](https://ankiweb.net/shared/info/3918629684) add-on,
+open Anki and go to Tools > Add-ons > Japanese Support > Config.
+My config looks like this:
+
+```
+{
+    "dstFields": [
+        "SentFurigana",
+        "VocabFurigana"
+    ],
+    "furiganaSuffix": " (furigana)",
+    "noteTypes": [
+        "japanese",
+        "subs2srs"
+    ],
+    "skipNumbers": false,
+    "srcFields": [
+        "SentKanji",
+        "VocabKanji"
+    ]
+}
+```
+
+Make sure to apply these settings to be able to generate furigana when using this Note Type.
