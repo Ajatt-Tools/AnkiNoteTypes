@@ -20,14 +20,17 @@ def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None)
     return resp
 
 
-def select(items: list[str]) -> Optional[str]:
+def select(items: list[str], msg: str = "Select item number: ") -> Optional[str]:
     if not items:
         print("Nothing to show.")
         return
+
     for idx, model in enumerate(items):
         print(f"{idx}: {model}")
-    idx = read_num("\nSelect model number: ", max_val=len(items) - 1)
-    return items[int(idx)]
+    print()
+
+    idx = read_num(msg, max_val=len(items) - 1)
+    return items[idx]
 
 
 def get_used_fonts(template_css: str):
