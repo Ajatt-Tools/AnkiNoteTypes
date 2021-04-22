@@ -3,6 +3,7 @@
 [Targeted sentence cards](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#targeted-sentence-cards-or-mpvacious-cards)
 for learning Japanese.
 Can be used for everyday sentence mining, as well as for storing premade sentence packs.
+A deck with example cards is available [here](https://ankiweb.net/shared/info/1557722832).
 
 ![screenshot](japanese_sentences.webp)
 
