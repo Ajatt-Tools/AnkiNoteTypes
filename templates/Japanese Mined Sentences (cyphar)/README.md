@@ -73,6 +73,13 @@ can add to it manually in the browser.
 
 ![yomichan settings](yomichan_settings.webp)
 
+By using `{cloze-prefix}<b>{cloze-body}</b>{cloze-suffix}` for `SentKanji`, the
+targeted word will be automatically highligted. If you prefer to do the
+highlighting yourself (or don't want to highlight the target word on the card
+front), use `{sentence}` instead. Note that Yomichan can be a bit peculiar when
+deciding how much of a conjugated verb counts as "part" of the verb, so double
+check that you're happy with the automatic highlighting.
+
 ## Japanese Support settings
 
 If you use the [Japanese Support add-on][anki-jpn], make sure to modify
@@ -118,7 +125,14 @@ word "Japanese" in its name, please add the note type name to `"noteTypes"`.
 As with the Japanese Support add-on, you need to add the right field to
 `srcFields`. However, because the JaPitch add-on writes to `VocabPitchPattern`
 you don't need to modify `dstFields`. And instead of adding `SentFurigana`, you
-want to add `VocabFurigana`.
+want to add `VocabKanji`. I also would set `regenerateReadings` to true because
+JaPitch provides more information than Yomichan.
+
+Note that this can lead to extra readings being generated, and you cannot
+currently force it to only use the correct reading by setting the source field
+to `VocabFurigana` (doing so will lead to an entirely wrong reading to be
+generated because it treats the furigana as a separate word, breaking up the
+expression into multple parts).
 
 Your final config should look something like this:
 
@@ -137,7 +151,7 @@ Your final config should look something like this:
     "srcFields": [
         "Expression",
         "Kanji",
-        "VocabFurigana"
+        "VocabKanji"
     ],
     "styles": {
         "&#42780;": "&#42780;",
