@@ -25,6 +25,15 @@ template][original-template], with the following modifications made to the
    I find that if both definitions are visible, my eyes immediately go to the
    bilingual definition even if it wasn't necessary for me to do so.
 
+ * A new field is added `Source`, which is useful for storing information about
+   where you mined a sentence from (be it from mpvacious or Yomichan when
+   browsing some website). This can be quite handy if you find that you need to
+   adjust the sentence some time later (or add a different image on the back).
+
+   To use this with mpvacious, you need to be using a version which includes
+   [this pull-request I wrote][mpvacious-pr36], which adds support for
+   specifying a "miscellaneous information". Set `miscinfo_field=Source`.
+
 I personally use these cards for sentence mining with Yomichan and Mpvacious.
 
 |           Front           |
@@ -36,6 +45,7 @@ I personally use these cards for sentence mining with Yomichan and Mpvacious.
 | ![back](card_back_monolingual.webp)  | ![back](card_back_multilingual.webp) |
 
 [original-template]: ../Japanese%20sentences/
+[mpvacious-pr36]: https://github.com/Ajatt-Tools/mpvacious/pull/36
 
 ## Included card types
 
@@ -79,6 +89,16 @@ highlighting yourself (or don't want to highlight the target word on the card
 front), use `{sentence}` instead. Note that Yomichan can be a bit peculiar when
 deciding how much of a conjugated verb counts as "part" of the verb, so double
 check that you're happy with the automatic highlighting.
+
+Note that Yomichan will happily include the URL (and screenshot) of the
+standalone search window (such as when you're using the clipboard monitor with
+mpvacious), which isn't very useful. The card type has some JavaScript which
+will auto-hide URLs that have the `moz-extension://` protocol (as well as
+images if there was only `moz-extension://` URL sources from Yomichan), but
+you'll need to make sure you use the format described above -- it will only
+work if it's wrapped in a `id="yomichan-source"` node. Alternatively, you can
+create a conditional profile for `moz-extension://` pages in Yomichan so that
+URLs aren't included when using the search window (this is what I do).
 
 ## Japanese Support settings
 
