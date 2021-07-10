@@ -1,6 +1,6 @@
 # Japanese fallback
 
-This card template was brought to you by ﾌｪﾘﾍﾟ. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on card [template provided by a DJT user](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#fallback-cards).
+This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#fallback-cards).
 
 ![gif](gif1-example.gif)
 
@@ -12,12 +12,13 @@ FBCs allow you do the following:
 
 ## Converting TSCs into FBCs　(and vice versa)
 
-It’s easy to convert your Mpvacious, TSC, cards into FBCs. Select the cards you want to convert, > Change note type > select “Fallback card” and make sure that each field is matching with each other.
+It’s easy to convert your Mpvacious, TSC, cards into FBCs. Select all the cards you want to convert, > Change note type > select “Fallback card” and make sure that each field is matching with each other.
+
 ![gif](gif2-notecon.gif)
 
 ## Footer
 
-![image](image1.png)
+![screenshot](image1.png)
 
 I’ve changed the original footers of Japanese sentences to match my needs. “Ichi.moe” is better than Jisho to parse sentences, in my opinion. “Images” puts the target word on Google JP, rather than the whole sentence. “Sentences” searchs the target word on Sentence Search, giving you more example sentences (tip: you can you can mine cards from that site).
 Here’s the original footer of Japanese sentences:
@@ -30,7 +31,8 @@ Here’s the original footer of Japanese sentences:
     href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}</footer
 >
 ```
-![image](image2.png)
+
+![screenshot](image2.png)
 
 ## Included card types
 
