@@ -1,6 +1,6 @@
 # Japanese fallback
 
-This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#fallback-cards).
+This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://pastebin.com/pAVvqLPd)(a big thanks to whoever made it). I've also changed the footers and made `Notes` and `SentEng` field collapsible.
 
 ![gif](gif1-example.gif)
 
