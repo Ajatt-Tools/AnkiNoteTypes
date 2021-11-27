@@ -1,0 +1,41 @@
+{{#MakeProductionCard}}
+{{#SentKanji}}
+
+<header>{{#Tags}}<div class="tags">{{Tags}}</div>{{/Tags}}</header>
+{{#Image}}<div class="images">{{Image}}</div>{{/Image}}
+<div class="jpsentence production">{{edit:furigana:SentFurigana}}</div>
+<div style="text-align: center;">{{VocabAudio}}{{SentAudio}}</div>
+<script>
+    function threeDots() {
+        const sent = document.getElementsByClassName("production")[0];
+        if (sent) {
+            for (const hidden of sent.getElementsByTagName("b")) {
+                hidden.style.visibility = "visible";
+                hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
+            }
+        }
+    }
+    /* Splits tags into separate divs */
+    function splitTagDiv() {
+        const header = document.querySelector("header");
+        if (!header) return;
+        const split = `{{MorphManFocus}} {{Tags}}`.split(' ');
+
+        header.innerHTML = "";
+
+        for (const tag of split) {
+            if (tag.length < 1)
+                continue;
+            const tag_elem = document.createElement("div");
+            tag_elem.className = "tags";
+            tag_elem.innerHTML = tag;
+            header.appendChild(tag_elem);
+        }
+    }
+
+    threeDots()
+    splitTagDiv()
+</script>
+
+{{/SentKanji}}
+{{/MakeProductionCard}}
