@@ -23,8 +23,10 @@ def invoke(action, **params):
 
 
 def main():
-    result = invoke('deckNames')
-    print('got list of decks: {}'.format(result))
+    decks = invoke('deckNames')
+    print("List of decks:")
+    for deck in decks:
+        print(deck)
 
 
 if __name__ == '__main__':
