@@ -5,6 +5,8 @@
 import base64
 import json
 import random
+import shutil
+from os import DirEntry
 from typing import Any
 
 from .ankiconnect import invoke
@@ -41,9 +43,9 @@ def select_model_dir_path(model_name: str) -> str:
     return dir_path
 
 
-def write_card_templates(template_dir: str, templates: list[CardTemplate]) -> None:
+def write_card_templates(model_dir_path: str, templates: list[CardTemplate]) -> None:
     for template in templates:
-        dir_path = os.path.join(template_dir, template.name)
+        dir_path = os.path.join(model_dir_path, template.name)
         if not os.path.isdir(dir_path):
             os.mkdir(dir_path)
         for filename, content in zip((FRONT_FILENAME, BACK_FILENAME), (template.front, template.back)):
@@ -57,6 +59,13 @@ def format_export(model: NoteType) -> dict[str, Any]:
         "inOrderFields": model.fields,
         "cardTemplates": [template.name for template in model.templates]
     }
+
+
+def remove_deleted_templates(model_dir_path: str, templates: list[str]) -> None:
+    for entry in os.scandir(model_dir_path):
+        entry: DirEntry
+        if entry.is_dir() and entry.name not in templates:
+            shutil.rmtree(entry.path)
 
 
 def save_note_type(model: NoteType):
@@ -75,6 +84,7 @@ def save_note_type(model: NoteType):
         f.write(model.css)
 
     write_card_templates(dir_path, model.templates)
+    remove_deleted_templates(dir_path, [template.name for template in model.templates])
 
     if not os.path.isfile(readme_path):
         with open(readme_path, 'w') as f:
