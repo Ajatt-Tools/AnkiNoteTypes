@@ -1,0 +1,127 @@
+
+<header>
+	{{#MorphManFocus}}
+		<div class="tags">{{MorphManFocus}}</div>
+	{{/MorphManFocus}}
+	{{#Tags}}
+		<div class="tags">{{Tags}}</div>
+	{{/Tags}}
+</header>
+
+<div class="fallback" lang="ja" id='flip' data-line='{{SentKanji}}'><span>{{furigana:VocabKanji}}</span></div>
+ 
+<script>
+  //handle html that anki may put into the sentence field
+  var s = document.getElementById("flip").dataset.line;
+  if (s.length > 0) {
+    s = s.replace(/<br>|<div>/ig, '\r\n');
+    s = s.replace(/<[^<]*>/ig, '');
+    document.getElementById("flip").dataset.line = s;
+ 
+    //https://ankiweb.net/shared/info/1642550423
+    document.addEventListener("keyup", e=>{
+      if(e.shiftKey) {
+       if(document.getElementById("flip").classList.contains("hover"))
+         document.getElementById("flip").classList.remove("hover");
+       else
+         document.getElementById("flip").classList.add("hover");
+      }
+    });
+  }
+</script>
+
+<!--
+<div class="jpsentence" lang="ja">
+	{{morphHighlight:furigana:SentKanji}}
+	{{^SentKanji}}
+		<nokana>{{kanji:SentFurigana}}</nokana>
+	{{/SentKanji}}
+</div>
+-->
+
+<div style="display:none;">
+	<div id="pitchnum_hidden">{{VocabPitchNum}}</div>
+	<div id="kanaword_hidden">{{kana:VocabFurigana}}</div>
+</div>
+
+<script>
+	/* Paints the question word according to its Pitch Accent number.
+	 * blue for 平板
+	 * red for 頭高
+	 * orange for 中高
+	 * green for 尾高
+	 */
+	function markPitch() {
+		var pitchNumber = document.getElementById("pitchnum_hidden");
+		if (pitchNumber === null) {
+			return;
+		} else {
+			pitchNumber = pitchNumber.innerHTML.match(/\d/);
+		}
+		if (pitchNumber === null) {
+			return;
+		} else {
+			pitchNumber = Number(pitchNumber);
+		}
+
+		/* Then decide what color to use and change font color accordingly. */
+		if ( pitchNumber == 0 )  {
+			// use blue for 平板
+			paintTargetWord("#3366CC");
+		} else if ( pitchNumber == 1 ) {
+			// use red for 頭高
+			paintTargetWord("red");
+		} else if ( pitchNumber > 1 ) {
+			if ( odaka(pitchNumber) ) {
+				// use green for 尾高
+				paintTargetWord("green");
+			} else {
+				// use orange for 中高
+				paintTargetWord("#ff6207");
+			}
+		}
+	}
+	
+	function paintTargetWord(color) {
+		for (sentence of document.getElementsByClassName("jpsentence")) {
+			for (word of sentence.getElementsByTagName("b")) {
+				word.style.color = color;
+			}
+		}
+	}
+
+	function odaka(pitch_num) {
+		// word is odaka if number of moras is equal to pitch accent position
+		const vocab_kana = document.getElementById("kanaword_hidden");
+		if (vocab_kana === null) {
+			return false;
+		}
+		// small っ is one mora; ゃゅょ are parts of single mora
+		const n_moras = vocab_kana.innerHTML.replace(/[ャュョゃゅょ]/g, '').length;
+		if ( n_moras == pitch_num ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/* Splits tags into separate divs */
+	function splitTagDiv() {
+		const header = document.getElementsByTagName("header")[0];
+		if (!header) return;
+		const tags = "{{MorphManFocus}} {{Tags}}".split(" ");
+		header.innerHTML = "";
+
+		for (const tag of tags){
+			if (tag.length < 1)
+				continue;
+			const tag_elem = document.createElement("div");
+			tag_elem.className = "tags";
+			tag_elem.innerHTML = tag;
+			header.appendChild(tag_elem);
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', markPitch(), false);
+	document.addEventListener('DOMContentLoaded', splitTagDiv(), false);
+</script>

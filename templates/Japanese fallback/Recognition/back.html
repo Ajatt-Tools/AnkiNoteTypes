@@ -1,0 +1,57 @@
+<div class="fside">{{FrontSide}}</div>
+<hr id="answer">
+<div class="jpsentence" lang="ja">
+	{{morphHighlight:furigana:SentFurigana}}
+	{{^SentFurigana}}{{furigana:SentKanji}}{{/SentFurigana}}
+</div>
+
+{{#SentEng}}
+<details>
+  <summary><div class="tags">eng</summary>
+	<div lang="en">
+		{{SentEng}}
+</div>
+</details>
+{{/SentEng}}
+
+<div class="vocab">
+{{VocabAudio}}{{SentAudio}}
+{{VocabPitchPattern}}{{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
+{{#VocabPitchNum}}<span class="tags" id="pitchnum">{{VocabPitchNum}}</span>{{/VocabPitchNum}}{{#VocabKanji}}【{{kanji:VocabKanji}}】{{/VocabKanji}}
+</div>
+
+{{#VocabDef}}	
+<div class="definitions">{{furigana:VocabDef}}</div>
+{{/VocabDef}}
+
+{{#Image}}<div class="images" >{{Image}}</div>{{/Image}}
+
+{{#Notes}}
+<details>
+  <summary><div class="tags">Notes</summary>
+<div class="notes">
+	<div>{{furigana:Notes}}</div>
+</div>
+</details>
+{{/Notes}}
+
+<hr>
+
+<footer>{{#SentKanji}}<a 
+	href="https://jisho.org/search?keyword={{kanji:text:SentKanji}}" title="Sentence on Jisho">Jisho</a><a
+href="https://ichi.moe/cl/qr/?q={{kanji:text:SentKanji}} &r=kana" title="Sentence on Ichi.moe">Ichi.moe</a>{{/SentKanji}}{{#VocabKanji}}<a
+	href="https://www.google.co.jp/search?q={{kanji:text:VocabKanji}}&tbm=isch" title="Search images">Images</a><a
+	href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
+	href="https://sentencesearch.neocities.org/#{{text:VocabKanji}}" title="Vocab on SentenceSearch">Sentences</a>{{/VocabKanji}}</footer
+>
+
+<script>
+	function removePitchBrackets() {
+		const tags = document.getElementById("pitchnum");
+		if (tags !== null) {
+			tags.innerHTML = tags.innerHTML.replace(/(\[(?=\d)|(?<=\d)\])/g, "");
+		}
+	}
+	document.addEventListener('DOMContentLoaded', markPitch(), false);
+	document.addEventListener('DOMContentLoaded', removePitchBrackets(), false);	
+</script>
