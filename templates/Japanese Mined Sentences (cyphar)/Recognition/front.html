@@ -1,0 +1,39 @@
+<!--
+mpvacious cards, version 5.0
+Wed Jan  6 11:41:21 PM UTC 2021
+Modified by Aleksa Sarai <cyphar@cyphar.com>.
+-->
+
+<header>
+	{{#MorphManFocus}}
+		<div class="tags">{{MorphManFocus}}</div>
+	{{/MorphManFocus}}
+	{{#Tags}}
+		<div class="tags">{{Tags}}</div>
+	{{/Tags}}
+</header>
+
+<div class="jpsentence" lang="ja">
+	{{morphHighlight:furigana:SentKanji}}
+	{{^SentKanji}}
+		<nokana>{{kanji:SentFurigana}}</nokana>
+	{{/SentKanji}}
+</div>
+
+<div style="display:none;">
+	<div id="pitchnum_hidden">{{VocabPitchNum}}</div>
+	<div id="kanaword_hidden">{{kana:VocabFurigana}}</div>
+</div>
+
+<script>
+	function boxTargetWord() {
+		for (sentence of document.getElementsByClassName("jpsentence")) {
+			for (word of sentence.getElementsByTagName("b")) {
+				word.style["border"] = "1px";
+				word.style["border-style"] = "dotted";
+				word.style["border-color"] = "#9a9a9a9a";
+			}
+		}
+	}
+	document.addEventListener('DOMContentLoaded', boxTargetWord(), false);
+</script>

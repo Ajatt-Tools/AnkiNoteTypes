@@ -1,0 +1,43 @@
+{{FrontSide}}
+
+<hr>
+
+<div lang="en" >{{SentEng}}</div>
+<div class="strokeorder">{{VocabKanji}}</div>
+
+{{#VocabKanji}}
+	<div class="vocab">
+		{{VocabPitchPattern}}
+		{{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
+		{{#VocabPitchNum}}
+			<span class="tags">{{VocabPitchNum}}</span>
+		{{/VocabPitchNum}}
+		【{{VocabKanji}}】
+	</div>
+{{/VocabKanji}}
+
+{{#VocabDef}}	
+	<div class="definitions">
+		{{furigana:VocabDef}}
+	</div>
+{{/VocabDef}}
+
+{{#Notes}}	
+	<div class="notes">
+		<div class="tags">Notes</div>
+		<div>{{furigana:Notes}}</div>
+	</div>
+{{/Notes}}
+
+<hr>
+
+<footer>
+	{{#SentKanji}}
+		<a href="https://jisho.org/search?keyword={{text:SentKanji}}" title="Sentence on Jisho">Jisho</a>
+		<a href="https://www.google.co.jp/search?q={{text:SentKanji}}&tbm=isch" title="Search images">Images</a>
+	{{/SentKanji}}{{#VocabKanji}}
+		<a href="http://tangorin.com/dict.php?dict=general&s={{text:VocabKanji}}">Tangorin</a>
+		<a  href="http://www.weblio.jp/content/{{text:VocabKanji}}">Weblio</a>
+		<a  href="https://wadoku.de/search/?q={{text:VocabKanji}}">Wadoku</a>
+	{{/VocabKanji}}
+</footer>

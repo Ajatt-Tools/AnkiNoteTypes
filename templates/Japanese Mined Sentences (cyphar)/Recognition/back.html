@@ -1,0 +1,161 @@
+<div class="fside">{{FrontSide}}</div>
+<hr id="answer">
+<div class="jpsentence" lang="ja">
+	{{edit:furigana:SentFurigana}}
+	{{^SentFurigana}}{{furigana:SentKanji}}{{/SentFurigana}}
+</div>
+
+{{#SentEng}}
+	<div lang="en">
+		{{hint:SentEng}}
+	</div>
+{{/SentEng}}
+
+<div class="vocab">
+{{VocabAudio}}{{SentAudio}}
+{{VocabPitchPattern}}{{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
+{{#VocabPitchNum}}<span class="tags" id="pitchnum">{{VocabPitchNum}}</span>{{/VocabPitchNum}}{{#VocabKanji}}【{{VocabKanji}}】{{/VocabKanji}}
+</div>
+
+{{#VocabDefMonolingual}}
+<div class="definitions">{{edit:furigana:VocabDefMonolingual}}</div>
+{{/VocabDefMonolingual}}
+
+{{#VocabDef}}
+{{#VocabDefMonolingual}}
+<div class="definitions">{{edit:hint:furigana:VocabDef}}</div>
+{{/VocabDefMonolingual}}
+{{^VocabDefMonolingual}}
+<div class="definitions">{{edit:furigana:VocabDef}}</div>
+{{/VocabDefMonolingual}}
+{{/VocabDef}}
+
+{{#Notes}}	
+<div class="notes">
+	<div class="tags">Notes</div>
+	<div>{{furigana:Notes}}</div>
+</div>
+{{/Notes}}
+
+{{#Image}}<div class="images">{{Image}}</div>{{/Image}}
+
+
+<hr>
+<footer>
+	{{#SentKanji}}
+		<a href="https://jisho.org/search?keyword={{kanji:text:SentKanji}}" title="Sentence on Jisho">Jisho</a>
+		<a href="https://www.google.co.jp/search?q={{kanji:text:SentKanji}}&tbm=isch" title="Search images">Images</a>
+	{{/SentKanji}}
+	{{#VocabKanji}}
+		<a  href="http://www.weblio.jp/content/{{text:VocabKanji}}">Weblio</a>
+		<a  href="https://wadoku.de/search/?q={{text:VocabKanji}}">Wadoku</a>
+	{{/VocabKanji}}
+	{{#Source}}
+	<div>
+		<div class="tags">Source</div>
+		<div id="source-ref">{{Source}}</div>
+	</div>
+	{{/Source}}
+</footer>
+
+<script>
+/*
+Paints the question word according to its Pitch Accent number.
+	blue for 平板
+	red for 頭高
+	orange for 中高
+	green for 尾高
+*/
+
+	function markPitch() {
+		var pitchNumber = document.getElementById("pitchnum_hidden");
+		if (pitchNumber === null) {
+			return;
+		} else {
+			pitchNumber = pitchNumber.innerHTML.match(/\d/);
+		}
+		if (pitchNumber === null) {
+			return;
+		} else {
+			pitchNumber = Number(pitchNumber);
+		}
+
+		/* Then decide what color to use and change font color accordingly. */
+		if ( pitchNumber == 0 )  {
+			// use blue for 平板
+			paintTargetWord("#3366CC");
+		} else if ( pitchNumber == 1 ) {
+			// use red for 頭高
+			paintTargetWord("red");
+		} else if ( pitchNumber > 1 ) {
+			if ( odaka(pitchNumber) ) {
+				// use green for 尾高
+				paintTargetWord("green");
+			} else {
+				// use orange for 中高
+				paintTargetWord("#ff6207");
+			}
+		}
+	}
+	
+	function paintTargetWord(color) {
+		for (sentence of document.getElementsByClassName("jpsentence")) {
+			for (word of sentence.getElementsByTagName("b")) {
+				word.style.color = color;
+				// clear border on back side of cards
+				word.style["border"] = "0px";
+				word.style["border-style"] = "none";
+			}
+		}
+	}
+
+	function odaka(pitch_num) {
+		// word is odaka if number of moras is equal to pitch accent position
+		const vocab_kana = document.getElementById("kanaword_hidden");
+		if (vocab_kana === null) {
+			return false;
+		}
+		// small っ is one mora; ゃゅょ are parts of single mora
+		const n_moras = vocab_kana.innerHTML.replace(/[ャュョゃゅょ]/g, '').length;
+		if ( n_moras == pitch_num ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function removePitchBrackets() {
+		const tags = document.getElementById("pitchnum");
+		if (tags === null)
+			return;
+		tags.innerHTML = tags.innerHTML.replace(/(\[(?=\d)|(?<=\d)\])/g, "");
+	}
+
+	function hideBadSource() {
+		const yomi_source = document.getElementById("yomichan-source");
+		if (yomi_source === null)
+			return;
+		var any_valid = false;
+		for (link of yomi_source.getElementsByTagName("a")) {
+			try {
+				let url = new URL(link.href);
+				if (url.protocol === "moz-extension:")
+					link.style["display"] = "none";
+				else
+					any_valid = true;
+			} catch {
+				// ...
+			}
+		}
+		if (!any_valid) {
+			yomi_source.style["display"] = "none";
+			const yomi_screenshot = document.getElementById("yomichan-screenshot");
+			if (yomi_screenshot !== null)
+				yomi_screenshot.style["display"] = "none";
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', markPitch(), false);
+	document.addEventListener('DOMContentLoaded', removePitchBrackets(), false);	
+	document.addEventListener('DOMContentLoaded', hideBadSource(), false);
+</script>
