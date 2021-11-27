@@ -7,12 +7,7 @@
         "Pronunciation",
         "Hint"
     ],
-    "css": "@charset \"utf-8\";\n@font-face {\n\tfont-family: \"KanjiStrokeOrders\";\n\tsrc:\n\t\tlocal(\"KanjiStrokeOrders\"),\n\t\turl(\"_kso.ttf\");\n}\n\ndiv.front {\n\ttext-align:center;\n\tfont-size: 25px;\n}\n.card {\n\tfont-family: \"Noto Sans\", \"Noto Sans CJK JP\", \"Liberation Sans\", Helvetica, Arial, sans-serif;\n\tbackground-color: #FFFAF0; \n}\n\n.stroke {\n\ttext-align: center;\n\tfont-family: KanjiStrokeOrders;\n\tfont-size: 200px;\n}\n\n.replaybutton { margin: 0; margin-right: 3px; text-decoration: none; }\n.replaybutton span  {\n\tpadding: 0;\n\tfont-size: 16px;\n\theight: 16px;\n\tvertical-align: baseline;\n}\n.replaybutton span svg {\n\tfill: #FFFAF0;\n\tbackground: #333;\n\tborder-radius: 3px;\n\tvertical-align: top; \n\tmin-width: 16px; \n\tmin-height: 16px; \n}\n\na.replay-button { top: -.125em;  position: relative; }\na.replay-button svg {\n\theight: 1em;\n\twidth: 1em;\n}\na.replay-button svg path { fill: #FFFAF0; }\na.replay-button svg circle { fill: #333; }",
     "cardTemplates": [
-        {
-            "Name": "\u4eee\u540d production",
-            "Front": "<div class=\"front\">\n\t<span id=\"charType\">{{Hint}}</span>\n\t{{Romaji}}{{Pronunciation}}\n</div>\n\n<script>\n\tconst hint = document.getElementById(\"charType\");\n\tif ( hint && hint.innerHTML == \"katakana\" )\n\t\thint.style.color = \"#ff6207\";\n\telse if  ( hint.innerHTML == \"hiragana\" )\n\t\thint.style.color = \"#637c8b\";\n</script>\n",
-            "Back": "{{FrontSide}}\n<hr id=answer>\n<div class=\"stroke\">{{Kana}}</div>"
-        }
+        "Production"
     ]
 }

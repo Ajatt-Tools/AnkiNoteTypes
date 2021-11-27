@@ -1,0 +1,55 @@
+@charset "utf-8";
+@font-face {
+    font-family: "KanjiStrokeOrders";
+    src: local("KanjiStrokeOrders"), url("_kso.ttf");
+}
+
+div.front {
+    text-align: center;
+    font-size: 25px;
+}
+.card {
+    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Helvetica, Arial, sans-serif;
+    background-color: #fffaf0;
+}
+
+.stroke {
+    text-align: center;
+    font-family: KanjiStrokeOrders;
+    font-size: 200px;
+}
+
+.replaybutton {
+    margin: 0;
+    margin-right: 3px;
+    text-decoration: none;
+}
+.replaybutton span {
+    padding: 0;
+    font-size: 16px;
+    height: 16px;
+    vertical-align: baseline;
+}
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #333;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+a.replay-button {
+    top: -0.125em;
+    position: relative;
+}
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+}
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+a.replay-button svg circle {
+    fill: #333;
+}
