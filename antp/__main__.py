@@ -8,7 +8,9 @@ from antp.importer import import_note_type
 def main():
     try:
         if len(sys.argv) < 2:
-            print("No action provided.")
+            print("No action provided.\n")
+            print(f"import\tAdd one of the available note types to Anki.")
+            print(f"export\tSave your note type as a template.")
             return
         cmd = sys.argv[1]
         if cmd == 'export':
