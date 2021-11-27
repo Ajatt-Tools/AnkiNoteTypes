@@ -69,7 +69,7 @@ def save_note_type(model: NoteType):
         os.mkdir(dir_path)
 
     with open(json_path, 'w') as f:
-        json.dump(format_export(model), f, indent=JSON_INDENT)
+        json.dump(format_export(model), f, indent=JSON_INDENT, ensure_ascii=False)
 
     with open(css_path, 'w') as f:
         f.write(model.css)
