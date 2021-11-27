@@ -1,0 +1,210 @@
+@charset "utf-8";
+@font-face {
+    font-family: "Yu Mincho";
+    src: local("Yu Mincho"), local("游明朝"), url("_yumin.ttf");
+}
+@font-face {
+    font-family: "Yu Mincho";
+    src: local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+    font-weight: 600;
+}
+@font-face {
+    font-family: "acgyosyo";
+    src: local("acgyosyo"), local("英椎行書"), url("_acgyosyo.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.card {
+    font-size: 24px;
+    text-align: left;
+    background-color: #fffaf0;
+    color: #2a1b0a;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card,
+ruby rt {
+    font-family: "Noto Serif", "Noto Serif CJK JP", Yu Mincho, "Liberation Serif", "Times New Roman", Times, Georgia,
+        Serif;
+}
+
+@media screen and (min-width: 820px) {
+    .card {
+        background-color: #e5d7c9;
+        display: flex;
+        justify-content: center;
+    }
+    .wrap {
+        width: 800px;
+        padding: 0 5px 0;
+        background-color: #fffaf0;
+        border-left: 1px solid #c9bcbc;
+        border-right: 1px solid #c9bcbc;
+        min-height: 100vh;
+    }
+    .wrap .wrap {
+        width: auto;
+        padding: 0;
+        min-height: 0;
+        border: 0;
+    }
+}
+
+/* links */
+a {
+    color: #532f2f;
+    text-decoration: none;
+}
+a:hover {
+    color: #722a2a;
+}
+header {
+    display: flex;
+    clear: both;
+}
+header > div:not(:last-child) {
+    margin-right: 3px;
+}
+header .tags {
+    border-radius: 0px 0px 3px 3px;
+}
+ul {
+    padding-left: 2em;
+}
+#question {
+    font-family: "acgyosyo", "Yu Mincho";
+}
+.japanese {
+    text-align: center;
+    font-size: 40px;
+}
+.definition {
+    text-align: left;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+.pronunciation {
+    text-align: center;
+    margin: 8px 0;
+}
+.pronunciation br {
+    display: none;
+}
+
+hr {
+    margin: 2px 0;
+    clear: both;
+    border: 0;
+    border-top: 1px solid #c9bcbc;
+}
+
+.extra {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+.extra br {
+    display: none;
+}
+.extra > img {
+    max-width: 48%;
+    max-height: 350px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    filter: sepia(33%);
+}
+
+.extra > img:only-child {
+    max-width: 100%;
+}
+
+footer {
+    font-size: 16px;
+    text-align: center;
+}
+footer > a:after {
+    content: "·";
+    color: brown;
+    display: inline-block;
+    width: 6px;
+}
+footer > a:last-child:after {
+    content: "";
+    width: 0;
+}
+
+.tags {
+    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Arial, Sans, IPAGothic, Yu Gothic, sans-serif;
+    text-align: center;
+    display: inline-block;
+    text-transform: lowercase;
+    background-color: #333;
+    color: #fffaf0;
+    font-weight: bold;
+    padding: 1px 3px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+/* AnkiDroid peplay button */
+/* .replaybutton is an <a> tag with a <span> that has an <svg> inside */
+.replaybutton {
+    margin: 0;
+    margin-right: 3px;
+    text-decoration: none;
+}
+.replaybutton span {
+    padding: 0;
+    font-size: 16px;
+}
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #333;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* PC peplay button */
+a.replay-button {
+    top: -0.125em;
+    position: relative;
+}
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+}
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+a.replay-button svg circle {
+    fill: #333;
+}
+
+/* Fix for Yomichan */
+ul,
+ol {
+    list-style-type: none;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+}
+.pronunciation ol > li {
+    display: inline;
+}
+.pronunciation ol > li:after {
+    content: "・";
+}
+.pronunciation ol > li:last-child:after {
+    content: "";
+}

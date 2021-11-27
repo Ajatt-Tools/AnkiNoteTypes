@@ -1,0 +1,14 @@
+<div class="wrap">
+    {{FrontSide}}
+    <hr id=answer>
+    <div class="japanese">{{edit:furigana:VocabFurigana}}</div>
+    <div class="pronunciation">{{edit:VocabAudio}}{{edit:VocabPitchPattern}}</div>
+    {{#VocabDef}}
+        <div class="definition">{{edit:furigana:VocabDef}}</div>
+    {{/VocabDef}}
+    {{#Image}}
+        <div class="extra">{{Image}}</div>
+    {{/Image}}
+    <hr>
+    <footer><a href="https://jisho.org/search/{{kanji:text:VocabKanji}}">Jisho</a><a href="https://duckduckgo.com/?q={{kanji:text:VocabKanji}}&iax=images&ia=images&kp=-2&kl=jp-jp">Images</a><a href="http://www.weblio.jp/content/{{kanji:text:VocabKanji}}">Weblio</a><a href="https://wadoku.de/search/?q={{kanji:text:VocabKanji}}">Wadoku</a><a href="https://chan.sankakucomplex.com/post/index?tags={{kanji:text:VocabKanji}} order:popular solo rating:safe">Sankaku</a></footer>
+</div>
