@@ -10,26 +10,29 @@ from .common import select, get_used_fonts, NoteType, CardTemplate
 from .consts import *
 
 
-def read_css(model_name: str) -> str:
-    with open(os.path.join(NOTE_TYPES_DIR, model_name, CSS_FILENAME)) as f:
+def read_css(model_dir_name: str) -> str:
+    with open(os.path.join(NOTE_TYPES_DIR, model_dir_name, CSS_FILENAME)) as f:
         return f.read()
 
 
-def read_card_templates(model_name, template_names: list[str]) -> list[CardTemplate]:
+def read_card_templates(model_dir_name: str, template_names: list[str]) -> list[CardTemplate]:
     templates = []
     for template_name in template_names:
-        dir_path = os.path.join(NOTE_TYPES_DIR, model_name, template_name)
+        dir_path = os.path.join(NOTE_TYPES_DIR, model_dir_name, template_name)
         with open(os.path.join(dir_path, FRONT_FILENAME)) as front, open(os.path.join(dir_path, BACK_FILENAME)) as back:
             templates.append(CardTemplate(template_name, front.read(), back.read()))
     return templates
 
 
-def read_model(model_dict: dict[str, Any]) -> NoteType:
+def read_model(model_dir_name: str) -> NoteType:
+    with open(os.path.join(NOTE_TYPES_DIR, model_dir_name, JSON_FILENAME), 'r') as f:
+        model_dict = json.load(f)
+
     return NoteType(
         name=model_dict['modelName'],
         fields=model_dict['inOrderFields'],
-        css=read_css(model_dict['modelName']),
-        templates=read_card_templates(model_dict['modelName'], model_dict['cardTemplates']),
+        css=read_css(model_dir_name),
+        templates=read_card_templates(model_dir_name, model_dict['cardTemplates']),
     )
 
 
@@ -64,10 +67,9 @@ def store_fonts(fonts: list[str]):
 
 
 def import_note_type():
-    if model_name := select(os.listdir(NOTE_TYPES_DIR)):
-        print(f"Selected model: {model_name}")
-        with open(os.path.join(NOTE_TYPES_DIR, model_name, JSON_FILENAME), 'r') as f:
-            model = read_model(json.load(f))
+    if model_dir_name := select(os.listdir(NOTE_TYPES_DIR)):
+        print(f"Selected model: {model_dir_name}")
+        model = read_model(model_dir_name)
         store_fonts(get_used_fonts(model.css))
         send_note_type(model)
         print("Done.")
