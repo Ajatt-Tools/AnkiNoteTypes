@@ -1,22 +1,36 @@
-import os
+# Copyright: Ren Tatsumoto <tatsu at autistici.org>
+# License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
+
 import re
+from dataclasses import dataclass
 from typing import Optional
 
-JSON_INDENT = 4
-JSON_FILENAME = 'template.json'
-README_FILENAME = 'README.md'
-SCRIPT_DIR = os.path.dirname(__file__)
-NOTE_TYPES_DIR = os.path.join(SCRIPT_DIR, os.pardir, 'templates')
-FONTS_DIR = os.path.join(SCRIPT_DIR, os.pardir, 'fonts')
+from .consts import *
 
-if not os.path.isdir(FONTS_DIR):
-    os.mkdir(FONTS_DIR)
+
+class ANTPError(Exception):
+    pass
+
+
+@dataclass(frozen=True)
+class CardTemplate:
+    name: str
+    front: str
+    back: str
+
+
+@dataclass(frozen=True)
+class NoteType:
+    name: str
+    fields: list[str]
+    css: str
+    templates: list[CardTemplate]
 
 
 def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None) -> int:
     resp = int(input(msg))
     if resp < min_val or (max_val and resp > max_val):
-        raise ValueError("Value out of range.")
+        raise ANTPError("Value out of range.")
     return resp
 
 
@@ -35,3 +49,14 @@ def select(items: list[str], msg: str = "Select item number: ") -> Optional[str]
 
 def get_used_fonts(template_css: str):
     return re.findall(r"url\([\"'](\w+\.[ot]tf)[\"']\)", template_css, re.IGNORECASE)
+
+
+def init():
+    from .consts import NOTE_TYPES_DIR, FONTS_DIR
+
+    for path in (NOTE_TYPES_DIR, FONTS_DIR):
+        if not os.path.isdir(path):
+            os.mkdir(path)
+
+
+init()

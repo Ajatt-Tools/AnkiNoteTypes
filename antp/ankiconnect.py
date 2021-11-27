@@ -1,7 +1,13 @@
 # Taken from https://github.com/FooSoft/anki-connect
+# Copyright: Ren Tatsumoto <tatsu at autistici.org>
+# License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
+
+__all__ = ['invoke']
 
 import json
 import urllib.request
+
+from .common import ANTPError
 
 
 def request(action, **params):
@@ -12,22 +18,11 @@ def invoke(action, **params):
     request_json = json.dumps(request(action, **params)).encode('utf-8')
     response = json.load(urllib.request.urlopen(urllib.request.Request('http://localhost:8765', request_json)))
     if len(response) != 2:
-        raise Exception('response has an unexpected number of fields')
+        raise ANTPError('response has an unexpected number of fields')
     if 'error' not in response:
-        raise Exception('response is missing required error field')
+        raise ANTPError('response is missing required error field')
     if 'result' not in response:
-        raise Exception('response is missing required result field')
+        raise ANTPError('response is missing required result field')
     if response['error'] is not None:
-        raise Exception(response['error'])
+        raise ANTPError(response['error'])
     return response['result']
-
-
-def main():
-    decks = invoke('deckNames')
-    print("List of decks:")
-    for deck in decks:
-        print(deck)
-
-
-if __name__ == '__main__':
-    main()

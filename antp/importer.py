@@ -1,46 +1,73 @@
 # Importer imports note types from ../templates/ to Anki.
+# Copyright: Ren Tatsumoto <tatsu at autistici.org>
+# License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 import json
-import os
-from urllib.error import URLError
+from typing import Any
 
-import antp.common as ac
-from antp.ankiconnect import invoke
-
-
-def read_template(model_name: str):
-    with open(os.path.join(ac.NOTE_TYPES_DIR, model_name, ac.JSON_FILENAME), 'r') as f:
-        return json.load(f)
+from .ankiconnect import invoke
+from .common import select, get_used_fonts, NoteType, CardTemplate
+from .consts import *
 
 
-def send_note_type(template_json: dict):
+def read_css(model_name: str) -> str:
+    with open(os.path.join(NOTE_TYPES_DIR, model_name, CSS_FILENAME)) as f:
+        return f.read()
+
+
+def read_card_templates(model_name, template_names: list[str]) -> list[CardTemplate]:
+    templates = []
+    for template_name in template_names:
+        dir_path = os.path.join(NOTE_TYPES_DIR, model_name, template_name)
+        with open(os.path.join(dir_path, FRONT_FILENAME)) as front, open(os.path.join(dir_path, BACK_FILENAME)) as back:
+            templates.append(CardTemplate(template_name, front.read(), back.read()))
+    return templates
+
+
+def read_model(model_dict: dict[str, Any]) -> NoteType:
+    return NoteType(
+        name=model_dict['modelName'],
+        fields=model_dict['inOrderFields'],
+        css=read_css(model_dict['modelName']),
+        templates=read_card_templates(model_dict['modelName'], model_dict['cardTemplates']),
+    )
+
+
+def format_import(model: NoteType) -> dict[str, Any]:
+    return {
+        "modelName": model.name,
+        "inOrderFields": model.fields,
+        "css": model.css,
+        "cardTemplates": [
+            {
+                "Name": template.name,
+                "Front": template.front,
+                "Back": template.back,
+            }
+            for template in model.templates
+        ]
+    }
+
+
+def send_note_type(model: NoteType):
     models = invoke('modelNames')
+    template_json = format_import(model)
     while template_json["modelName"] in models:
         template_json["modelName"] = input("Model with this name already exists. Enter new name: ")
     invoke("createModel", **template_json)
 
 
 def store_fonts(fonts: list[str]):
-    for file in os.listdir(ac.FONTS_DIR):
+    for file in os.listdir(FONTS_DIR):
         if file in fonts:
-            invoke("storeMediaFile", filename=file, path=os.path.join(ac.FONTS_DIR, file))
+            invoke("storeMediaFile", filename=file, path=os.path.join(FONTS_DIR, file))
 
 
 def import_note_type():
-    model = ac.select(os.listdir(ac.NOTE_TYPES_DIR))
-    if not model:
-        return
-    print(f"Selected model: {model}")
-    template = read_template(model)
-    store_fonts(ac.get_used_fonts(template['css']))
-    send_note_type(template)
-    print("Done.")
-
-
-if __name__ == '__main__':
-    try:
-        import_note_type()
-    except URLError:
-        print("Couldn't connect. Make sure Anki is open and AnkiConnect is installed.")
-    except Exception as ex:
-        print(ex)
+    if model_name := select(os.listdir(NOTE_TYPES_DIR)):
+        print(f"Selected model: {model_name}")
+        with open(os.path.join(NOTE_TYPES_DIR, model_name, JSON_FILENAME), 'r') as f:
+            model = read_model(json.load(f))
+        store_fonts(get_used_fonts(model.css))
+        send_note_type(model)
+        print("Done.")
