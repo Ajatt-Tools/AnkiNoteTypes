@@ -40,6 +40,9 @@
 .card2 .jpsentence ruby rt {
     opacity: 0;
 }
+.card2 .jpsentence:hover ruby rt {
+    opacity: 1;
+}
 
 @media screen and (min-width: 820px) {
     .card {
@@ -61,10 +64,6 @@
         min-height: 0;
         border: 0;
     }
-}
-
-.card2 .jpsentence:hover ruby rt {
-    opacity: 1;
 }
 
 hr {
