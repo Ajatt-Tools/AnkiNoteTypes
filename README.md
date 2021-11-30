@@ -23,6 +23,8 @@ to Anki, run:
 ./antp.sh import
 ```
 
+https://user-images.githubusercontent.com/69171671/143988488-ff70960c-840c-48e2-90d3-a24468da8942.mp4
+
 ### Exporting
 
 To export one of your Note Types, run:
