@@ -8,8 +8,18 @@ A collection of user-created note types for Anki 2.1. It includes a super user-f
 
 ## Usage
 
-0. Clone the repository and `cd` into it.
-1. Make sure Anki is running, and you have
+Clone the repository and `cd` into it.
+If you have never cloned a repository before,
+you need to install [git](https://git-scm.com/).
+If you have `git` installed,
+open your terminal and type the following commands.
+
+```
+git clone "https://github.com/Ajatt-Tools/AnkiNoteTypes.git"
+cd AnkiNoteTypes
+```
+
+Make sure Anki is running, and you have
 [AnkiConnect](https://ankiweb.net/shared/info/2055492159)
 installed.
 
