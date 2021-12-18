@@ -2,18 +2,17 @@
 
 <div class="fside">{{FrontSide}}</div>
 
+<div class="sent-center">
 <div class="jpsentence" lang="ja">
-<p>
     {{edit:furigana:SentFurigana}}
     {{^SentFurigana}}{{edit:furigana:SentKanji}}{{/SentFurigana}}
-</p>
 </div>
-
 {{#SentEng}}
 <div lang="en">
     {{hint:SentEng}}
 </div>
 {{/SentEng}}
+</div>
 
 <div class="vocab">
     {{VocabAudio}}{{SentAudio}}

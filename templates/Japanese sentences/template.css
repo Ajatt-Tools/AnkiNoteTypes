@@ -127,13 +127,16 @@ header > div:not(:last-child) {
     margin-bottom: 16px;
 }
 
+.sent-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
 /* Japanese sentence */
 
-.jpsentence {
-    display: flex;
-    justify-content: center;
-    font-size: 35px;
-}
+.jpsentence { font-size: 35px; }
 .fside .jpsentence { display: none; }
 
 .tags {
