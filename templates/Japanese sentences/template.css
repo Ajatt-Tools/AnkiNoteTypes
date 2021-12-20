@@ -137,7 +137,12 @@ header > div:not(:last-child) {
 /* Japanese sentence */
 
 .jpsentence { font-size: 35px; }
+
+/* Hide front side when the back is shown. */
+
 .fside .jpsentence { display: none; }
+
+/* Tags */
 
 .tags {
     font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Arial, Sans, sans-serif;
@@ -156,6 +161,7 @@ header > div:not(:last-child) {
 }
 
 /* AnkiDroid replay button */
+
 .replaybutton {
     margin: 0;
     margin-right: 3px;
@@ -177,6 +183,7 @@ header > div:not(:last-child) {
 }
 
 /* PC replay button */
+
 a.replay-button {
     top: -0.125em;
     position: relative;
@@ -197,6 +204,7 @@ a.replay-button svg circle {
 }
 
 /* Footer and links */
+
 footer {
     font-size: 16px;
     text-align: center;
@@ -219,6 +227,7 @@ footer > a:last-child:after {
 }
 
 /* Vocab */
+
 .vocab {
     margin-top: 16px;
 }
@@ -240,6 +249,7 @@ footer > a:last-child:after {
 }
 
 /* Images */
+
 .images {
     display: flex;
     flex-wrap: wrap;
@@ -260,6 +270,7 @@ footer > a:last-child:after {
 }
 
 /* Production cards */
+
 .production b {
     visibility: hidden;
 }
@@ -271,6 +282,7 @@ footer > a:last-child:after {
 }
 
 /* Morphman coloring */
+
 .fside .jpsentence:hover [mtype="unknown"] {
     background-color: #ffff99;
 }
@@ -301,6 +313,7 @@ del.morphmanhide {
 }
 
 /* Fix for Yomichan defs */
+
 ul,
 ol {
     list-style-type: none;
@@ -310,6 +323,7 @@ ol {
 }
 
 /* Fix for Yomichan pitch accents */
+
 .vocab ol > li {
     display: inline;
 }
@@ -323,6 +337,7 @@ ol {
 }
 
 /* Night Mode */
+
 .nightMode .jpsentence b {
     color: gray;
 }
