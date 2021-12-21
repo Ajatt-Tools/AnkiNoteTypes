@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.card {
+    font-family: Noto Sans, Liberation Sans, Arial, Helvetica, Noto Sans CJK JP, Meiryo, Meiryo UI, IPAexGothic,
+        IPAPGothic, IPAGothic, Sans, sans-serif;
+    font-size: 20px;
+    text-align: left;
+    color: black;
+    background-color: #fffaf0;
+}
+li {
+    margin-left: 1em;
+}
+.tags {
+    text-align: center;
+    display: inline-block;
+    text-transform: lowercase;
+    background-color: #333;
+    color: #fffaf0;
+    font-weight: bold;
+    padding: 1px 3px;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 14px;
+}
+#q:before {
+    content: "Question";
+}
+#a:before {
+    content: "Answer";
+}
+#e:before {
+    content: "Extra";
+}
+#q:before,
+#a:before,
+#e:before {
+    display: block;
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+    font-family: Noto Serif, Liberation Serif, Times New Roman, Serif;
+}
+img {
+    filter: sepia(33%);
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+/* .replaybutton is an <a> tag with a <span> that has an <svg> inside */
+.replaybutton {
+    margin: 0;
+    margin-right: 3px;
+    text-decoration: none;
+}
+.replaybutton span {
+    padding: 0;
+    font-size: 16px;
+}
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #333;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+a.replay-button {
+    top: -0.125em;
+    position: relative;
+}
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+}
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+a.replay-button svg circle {
+    fill: #333;
+}
+
+/* syntax highlighting for code */
+table.highlighttable {
+    overflow: auto;
+    display: block;
+}
+.linenodiv {
+    display: none;
+}
+.night_mode table.highlighttable pre {
+    background-color: #222;
+}
+pre {
+    background-color: rgb(246, 248, 250);
+    border-radius: 6px;
+    border: 1px solid #dedede;
+    color: rgb(36, 41, 46);
+    padding: 16px;
+    overflow: auto;
+    margin: 8px 0;
+}
+code {
+    color: #351214;
+}
+
+/* style tables */
+table {
+    display: block;
+    border-collapse: collapse;
+    overflow-x: auto;
+    max-width: 100%;
+}
+th,
+td {
+    border: 1px solid #555;
+}
+th,
+td {
+    padding: 2px;
+}

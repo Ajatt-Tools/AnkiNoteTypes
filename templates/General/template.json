@@ -1,0 +1,11 @@
+{
+    "modelName": "General",
+    "inOrderFields": [
+        "Question",
+        "Answer",
+        "Extra"
+    ],
+    "cardTemplates": [
+        "Question-Answer"
+    ]
+}
