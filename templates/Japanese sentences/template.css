@@ -379,3 +379,9 @@ ol {
 .nightMode footer > a:after {
     color: white;
 }
+
+/* Don't select furigana */
+
+.jpsentence ruby rt {
+    user-select: none;
+}
