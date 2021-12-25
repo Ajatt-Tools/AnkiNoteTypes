@@ -33,6 +33,8 @@ def main():
         print("Couldn't connect. Make sure Anki is open and AnkiConnect is installed.")
     except ANTPError as ex:
         print(ex)
+    except KeyboardInterrupt:
+        print("\nAborted.")
 
 
 if __name__ == '__main__':
