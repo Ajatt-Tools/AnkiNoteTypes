@@ -37,6 +37,16 @@ to Anki, run:
 
 https://user-images.githubusercontent.com/69171671/143988488-ff70960c-840c-48e2-90d3-a24468da8942.mp4
 
+### Updating
+
+If you imported a note type from this collection before,
+it received an update,
+and you want to import the new version, run:
+
+```
+./antp.sh update
+```
+
 ### Exporting
 
 To export one of your Note Types, run:
