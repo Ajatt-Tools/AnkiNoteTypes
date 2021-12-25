@@ -46,6 +46,12 @@
 </div> <!-- /wrap -->
 
 <script>
+    function tweak_reveal_text() {
+        const elem = document.querySelector("div.ensentence > a.hint");
+        if (elem) {
+            elem.innerText = "Reveal English translation";
+        }
+    }
     function removePitchBrackets() {
         const tags = document.getElementById("pitchnum");
         if (tags !== null) {
@@ -54,4 +60,5 @@
     }
     markPitch()
     removePitchBrackets()
+    tweak_reveal_text()
 </script>

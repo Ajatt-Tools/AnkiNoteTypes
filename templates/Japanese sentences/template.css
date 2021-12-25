@@ -142,6 +142,22 @@ header > div:not(:last-child) {
 
 .fside .jpsentence { display: none; }
 
+/* English */
+
+div.ensentence > a.hint {
+    color: #555;
+    font-size: 14px;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 2.2px;
+    padding: 2px 10px;
+    margin: 2px 0;
+}
+div.ensentence > a.hint:hover {
+    color: #111;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
 /* Tags */
 
 .tags {
