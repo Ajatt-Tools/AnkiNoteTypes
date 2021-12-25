@@ -2,7 +2,7 @@
 # Copyright: Ren Tatsumoto <tatsu at autistici.org>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
-__all__ = ['invoke']
+__all__ = ['invoke', 'request_model_names']
 
 import json
 import urllib.request
@@ -26,3 +26,7 @@ def invoke(action, **params):
     if response['error'] is not None:
         raise ANTPError(response['error'])
     return response['result']
+
+
+def request_model_names() -> list[str]:
+    return invoke('modelNames')

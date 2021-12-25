@@ -9,7 +9,7 @@ import shutil
 from os import DirEntry
 from typing import Any
 
-from .ankiconnect import invoke
+from .ankiconnect import invoke, request_model_names
 from .common import NoteType, CardTemplate, get_used_fonts, select
 from .consts import *
 
@@ -100,7 +100,7 @@ def save_fonts(model: NoteType) -> None:
 
 
 def export_note_type():
-    if model := select(invoke('modelNames')):
+    if model := select(request_model_names()):
         print(f"Selected model: {model}")
         template = fetch_template(model)
         save_fonts(template)

@@ -5,7 +5,7 @@
 import json
 from typing import Any
 
-from .ankiconnect import invoke
+from .ankiconnect import invoke, request_model_names
 from .common import select, get_used_fonts, NoteType, CardTemplate
 from .consts import *
 
@@ -53,9 +53,8 @@ def format_import(model: NoteType) -> dict[str, Any]:
 
 
 def send_note_type(model: NoteType):
-    models = invoke('modelNames')
     template_json = format_import(model)
-    while template_json["modelName"] in models:
+    while template_json["modelName"] in request_model_names():
         template_json["modelName"] = input("Model with this name already exists. Enter new name: ")
     invoke("createModel", **template_json)
 
