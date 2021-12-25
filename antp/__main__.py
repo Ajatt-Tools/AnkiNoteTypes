@@ -10,15 +10,19 @@ from .importer import import_note_type
 
 
 def main():
+    if len(sys.argv) < 2:
+        return print(
+            "No action provided.\n\n"
+            f"import\tAdd one of the available note types to Anki.\n"
+            f"export\tSave your note type as a template.\n"
+        )
+
     try:
-        if len(sys.argv) < 2:
-            print("No action provided.\n")
-            print(f"import\tAdd one of the available note types to Anki.")
-            print(f"export\tSave your note type as a template.")
-        elif (cmd := sys.argv[1]) == 'export':
-            export_note_type()
-        elif cmd == 'import':
-            import_note_type()
+        match sys.argv[1]:
+            case 'export':
+                export_note_type()
+            case 'import':
+                import_note_type()
     except URLError:
         print("Couldn't connect. Make sure Anki is open and AnkiConnect is installed.")
     except ANTPError as ex:
