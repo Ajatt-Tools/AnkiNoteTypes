@@ -46,7 +46,7 @@
 
 @media screen and (min-width: 820px) {
     .card {
-        background-color: #E5D7C9;
+        background-color: #e5d7c9;
         display: flex;
         justify-content: center;
     }
@@ -136,11 +136,15 @@ header > div:not(:last-child) {
 
 /* Japanese sentence */
 
-.jpsentence { font-size: 35px; }
+.jpsentence {
+    font-size: 35px;
+}
 
 /* Hide front side when the back is shown. */
 
-.fside .jpsentence { display: none; }
+.fside .jpsentence {
+    display: none;
+}
 
 /* English */
 

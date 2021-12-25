@@ -4,25 +4,23 @@ Sat Nov 27 11:10:04 AM UTC 2021
 -->
 
 <div class="wrap">
+    <header>
+        {{#MorphManFocus}}
+        <div class="tags">{{MorphManFocus}}</div>
+        {{/MorphManFocus}}
+        {{#Tags}}
+        <div class="tags">{{Tags}}</div>
+        {{/Tags}}
+    </header>
 
-<header>
-    {{#MorphManFocus}}
-    <div class="tags">{{MorphManFocus}}</div>
-    {{/MorphManFocus}}
-    {{#Tags}}
-    <div class="tags">{{Tags}}</div>
-    {{/Tags}}
-</header>
-
-<div class="sent-center">
-<div class="jpsentence" lang="ja">
-    {{edit:morphHighlight:furigana:SentKanji}}
-    {{^SentKanji}}
-    <nokana>{{edit:kanji:SentFurigana}}</nokana>
-    {{/SentKanji}}
-</div>
-</div>
-
+    <div class="sent-center">
+        <div class="jpsentence" lang="ja">
+            {{edit:morphHighlight:furigana:SentKanji}}
+            {{^SentKanji}}
+            <nokana>{{edit:kanji:SentFurigana}}</nokana>
+            {{/SentKanji}}
+        </div>
+    </div>
 </div> <!-- /wrap -->
 
 <div style="display:none;">
@@ -83,7 +81,7 @@ Sat Nov 27 11:10:04 AM UTC 2021
             return false;
         }
         // small っ is one mora; ゃゅょ are parts of single mora
-        const n_moras = vocab_kana.innerHTML.replace(/[ャュョゃゅょ]/g, '').length;
+        const n_moras = vocab_kana.innerHTML.replace(/[ャュョゃゅょ]/g, "").length;
         if (n_moras == pitch_num) {
             return true;
         } else {
@@ -95,13 +93,12 @@ Sat Nov 27 11:10:04 AM UTC 2021
     function splitTagDiv() {
         const header = document.querySelector("header");
         if (!header) return;
-        const split = `{{MorphManFocus}} {{Tags}}`.split(' ');
+        const split = `{{MorphManFocus}} {{Tags}}`.split(" ");
 
         header.innerHTML = "";
 
         for (const tag of split) {
-            if (tag.length < 1)
-                continue;
+            if (tag.length < 1) continue;
             const tag_elem = document.createElement("div");
             tag_elem.className = "tags";
             tag_elem.innerHTML = tag;
@@ -109,6 +106,6 @@ Sat Nov 27 11:10:04 AM UTC 2021
         }
     }
 
-    markPitch()
-    splitTagDiv()
+    markPitch();
+    splitTagDiv();
 </script>
