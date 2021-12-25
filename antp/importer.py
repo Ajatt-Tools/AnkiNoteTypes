@@ -25,7 +25,7 @@ def read_card_templates(model_dir_name: str, template_names: list[str]) -> list[
 
 
 def read_model(model_dir_name: str) -> NoteType:
-    with open(os.path.join(NOTE_TYPES_DIR, model_dir_name, JSON_FILENAME), 'r') as f:
+    with open(os.path.join(NOTE_TYPES_DIR, model_dir_name, JSON_FILENAME)) as f:
         model_dict = json.load(f)
 
     return NoteType(

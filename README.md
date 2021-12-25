@@ -8,6 +8,8 @@ A collection of user-created note types for Anki 2.1. It includes a super user-f
 
 ## Usage
 
+Install [Python](https://wiki.archlinux.org/title/Python) 3.10 or later if you haven't already.
+
 Clone the repository and `cd` into it.
 If you have never cloned a repository before,
 you need to install [git](https://git-scm.com/).

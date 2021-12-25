@@ -34,7 +34,7 @@ def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None)
     return resp
 
 
-def select(items: list[str], msg: str = "Select item number: ") -> Optional[str]:
+def select(items: list[str], msg: str = "Select item number: ") -> str | None:
     if not items:
         print("Nothing to show.")
         return
