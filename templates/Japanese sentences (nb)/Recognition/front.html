@@ -1,0 +1,48 @@
+<!--
+mpvacious cards, version 13.0
+Sat Nov 27 11:10:04 AM UTC 2021
+-->
+
+<div class="wrap">
+    <header>
+        {{#Tags}}
+        <div class="tags">{{Tags}}</div>
+        {{/Tags}}
+    </header>
+
+    <div class="sent-center">
+        <div class="jpsentence" lang="ja">
+            {{edit:furigana:SentKanji}}
+            {{^SentKanji}}
+                <nokana>{{edit:kanji:SentFurigana}}</nokana>
+                {{^SentFurigana}}<b>
+                    {{edit:furigana:VocabKanji}}
+                    {{^VocabKanji}}
+                        <nokana>{{edit:kanji:VocabFurigana}}</nokana>
+                    {{/VocabKanji}}
+                </b>{{/SentFurigana}}
+            {{/SentKanji}}
+        </div>
+    </div>
+</div> <!-- /wrap -->
+
+<script>
+    /* Splits tags into separate divs */
+    function splitTagDiv() {
+        const header = document.querySelector("header");
+        if (!header) return;
+        const split = `{{Tags}}`.split(" ");
+
+        header.innerHTML = "";
+
+        for (const tag of split) {
+            if (tag.length < 1) continue;
+            const tag_elem = document.createElement("div");
+            tag_elem.className = "tags";
+            tag_elem.innerHTML = tag;
+            header.appendChild(tag_elem);
+        }
+    }
+
+    splitTagDiv();
+</script>
