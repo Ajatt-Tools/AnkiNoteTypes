@@ -406,3 +406,9 @@ ol {
     color: gray;
     background-color: rgba(0, 0, 0, 0.20);
 }
+
+/* Don't select furigana */
+
+.jpsentence ruby rt {
+    user-select: none;
+}
