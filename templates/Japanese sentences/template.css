@@ -358,50 +358,51 @@ ol {
 
 /* Night Mode */
 
-.nightMode .jpsentence b {
-    color: gray;
-}
-
 .nightMode .tags {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #FFFFFF;
+    color: #2F2F31;
 }
 
 .nightMode a.replay-button svg path {
-    fill: #2f2f31;
+    fill: #2F2F31;
 }
 
 .nightMode a.replay-button svg circle {
-    fill: white;
+    fill: #FFFFFF;
 }
 
 .nightMode .replaybutton span svg {
-    fill: #2f2f31;
-    background: white;
+    fill: #2F2F31;
+    background: #FFFFFF;
 }
 
 .nightMode.card {
-    color: #f0f0f0;
+    color: #FFFFFF;
+    background-color: #2F2F31
 }
 
 .nightMode a {
-    color: #ccc;
+    color: gray;
 }
 
 .nightMode a:hover {
-    color: #eee;
+    color: #722a2a;
 }
 
 .nightMode .jpsentence b {
     color: gray;
 }
 
-.nightMode footer > a:after {
-    color: white;
+.nightMode .images > img {
+    filter: sepia(0%);
 }
 
-/* Don't select furigana */
+.nightMode div.ensentence > a.hint {
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
 
-.jpsentence ruby rt {
-    user-select: none;
+.nightMode div.ensentence > a.hint:hover {
+    color: gray;
+    background-color: rgba(0, 0, 0, 0.20);
 }
