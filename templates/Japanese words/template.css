@@ -208,3 +208,40 @@ ol {
 .pronunciation ol > li:last-child:after {
     content: "";
 }
+
+/* Night Mode */
+
+.nightMode .tags {
+    background-color: #FFFFFF;
+    color: #2F2F31;
+}
+
+.nightMode a.replay-button svg path {
+    fill: #2F2F31;
+}
+
+.nightMode a.replay-button svg circle {
+    fill: #FFFFFF;
+}
+
+.nightMode .replaybutton span svg {
+    fill: #2F2F31;
+    background: #FFFFFF;
+}
+
+.nightMode.card {
+    color: #FFFFFF;
+    background-color: #2F2F31
+}
+
+.nightMode a {
+    color: gray;
+}
+
+.nightMode a:hover {
+    color: #722a2a;
+}
+
+.nightMode .images > img {
+    filter: sepia(0%);
+}
