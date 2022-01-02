@@ -1,57 +1,63 @@
-<div class="fside">{{FrontSide}}</div>
-<hr id="answer">
-<div class="jpsentence" lang="ja">
-	{{morphHighlight:furigana:SentFurigana}}
-	{{^SentFurigana}}{{furigana:SentKanji}}{{/SentFurigana}}
-</div>
+<div class="wrap">
+    <div class="fside">{{FrontSide}}</div>
 
-{{#SentEng}}
-<details>
-  <summary><div class="tags">eng</summary>
-	<div lang="en">
-		{{SentEng}}
-</div>
-</details>
-{{/SentEng}}
+    <div class="sent-center">
+        <div class="jpsentence" lang="ja">
+            {{edit:furigana:SentFurigana}}
+	    {{^SentFurigana}}{{edit:furigana:SentKanji}}{{/SentFurigana}}
+        </div>
+        {{#SentEng}}
+        <div class="ensentence" lang="en">{{hint:SentEng}}</div>
+        {{/SentEng}}
+    </div>
 
-<div class="vocab">
-{{VocabAudio}}{{SentAudio}}
-{{VocabPitchPattern}}{{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
-{{#VocabPitchNum}}<span class="tags" id="pitchnum">{{VocabPitchNum}}</span>{{/VocabPitchNum}}{{#VocabKanji}}【{{kanji:VocabKanji}}】{{/VocabKanji}}
-</div>
+    <div class="vocab">
+        {{VocabAudio}}{{SentAudio}}{{VocabPitchPattern}}
+	{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}
+	{{#VocabPitchNum}}<span class="tags" id="pitchnum">{{VocabPitchNum}}</span>{{/VocabPitchNum}}
+	{{#VocabKanji}}【{{text:kanji:VocabKanji}}】{{/VocabKanji}}
+    </div>
 
-{{#VocabDef}}	
-<div class="definitions">{{furigana:VocabDef}}</div>
-{{/VocabDef}}
+    {{#VocabDef}}
+    <div class="definitions">{{edit:furigana:VocabDef}}</div>
+    {{/VocabDef}}
+    {{#Notes}}
+    <div class="notes">
+        <div class="tags">Notes</div>
+        <div>{{furigana:Notes}}</div>
+    </div>
+    {{/Notes}}
+    {{#Image}}
+    <div class="images">{{Image}}</div>
+    {{/Image}}
 
-{{#Image}}<div class="images" >{{Image}}</div>{{/Image}}
+    <hr />
 
-{{#Notes}}
-<details>
-  <summary><div class="tags">Notes</summary>
-<div class="notes">
-	<div>{{furigana:Notes}}</div>
-</div>
-</details>
-{{/Notes}}
-
-<hr>
-
-<footer>{{#SentKanji}}<a 
-	href="https://jisho.org/search?keyword={{kanji:text:SentKanji}}" title="Sentence on Jisho">Jisho</a><a
-href="https://ichi.moe/cl/qr/?q={{kanji:text:SentKanji}} &r=kana" title="Sentence on Ichi.moe">Ichi.moe</a>{{/SentKanji}}{{#VocabKanji}}<a
-	href="https://www.google.co.jp/search?q={{kanji:text:VocabKanji}}&tbm=isch" title="Search images">Images</a><a
-	href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
-	href="https://sentencesearch.neocities.org/#{{text:VocabKanji}}" title="Vocab on SentenceSearch">Sentences</a>{{/VocabKanji}}</footer
->
+    <footer>
+        {{#SentKanji}}<a title="Translate with SimplyTranslate"
+            href="https://translate.metalune.xyz/?engine=google&text={{text:kanji:SentKanji}}&sl=ja&tl=en">Translate</a><a
+            href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}" title="Sentence on Jisho">Jisho</a><a
+            href="https://www.google.co.jp/search?q={{text:kanji:SentKanji}}&tbm=isch"
+            title="Search images">Images</a>{{/SentKanji}}{{#VocabKanji}}<a
+            href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
+            href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}
+    </footer>
+</div> <!-- /wrap -->
 
 <script>
-	function removePitchBrackets() {
-		const tags = document.getElementById("pitchnum");
-		if (tags !== null) {
-			tags.innerHTML = tags.innerHTML.replace(/(\[(?=\d)|(?<=\d)\])/g, "");
-		}
-	}
-	document.addEventListener('DOMContentLoaded', markPitch(), false);
-	document.addEventListener('DOMContentLoaded', removePitchBrackets(), false);	
+    function tweak_reveal_text() {
+        const elem = document.querySelector("div.ensentence > a.hint");
+        if (elem) {
+            elem.innerText = "Reveal English translation";
+        }
+    }
+    function removePitchBrackets() {
+        const tags = document.getElementById("pitchnum");
+        if (tags !== null) {
+            tags.innerHTML = tags.innerHTML.replace(/[\[\]]/g, "");
+        }
+    }
+    markPitch();
+    removePitchBrackets();
+    tweak_reveal_text();
 </script>
