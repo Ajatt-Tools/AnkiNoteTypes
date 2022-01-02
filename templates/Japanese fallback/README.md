@@ -2,6 +2,8 @@
 
 This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://pastebin.com/pAVvqLPd)(a big thanks to whoever made it). It's also available on [Yandex](https://disk.yandex.com/d/x-LeTujmDeYFNQ).
 
+![gif](showcase.gif)
+
 ### But what is it?
 
 Fallback cards (FBCs) are similar to SWCs and TSCs at first: you’ve got the target word on the front of the card and whatever you need to understand it on the back, an example sentence and pitch accent information -- if you make cards using [Mpvacious](https://github.com/Ajatt-Tools/mpvacious), you’ve also got the audio of the example sentence and an image. (That looks like SWCs, right?) When you hover over the target word a sentence appears, giving you the context in which you found the target word.
