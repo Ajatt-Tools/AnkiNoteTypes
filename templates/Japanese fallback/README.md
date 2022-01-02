@@ -1,38 +1,12 @@
 # Japanese fallback
 
-This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://pastebin.com/pAVvqLPd)(a big thanks to whoever made it). I've also changed the footers and made `Notes` and `SentEng` field collapsible. It's also available on [Yandex](https://disk.yandex.com/d/x-LeTujmDeYFNQ).
-
-![gif](gif1-example.gif)
+This card template was brought to you by `ﾌｪﾘﾍﾟ`. It is based on [Japanese sentences](https://github.com/Ajatt-Tools/AnkiNoteTypes/tree/main/templates/Japanese%20sentences#japanese-sentences) and on [card template provided by a DJT user](https://pastebin.com/pAVvqLPd)(a big thanks to whoever made it). It's also available on [Yandex](https://disk.yandex.com/d/x-LeTujmDeYFNQ).
 
 Fallback cards (FBCs) are similar to SWCs and TSCs at first: you’ve got the target word on the front of the card and whatever you need to understand it on the back, an example sentence and pitch accent information -- if you make cards using [Mpvacious](https://github.com/Ajatt-Tools/mpvacious), you’ve also got the audio of the example sentence and an image. (That looks like SWCs, right?) When you hover over the target word a sentence appears, giving you the context in which you found the target word.
 FBCs allow you do the following:
 * Have a backup when you go like, “what the hell am I looking at?!” (hence its [name](https://www.oxfordlearnersdictionaries.com/definition/english/fallback?q=fallback))
 * Forget about context-dependent memories but still benefit from TSCs, since you’re testing yourself on the target word and still have the benefits that [TSCs can provide](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#targeted-sentence-cards-or-mpvacious-cards) on the back;
 * Be flexible. A word becomes easier as you get familiar with it -- by seeing it on your immersion or on Anki. At first you can use the hover feature to review the card as a TSC, and later as a SWC when you’re already familiar with the word and don’t need a backup plan anymore.
-
-## Converting TSCs into FBCs　(and vice versa)
-
-It’s easy to convert your Mpvacious, TSC, cards into FBCs. Select all the cards you want to convert, > Change note type > select “Fallback card” and make sure that each field is matching with each other.
-
-![gif](gif2-notecon.gif)
-
-## Footer
-
-![screenshot](image1.png)
-
-I’ve changed the original footers of Japanese sentences to match my needs. “Ichi.moe” is better than Jisho to parse sentences, in my opinion. “Images” puts the target word on Google JP, rather than the whole sentence. “Sentences” searchs the target word on Sentence Search, giving you more example sentences (tip: you can you can mine cards from that site).
-Here’s the original footer of Japanese sentences:
-```
-<footer>{{#SentKanji}}<a
-    href="https://jisho.org/search?keyword={{kanji:text:SentKanji}}" title="Sentence on Jisho">Jisho</a><a
-    href="https://www.google.co.jp/search?q={{kanji:text:SentKanji}}&tbm=isch" title="Search images">Images</a
-    >{{/SentKanji}}{{#VocabKanji}}<a
-    href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
-    href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}</footer
->
-```
-
-![screenshot](image2.png)
 
 ## Included card types
 
