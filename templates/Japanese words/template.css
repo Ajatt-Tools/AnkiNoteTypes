@@ -79,6 +79,9 @@ ul {
 #question {
     font-family: "acgyosyo", "Yu Mincho";
 }
+#question ruby rt {
+    font-family: "acgyosyo", "Yu Mincho";
+}
 .japanese {
     text-align: center;
     font-size: 40px;
