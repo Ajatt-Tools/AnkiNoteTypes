@@ -358,6 +358,15 @@ ol {
 
 /* Night Mode */
 
+.nightMode.card {
+    color: #FFFFFF;
+    background-color: black;
+}
+
+.nightMode .wrap {
+    background-color: #2F2F31;
+}
+
 .nightMode .tags {
     background-color: #FFFFFF;
     color: #2F2F31;
@@ -376,17 +385,12 @@ ol {
     background: #FFFFFF;
 }
 
-.nightMode.card {
-    color: #FFFFFF;
-    background-color: #2F2F31
-}
-
 .nightMode a {
-    color: gray;
+    color: #c7493a;
 }
 
 .nightMode a:hover {
-    color: #722a2a;
+    color: #a33327;
 }
 
 .nightMode .jpsentence b {
