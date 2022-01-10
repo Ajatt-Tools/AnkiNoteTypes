@@ -49,7 +49,7 @@ def write_card_templates(model_dir_path: str, templates: list[CardTemplate]) -> 
         if not os.path.isdir(dir_path):
             os.mkdir(dir_path)
         for filename, content in zip((FRONT_FILENAME, BACK_FILENAME), (template.front, template.back)):
-            with open(os.path.join(dir_path, filename), 'w') as f:
+            with open(os.path.join(dir_path, filename), 'w', encoding='utf8') as f:
                 f.write(content)
 
 
@@ -77,17 +77,17 @@ def save_note_type(model: NoteType):
     if not os.path.isdir(dir_path):
         os.mkdir(dir_path)
 
-    with open(json_path, 'w') as f:
+    with open(json_path, 'w', encoding='utf8') as f:
         json.dump(format_export(model), f, indent=JSON_INDENT, ensure_ascii=False)
 
-    with open(css_path, 'w') as f:
+    with open(css_path, 'w', encoding='utf8') as f:
         f.write(model.css)
 
     write_card_templates(dir_path, model.templates)
     remove_deleted_templates(dir_path, [template.name for template in model.templates])
 
     if not os.path.isfile(readme_path):
-        with open(readme_path, 'w') as f:
+        with open(readme_path, 'w', encoding='utf8') as f:
             f.write(f"# {model.name}\n\n*Description and screenshots here.*")
 
 
