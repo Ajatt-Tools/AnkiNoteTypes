@@ -1,0 +1,22 @@
+{
+    "modelName": "Japanese sentences (nb)",
+    "inOrderFields": [
+        "SentKanji",
+        "SentFurigana",
+        "SentEng",
+        "SentAudio",
+        "VocabKanji",
+        "VocabFurigana",
+        "VocabPitchPattern",
+        "VocabDef",
+        "VocabAudio",
+        "Notes",
+        "Image",
+        "Source",
+        "MakeProductionCard"
+    ],
+    "cardTemplates": [
+        "Recognition",
+        "Production"
+    ]
+}

@@ -1,0 +1,42 @@
+<div class="wrap">
+
+{{FrontSide}}
+
+<hr>
+
+<div lang="en">{{SentEng}}</div>
+<div class="strokeorder">{{VocabKanji}}</div>
+
+{{#VocabKanji}}
+<div class="vocab">
+    {{VocabPitchPattern}}
+    {{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
+    【{{VocabKanji}}】
+</div>
+{{/VocabKanji}}
+
+{{#VocabDef}}
+<div class="definitions">
+    {{edit:furigana:VocabDef}}
+</div>
+{{/VocabDef}}
+
+{{#Notes}}
+<div class="notes">
+    <div class="tags">Notes</div>
+    <div>{{furigana:Notes}}</div>
+</div>
+{{/Notes}}
+
+{{#Source}}<div class="source">{{Source}}</div>{{/Source}}
+
+<hr>
+
+<footer>{{#SentKanji}}<a title="Translate with SimplyTranslate" href="https://translate.metalune.xyz/?engine=google&text={{text:kanji:SentKanji}}&sl=ja&tl=en">Translate</a><a href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}"
+        title="Sentence on Jisho">Jisho</a><a href="https://www.google.co.jp/search?q={{text:kanji:SentKanji}}&tbm=isch"
+        title="Search images">Images</a>{{/SentKanji}}{{#VocabKanji}}<a
+        href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
+        href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}
+</footer>
+
+</div> <!-- /wrap -->
