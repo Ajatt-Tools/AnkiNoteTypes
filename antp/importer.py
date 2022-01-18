@@ -27,10 +27,13 @@ def read_card_templates(model_dir_name: str, template_names: list[str]) -> list[
     return templates
 
 
-def read_model(model_dir_name: str) -> NoteType:
+def read_model_dict(model_dir_name: str) -> dict[str, Any]:
     with open(os.path.join(NOTE_TYPES_DIR, model_dir_name, JSON_FILENAME), encoding='utf8') as f:
-        model_dict = json.load(f)
+        return json.load(f)
 
+
+def read_model(model_dir_name: str) -> NoteType:
+    model_dict = read_model_dict(model_dir_name)
     return NoteType(
         name=model_dict['modelName'],
         fields=model_dict['inOrderFields'],

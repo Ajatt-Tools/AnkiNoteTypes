@@ -7,7 +7,11 @@ from typing import Any
 from .ankiconnect import invoke, request_model_names
 from .common import select, get_used_fonts, NoteType
 from .consts import *
-from .importer import read_model, store_fonts
+from .importer import read_model_dict, read_model, store_fonts
+
+
+def read_model_name(model_dir_name: str) -> str:
+    return read_model_dict(model_dir_name)['modelName']
 
 
 def format_templates(model: NoteType) -> dict[str, Any]:
@@ -36,12 +40,15 @@ def send_note_type(model: NoteType):
 
 
 def update_note_type():
-    if model_dir_name := select(os.listdir(NOTE_TYPES_DIR)):
-        print(f"Selected model: {model_dir_name}")
+    anki_models = set(request_model_names())
+    dir_names = [dir_name for dir_name in os.listdir(NOTE_TYPES_DIR)
+                 if read_model_name(dir_name) in anki_models]
+    if not dir_names:
+        print("No note types can be updated.")
+        return
+    if model_dir_name := select(dir_names):
+        print(f"Selected note type: {model_dir_name}")
         model = read_model(model_dir_name)
-        if model.name in request_model_names():
-            store_fonts(get_used_fonts(model.css))
-            send_note_type(model)
-            print("Done.")
-        else:
-            print("This note type hasn't been imported yet. Aborted.")
+        store_fonts(get_used_fonts(model.css))
+        send_note_type(model)
+        print("Done.")
