@@ -34,39 +34,23 @@ Thu Feb  4 01:06:07 AM UTC 2021
     }
 
     function splitTagDiv() {
-        const header = document.getElementsByTagName("header")[0];
-        if (!header) return;
-        const tags = `{{Tags}}`.split(" ");
-        header.innerHTML = "";
-        for (const tag of tags) {
-            const tag_elem = document.createElement("div");
-            tag_elem.className = "tags";
-            tag_elem.innerHTML = tag;
-            header.appendChild(tag_elem);
+        const header = document.querySelector("header");
+        if (header) {
+            const tags = `{{Tags}}`.split(" ");
+            header.innerHTML = "";
+            for (const tag of tags) {
+                if (tag.includes("DisableGyousyo")) {
+                    continue;
+                }
+                const tag_elem = document.createElement("div");
+                tag_elem.className = "tags";
+                tag_elem.innerHTML = tag;
+                header.appendChild(tag_elem);
+            }
         }
     }
-
 
     splitTagDiv()
     highlightNames()
     applyQuizFont()
-</script>
-
-<script>
-    // Hides DisableGyousyo from tags.
-
-  document.addEventListener('DOMContentLoaded', tagActions(), false);
-
-  function hidedisablegyousyo() {
-    const tags_elems = document.getElementsByClassName("tags");
-    for (const tag_elem of tags_elems) {
-      if (tag_elem.innerHTML.includes("DisableGyousyo")) {
-        tag_elem.style.display = "none";
-      }
-    }
-  }
-
-  function tagActions() {  
-    hidedisablegyousyo()
-  }
 </script>
