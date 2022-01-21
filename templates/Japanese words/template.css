@@ -248,3 +248,13 @@ ol {
 .nightMode .images > img {
     filter: sepia(0%);
 }
+
+/* Dim furigana color on the front (if present) */
+
+.japanese.question ruby rt {
+    opacity: 0.15;
+    transition: opacity 0.15s;
+}
+.japanese.question:hover ruby rt {
+    opacity: 1;
+}
