@@ -358,12 +358,9 @@ ol {
 
 /* Night Mode */
 
-.nightMode.card {
-    color: #FFFFFF;
-    background-color: #212121;
-}
-
+.nightMode.card,
 .nightMode .wrap {
+    color: #FFFFFF;
     background-color: #2F2F31;
 }
 
