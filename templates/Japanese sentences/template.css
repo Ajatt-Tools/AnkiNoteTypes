@@ -1,19 +1,27 @@
 @charset "utf-8";
 
-@font-face {
-    font-family: "KanjiStrokeOrders";
-    src: local("KanjiStrokeOrders"), url("_kso.ttf");
-}
+@media screen and (min-width: 900px) {
 
-@font-face {
-    font-family: "Yu Mincho";
-    src: local("Yu Mincho"), local("游明朝"), url("_yumin.ttf");
-}
+    /* Limit font loading to wide screens to avoid performance hits on mobile. */
+    @font-face {
+        font-family: "KanjiStrokeOrders";
+        src: local("KanjiStrokeOrders"), url("_kso.ttf");
+    }
 
-@font-face {
-    font-family: "Yu Mincho";
-    src: local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
-    font-weight: 600;
+    @font-face {
+        font-family: "Yu Mincho";
+        src: local("Yu Mincho"), local("游明朝"), url("_yumin.ttf");
+    }
+
+    @font-face {
+        font-family: "Yu Mincho";
+        src: local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+        font-weight: 600;
+    }
+
+    b {
+        font-weight: 600;
+    }
 }
 
 * {
@@ -71,10 +79,6 @@ hr {
     clear: both;
     border: 0;
     border-top: 1px solid #c9bcbc;
-}
-
-b {
-    font-weight: 600;
 }
 
 /* links */
@@ -358,10 +362,13 @@ ol {
 
 /* Night Mode */
 
-.nightMode.card,
+.nightMode.card {
+    background-color: #2F2F31;
+}
+
 .nightMode .wrap {
     color: #FFFFFF;
-    background-color: #2F2F31;
+    background-color: inherit;
 }
 
 .nightMode .tags {
