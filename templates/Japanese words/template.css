@@ -113,10 +113,11 @@ hr {
     align-items: flex-start;
     justify-content: space-evenly;
 }
-.extra br {
+.extra br, .extra > * {
     display: none;
 }
 .extra > img {
+    display: block;
     max-width: 48%;
     max-height: 350px;
     border-radius: 4px;
