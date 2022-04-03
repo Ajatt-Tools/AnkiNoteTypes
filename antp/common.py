@@ -27,7 +27,10 @@ class NoteType:
 
 
 def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None) -> int:
-    resp = int(input(msg))
+    try:
+        resp = int(input(msg))
+    except ValueError as ex:
+        raise ANTPError(ex) from ex
     if resp < min_val or (max_val and resp > max_val):
         raise ANTPError("Value out of range.")
     return resp
