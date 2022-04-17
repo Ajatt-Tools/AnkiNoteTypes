@@ -27,12 +27,10 @@ Modified by Aleksa Sarai <cyphar@cyphar.com>.
 
 <script>
 	function boxTargetWord() {
-		for (sentence of document.getElementsByClassName("jpsentence")) {
-			for (word of sentence.getElementsByTagName("b")) {
-				word.style["border"] = "1px";
-				word.style["border-style"] = "dotted";
-				word.style["border-color"] = "#9a9a9a9a";
-			}
+		for (word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
+			word.style["border"] = "1px";
+			word.style["border-style"] = "dotted";
+			word.style["border-color"] = "#9a9a9a9a";
 		}
 	}
 	document.addEventListener('DOMContentLoaded', boxTargetWord(), false);

@@ -13,12 +13,9 @@
 
 <script>
     function threeDots() {
-        const sent = document.getElementsByClassName("production")[0];
-        if (sent) {
-            for (const hidden of sent.getElementsByTagName("b")) {
-                hidden.style.visibility = "visible";
-                hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
-            }
+        for (hidden of document.querySelectorAll(".production b, .production strong")) {
+            hidden.style.visibility = "visible";
+            hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
         }
     }
     /* Splits tags into separate divs */

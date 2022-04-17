@@ -9,16 +9,9 @@
 	document.addEventListener('DOMContentLoaded', threeDots(), false);
 
 	function threeDots() {
-		const sent = document.getElementsByClassName("production")[0];
-		if (sent) {
-			const hidden = sent.getElementsByTagName("b");
-			for (i = 0; i < hidden.length; i++) {
-				if (hidden[i]) {
-					hidden[i].style.visibility = "visible";
-					//hidden[i].innerText = "【{{kana:VocabFurigana}}】";
-					hidden[i].innerText = "【"+hidden[i].innerText.replace(/[^ぁ-んァ-ン]/g, "")+"】";
-				}
-			}
+		for (hidden of document.querySelectorAll(".production b, .production strong")) {
+			hidden.style.visibility = "visible";
+			hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
 		}
 	}
 </script>
