@@ -99,7 +99,7 @@ Paints the question word according to its Pitch Accent number.
 	}
 	
 	function paintTargetWord(color) {
-		for (word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
+		for (const word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
 			word.style.color = color;
 			// clear border on back side of cards
 			word.style["border"] = "0px";

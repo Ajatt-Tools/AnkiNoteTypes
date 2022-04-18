@@ -81,7 +81,7 @@ Sat Nov 27 11:10:04 AM UTC 2021
     }
 
     function paintTargetWord(color) {
-        for (word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
+        for (const word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
             word.style.color = color;
         }
     }

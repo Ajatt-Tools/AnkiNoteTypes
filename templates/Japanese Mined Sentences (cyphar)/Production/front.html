@@ -9,7 +9,7 @@
 	document.addEventListener('DOMContentLoaded', threeDots(), false);
 
 	function threeDots() {
-		for (hidden of document.querySelectorAll(".production b, .production strong")) {
+		for (const hidden of document.querySelectorAll(".production b, .production strong")) {
 			hidden.style.visibility = "visible";
 			hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
 		}

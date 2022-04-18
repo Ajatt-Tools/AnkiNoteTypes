@@ -27,7 +27,7 @@ Modified by Aleksa Sarai <cyphar@cyphar.com>.
 
 <script>
 	function boxTargetWord() {
-		for (word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
+		for (const word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
 			word.style["border"] = "1px";
 			word.style["border-style"] = "dotted";
 			word.style["border-color"] = "#9a9a9a9a";
