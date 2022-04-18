@@ -19,7 +19,7 @@
         font-weight: 600;
     }
 
-    b {
+    b, strong {
         font-weight: 600;
     }
 }
@@ -106,7 +106,8 @@ nokana ruby rt {
     display: none;
 }
 
-notext b {
+notext b,
+notext strong {
     background-color: black;
     color: transparent;
 }
@@ -304,7 +305,8 @@ footer>a:last-child:after {
 
 /* Production cards */
 
-.production b {
+.production b,
+.production strong {
     visibility: hidden;
 }
 
@@ -406,7 +408,8 @@ ol {
     color: #a33327;
 }
 
-.nightMode .jpsentence b {
+.nightMode .jpsentence b,
+.nightMode .jpsentence strong {
     color: gray;
 }
 

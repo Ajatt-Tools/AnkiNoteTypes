@@ -23,7 +23,7 @@
 .card2 .jpsentence:hover ruby rt { opacity: 1; }
 
 hr { margin: 2px 0; clear: both; }
-b { font-weight: 600; }
+b, strong { font-weight: 600; }
 
 /* links */
 a { color: #585858; }
@@ -32,7 +32,7 @@ a.hint { text-decoration: none; text-align: center; display: block; }
 
 /* Hide furigana on front */
 nokana ruby rt { opacity:0.0; font-size:0; display: none; }
-notext b { background-color: black; color:transparent; }
+notext b, notext strong { background-color: black; color:transparent; }
 
 /* Top */
 header { font-size: 14px; line-height: 14px; clear: both; }
@@ -108,7 +108,7 @@ footer>a { text-decoration: none; }
 }
 
 /* Production cards */
-.production b { visibility: hidden; }
+.production b, .production strong { visibility: hidden; }
 .strokeorder {
 	text-align: center;
 	font-size: 150px;
@@ -171,7 +171,7 @@ ul, ol {
     color: #722a2a;
 }
 
-.nightMode .jpsentence b {
+.nightMode .jpsentence b, .nightMode .jpsentence strong {
     color: gray;
 }
 
