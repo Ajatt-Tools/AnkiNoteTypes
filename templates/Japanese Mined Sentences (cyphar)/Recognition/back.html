@@ -30,7 +30,7 @@
 {{/VocabDefMonolingual}}
 {{/VocabDef}}
 
-{{#Notes}}	
+{{#Notes}}
 <div class="notes">
 	<div class="tags">Notes</div>
 	<div>{{furigana:Notes}}</div>
@@ -59,45 +59,43 @@
 </footer>
 
 <script>
-/*
-Paints the question word according to its Pitch Accent number.
-	blue for 平板
-	red for 頭高
-	orange for 中高
-	green for 尾高
-*/
-
+	/*
+	 * Paints the question word according to its Pitch Accent number.
+	 *	- blue for 平板
+	 *	- red for 頭高
+	 *	- orange for 中高
+	 *	- green for 尾高
+	 */
 	function markPitch() {
-		var pitchNumber = document.getElementById("pitchnum_hidden");
-		if (pitchNumber === null) {
+		let pitchNumber = document.getElementById("pitchnum_hidden");
+		if (pitchNumber === null)
 			return;
-		} else {
+		else
 			pitchNumber = pitchNumber.innerHTML.match(/\d/);
-		}
-		if (pitchNumber === null) {
+
+		if (pitchNumber === null)
 			return;
-		} else {
+		else
 			pitchNumber = Number(pitchNumber);
-		}
 
 		/* Then decide what color to use and change font color accordingly. */
-		if ( pitchNumber == 0 )  {
+		if (pitchNumber == 0)  {
 			// use blue for 平板
-			paintTargetWord("#3366CC");
-		} else if ( pitchNumber == 1 ) {
+			paintTargetWord("#59b2ff");
+		} else if (pitchNumber == 1) {
 			// use red for 頭高
-			paintTargetWord("red");
-		} else if ( pitchNumber > 1 ) {
-			if ( odaka(pitchNumber) ) {
+			paintTargetWord("#ef4c4c");
+		} else if (pitchNumber > 1) {
+			if (odaka(pitchNumber)) {
 				// use green for 尾高
-				paintTargetWord("green");
+				paintTargetWord("#34ff9a");
 			} else {
 				// use orange for 中高
-				paintTargetWord("#ff6207");
+				paintTargetWord("#ff9b54");
 			}
 		}
 	}
-	
+
 	function paintTargetWord(color) {
 		for (const word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
 			word.style.color = color;
@@ -142,7 +140,7 @@ Paints the question word according to its Pitch Accent number.
 				else
 					any_valid = true;
 			} catch {
-				// ...
+				// ignore bad links
 			}
 		}
 		if (!any_valid) {
@@ -154,6 +152,6 @@ Paints the question word according to its Pitch Accent number.
 	}
 
 	document.addEventListener('DOMContentLoaded', markPitch(), false);
-	document.addEventListener('DOMContentLoaded', removePitchBrackets(), false);	
+	document.addEventListener('DOMContentLoaded', removePitchBrackets(), false);
 	document.addEventListener('DOMContentLoaded', hideBadSource(), false);
 </script>
