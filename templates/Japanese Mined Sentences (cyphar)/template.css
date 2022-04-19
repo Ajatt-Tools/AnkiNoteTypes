@@ -6,14 +6,9 @@
 .card {
 	background-color: #FFFAF0;
 	color: #2A1B0A;
-	font-family:	"Noto Serif",
-									"Noto Serif CJK JP",
-									Yu Mincho,
-									"Liberation Serif",
-									"Times New Roman",
-									Times,
-									Georgia,
-									Serif;
+	font-family: "Noto Serif", "Noto Serif CJK JP", "Yu Mincho",
+	             "Liberation Serif", "Times New Roman", Times,
+	             Georgia, Serif;
 	font-size: 24px;
 	text-align: left;
 	line-height: 1.4;
@@ -31,8 +26,8 @@ a:hover { color: #222; }
 a.hint { text-decoration: none; text-align: center; display: block; }
 
 /* Hide furigana on front */
-nokana ruby rt { opacity:0.0; font-size:0; display: none; }
-notext b, notext strong { background-color: black; color:transparent; }
+nokana ruby rt { opacity: 0.0; font-size: 0; display: none; }
+notext b, notext strong { background-color: black; color: transparent; }
 
 /* Top */
 header { font-size: 14px; line-height: 14px; clear: both; }
@@ -67,7 +62,7 @@ header { font-size: 14px; line-height: 14px; clear: both; }
 	fill: #FFFAF0;
 	background: #333;
 	border-radius: 3px;
-	vertical-align: top; 
+	vertical-align: top;
 	min-width: 16px;
 	min-height: 16px;
 }
@@ -123,11 +118,11 @@ footer>a { text-decoration: none; }
 .fside .jpsentence:hover [priority=true] { }
 .fside .jpsentence:hover [frequency=true] { }
 
-del.MorphManHide {display:none;}
+del.MorphManHide {display: none;}
 
 /* Fix for Yomichan defs */
 ul, ol {
-  list-style-type: none; 
+  list-style-type: none;
   display: inline;
   margin: 0px;
   padding: 0px;
@@ -136,7 +131,6 @@ ul, ol {
 .vocab ol > li { display: inline; }
 .vocab ol > li:after { content: "・"; }
 .vocab ol > li:last-child:after { content: ""; }
-
 
 /* Night Mode */
 
@@ -158,23 +152,10 @@ ul, ol {
     background: #FFFFFF;
 }
 
-.nightMode.card {
-    color: #FFFFFF;
-    background-color: #2F2F31
-}
-
 .nightMode a {
     color: gray;
 }
 
 .nightMode a:hover {
-    color: #722a2a;
-}
-
-.nightMode .jpsentence b, .nightMode .jpsentence strong {
-    color: gray;
-}
-
-.nightMode .images > img {
-    filter: sepia(0%);
+    color: lightgray;
 }
