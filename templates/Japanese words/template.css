@@ -226,6 +226,10 @@ ol {
     margin: 0px;
     padding: 0px;
 }
+ul li,
+ol li {
+    margin-bottom: 1em;
+}
 .pronunciation ol > li {
     display: inline;
 }
