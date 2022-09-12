@@ -21,6 +21,8 @@ Sat Nov 27 11:10:04 AM UTC 2021
             {{/SentKanji}}
         </div>
     </div>
+
+    <div class="images on-front">{{Image}}</div>
 </div> <!-- /wrap -->
 
 <div style="display:none;">
@@ -99,11 +101,20 @@ Sat Nov 27 11:10:04 AM UTC 2021
             if (tag.length < 1) continue;
             const tag_elem = document.createElement("div");
             tag_elem.className = "tags";
-            tag_elem.innerHTML = tag;
+            tag_elem.innerText = tag;
             header.appendChild(tag_elem);
+        }
+    }
+
+    function setImageOnFront() {
+        const tags = `{{Tags}}`.split(" ");
+        const front_img = document.querySelector("div.images.on-front");
+        if (front_img && tags.includes("imageonfront")) {
+            front_img.classList.toggle("on-front");
         }
     }
 
     markPitch();
     splitTagDiv();
+    setImageOnFront();
 </script>
