@@ -19,6 +19,9 @@ On the back you can put the definitions and pronunciations of the target word, a
 The note type also contains a separate field for Japanese pitch accent pattern.
 I use [this Anki add-on](https://ankiweb.net/shared/info/1225470483) to generate pitch accents.
 
+The `Image` field will be shown on the front
+if a card has `imageonfront` tag.
+
 ### 2: Production
 
 This card type is designed to teach you how to write the target word.
