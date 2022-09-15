@@ -1,0 +1,72 @@
+<!--
+mpvacious JP1K TSC cards, version 1.0
+Thu Sep 15 23:27:08 2022 UTC
+-->
+
+<div class="wrap">
+<header>
+{{#Tags}}
+  <div class="tags">{{Tags}}</div>
+{{/Tags}}
+</header>
+
+<div id="question">
+  <div class="sent-center">
+    <div class="jpsentence" lang="ja">
+
+<!--Sentence-->
+      {{furigana:SentFurigana}}
+{{^SentFurigana}}
+      <nokana>{{edit:SentKanji}}</nokana>
+
+<!--No Sentence-->
+{{^SentKanji}}
+      <div align="center"><b>
+      {{furigana:VocabFurigana}}
+{{^VocabFurigana}}
+      <nokana>{{edit:VocabKanji}}</nokana>
+{{/VocabFurigana}}</b>
+      </div>
+{{/SentKanji}}
+{{/SentFurigana}}
+    </div>
+
+<!--Hint-->
+  <div class="sent-center">
+    <div class="front-hint" lang="ja">
+      {{edit:Hint}}
+     </div>
+  </div>
+  </div>
+</div>
+</div> <!-- /wrap -->
+
+<script>
+ /* Splits tags into separate divs */
+    function splitTagDiv() {
+        const header = document.querySelector("header");
+        if (!header) return;
+        const split = `{{Tags}}`.split(" ");
+
+        header.innerHTML = "";
+
+        for (const tag of split) {
+            if (tag.length < 1) continue;
+            const tag_elem = document.createElement("div");
+            tag_elem.className = "tags";
+            tag_elem.innerHTML = tag;
+            header.appendChild(tag_elem);
+        }
+    }
+
+    /* Press "P" to reveal furigana for the target word */
+    var P_KEY = 80;
+    document.addEventListener('keydown', (event) => {
+        if (event.keyCode === P_KEY) {
+            for (const element of document.querySelectorAll('#question .jpsentence ruby rt')) {
+                element.style.visibility = "visible";
+            }
+        }
+    });
+    splitTagDiv();
+</script>
