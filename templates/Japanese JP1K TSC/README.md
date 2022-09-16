@@ -35,16 +35,16 @@ Fields added: `VocabDefMono`, `Source` (added by Cyphar), I added `Hint`
 Below are the screenshots of *Recognition* cards.  *Production* cards are not
 much different.
 
-[Night front](night front.webp)<br/>
+![Night front](/Japanese JP1K TSC/night front.webp?raw=true)<br/>
 *The front of the card showing the `Hint` field*
 
-[Night back](night back.webp)<br/>
+![Night back](/Japanese JP1K TSC/night back.webp?raw=true)<br/>
 *Bilingual definition hidden and a bolded word on monolingual definition.*
 
-[Day front](day front.webp)<br/>
+![Day front](/Japanese JP1K TSC/day front.webp?raw=true)<br/>
 *Day mode*
 
-[Day back](day back.webp)<br/>
+![Day back](/Japanese JP1K TSC/day back.webp?raw=true)<br/>
 *`VocabDef` shown after pressing button.*
 
 
