@@ -1,0 +1,55 @@
+<div class="wrap">
+{{FrontSide}}
+<hr>
+
+<div class="ensentence" lang="en">{{SentEng}}</div>
+<div class="strokeorder">{{edit:VocabKanji}}</div>
+
+{{#VocabKanji}}
+<div class="vocab" align="center">
+  {{VocabPitchPattern}}
+  {{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}}
+  【{{edit:VocabKanji}}】
+</div>
+{{/VocabKanji}}
+
+{{#VocabDefMono}}
+<div class="definition-mono">{{edit:furigana:VocabDefMono}}</div>
+{{/VocabDefMono}}
+
+{{#VocabDef}}
+{{#VocabDefMono}}
+<div class="sent-center">
+  <div class="definition">{{edit:VocabDef}}</div>
+</div>
+{{/VocabDefMono}}
+{{^VocabDefMono}}
+<div class="definition-mono">{{edit:VocabDef}}</div>
+{{/VocabDefMono}}
+{{/VocabDef}}
+
+{{#Notes}}
+<div class="notes">
+  <div class="tags">Notes</div>
+  <div>{{edit:furigana:Notes}}</div>
+</div>
+{{/Notes}}
+
+{{#Source}}
+<div class="source">{{edit:Source}}</div>
+{{/Source}}
+<hr>
+
+<footer>
+{{#SentKanji}}
+  <a href="https://www.deepl.com/translator#ja/en/{{text:kanji:SentKanji}}" title="Translate with DeepL">Translate</a>
+  <a href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}" title="Sentence on Jisho">Jisho</a>
+{{/SentKanji}}
+{{#VocabKanji}}
+  <a href="https://duckduckgo.com/?q={{kanji:text:VocabKanji}}&iax=images&ia=images&kp=-2&kl=jp-jp" title="Vocab Image on DuckDuckGo">Images</a>
+  <a href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a>
+  <a href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>
+{{/VocabKanji}}
+</footer>
+
+</div> <!-- /wrap -->

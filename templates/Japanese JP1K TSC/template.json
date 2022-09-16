@@ -1,0 +1,24 @@
+{
+    "modelName": "Japanese 1K TSC",
+    "inOrderFields": [
+        "SentKanji",
+        "SentFurigana",
+        "SentEng",
+        "SentAudio",
+        "VocabKanji",
+        "VocabFurigana",
+        "VocabPitchPattern",
+        "VocabDef",
+        "VocabDefMono",
+        "VocabAudio",
+        "Image",
+        "Notes",
+        "Hint",
+        "Source",
+        "MakeProductionCard"
+    ],
+    "cardTemplates": [
+        "Recognition",
+        "Production"
+    ]
+}

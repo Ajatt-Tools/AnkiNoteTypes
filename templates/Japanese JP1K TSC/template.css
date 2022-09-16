@@ -1,0 +1,633 @@
+@charset "utf-8";
+
+@media screen and (min-width: 900px) {
+
+/* Limit font loading to wide screens to avoid performance hits on mobile. */
+@font-face {
+    font-family: "KanjiStrokeOrders";
+    src: local("KanjiStrokeOrders"), url("_kso.ttf");
+}
+
+@font-face {
+    font-family: "Yu Mincho";
+    src: local("Yu Mincho"), local("游明朝"), url("_yumin.ttf");
+}
+
+@font-face {
+    font-family: "Yu Mincho";
+    src: local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+    font-weight: 600;
+}
+
+b, strong {
+    font-weight: 600;
+}
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    background-color: #fffaf0;
+    color: #2E2E30;
+    font-family: "Noto Serif", "Noto Serif CJK JP", Yu Mincho, "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
+    font-size: 20px;
+    text-align: left;
+    line-height: 1.35;
+    margin: 0 auto;
+}
+
+.card1 {
+    color: inherit;
+}
+
+.card2 .jpsentence ruby rt {
+    opacity: 0;
+}
+
+.card2 .jpsentence:hover ruby rt {
+    opacity: 1;
+}
+
+@media screen and (min-width: 820px) {
+.card {
+    background-color: #e5d7c9;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap {
+    width: 800px;
+    padding: 0 5px 0;
+    background-color: #fffaf0;
+}
+
+.wrap .wrap {
+    width: auto;
+    padding: 0;
+    min-height: 0;
+    border: 0;
+}
+}
+
+.nightMode.card {
+    color: #DDDDDD;
+    background-color: #2E2E30;
+}
+
+.nightMode .wrap {
+    color: #inherit;
+    background-color: inherit;
+}
+
+hr {
+    margin: 2px 0;
+    clear: both;
+    border: 0;
+    border-top: 1px solid #c9bcbc;
+}
+
+/* Links */
+a {
+    color: #532f2f;
+}
+
+a:hover {
+    color: #722a2a;
+}
+
+a.hint {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+}
+
+.nightMode a {
+    color: #c7493a;
+}
+
+.nightMode a:hover {
+    color: #a33327;
+}
+
+/* Hide furigana on front */
+nokana ruby rt {
+    opacity: 0;
+    font-size: 0;
+    display: none;
+}
+
+notext b,
+notext strong {
+    background-color: black;
+    color: transparent;
+}
+
+/* Top */
+header {
+    display: flex;
+    clear: both;
+}
+
+header .tags {
+    border-radius: 0px 0px 3px 3px;
+}
+
+header .notes {
+    border-radius: 0px 0px 3px 3px;
+}
+
+header>div:not(:last-child) {
+    margin-right: 3px;
+}
+
+/* Space between elements */
+
+.sent-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
+/* Japanese sentence */
+
+.jpsentence {
+    font-size: 35px;
+}
+
+.jpsentence b,
+.jpsentence strong {
+    color: Maroon;
+    font-size: 39px;
+}
+
+.jpsentence br {
+content: "";
+display: block;
+padding: 0px 0;
+}
+
+.nightMode .jpsentence b,
+.nightMode .jpsentence strong {
+    color: IndianRed;
+}
+
+/* Japanese word */
+
+.jpword {
+    text-align: center;
+    font-size: 42px;
+    color: Maroon;
+}
+
+.nightMode .jpword {
+    color: IndianRed;
+}
+
+/* Hide front side when the back is shown. */
+
+.fside .jpsentence {
+    display: none;
+}
+
+.fside .sent-center {
+    display: none;
+}
+
+/* English hint*/
+
+.ensentence {
+    color: #666;
+}
+
+div.ensentence .hint {
+    margin-bottom: 9px;
+}
+
+div.ensentence > a.hint {
+    color: #555;
+    font-size: 15px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 2.2px;
+    padding: 2px 10px;
+    margin: 6px;
+}
+
+.nightMode .ensentence {
+    color: #aaa;
+}
+
+div.ensentence > a.hint:hover {
+    color: #AAA;
+}
+
+.nightMode div.ensentence>a.hint {
+    color: Gray;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.nightMode div.ensentence>a.hint:hover {
+    color: DarkGray;
+}
+
+/* Tags */
+
+.tags {
+    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Arial, Sans, sans-serif;
+    text-align: center;
+    display: inline-block;
+    background-color: #2E2E30;
+    color: #fffaf0;
+    padding: 1px 3px;
+    margin: 0px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.notes .tags {
+    user-select: none;
+}
+
+.nightMode .tags {
+    background-color: #DDDDDD;
+    color: #2F2F31;
+}
+
+/* AnkiDroid replay button */
+
+.replaybutton {
+    margin: 0;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.replaybutton span {
+    padding: 0;
+    font-size: 20px;
+}
+
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #2E2E30;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* PC replay button */
+
+a.replay-button {
+    font-size: 24px;
+    top: -0.125em;
+    position: relative;
+    margin: 0;
+}
+
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+}
+
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+
+a.replay-button svg circle {
+    fill: #2E2E30;
+}
+
+.nightMode a.replay-button svg path {
+    fill: #2E2E30;
+}
+
+.nightMode a.replay-button svg circle {
+    fill: #DDDDDD;
+}
+
+.nightMode .replaybutton span svg {
+    fill: #2F2F31;
+    background: #FFFFFF;
+}
+
+/* Footer and links */
+
+footer {
+    font-size: 16px;
+    text-align: center;
+}
+
+footer>a {
+    text-decoration: none;
+}
+
+footer>a:after {
+    content: "·";
+    color: brown;
+    display: inline-block;
+    width: 0px;
+    padding: 2px
+}
+
+footer>a:last-child:after {
+    content: "";
+    width: 0;
+}
+
+/* Source */
+
+.source {
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Vocab */
+
+.vocab {
+    font-size: 24px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    color: #444;
+}
+
+.vocab div {
+    display: inline-block;
+}
+
+.vocab br {
+    display: none;
+}
+
+.vocab>.tags {
+    vertical-align: top;
+}
+
+.nightMode .vocab {
+    color: #aaa;
+}
+
+.notes>.tags {
+    vertical-align: bottom;
+}
+
+/* Notes */
+
+.notes {
+    color: #444;
+}
+
+.nightMode .notes {
+    color: #aaa;
+}
+
+/* Hint on Front */
+
+.front-hint {
+    color: #666;
+    margin: 6px;
+}
+
+.nightMode .front-hint {
+    color: LightSlateGrey;
+}
+
+/* Definitions */
+
+.definition {
+    color: #444;
+}
+
+.definition .hint {
+    margin-bottom: 10px;
+}
+
+.definition b,
+.definition strong {
+    color: Maroon;
+}
+
+.definition-mono {
+    font-size: 24px;
+    color: #444;
+}
+
+.definition-mono b,
+.definition-mono strong {
+    color: Maroon;
+}
+
+.nightMode .definition {
+    color: #aaa;
+}
+
+.nightMode .definition .hint {
+    color: #777;
+}
+
+.nightMode .definition b,
+.nightMode .definition strong {
+    color: NavajoWhite;
+}
+
+.nightMode .definition-mono {
+    color: #aaa;
+}
+
+.nightMode .definition-mono b,
+.nightMode .definition-mono strong {
+    color: NavajoWhite;
+}
+
+/* Definitions hint*/
+
+.definition a.hint {
+    color: #555;
+    background-color: rgba(0, 0, 0, 0.06);
+    font-size: 15px;
+    display: block;
+    padding: 2px 10px;
+    margin: 6px;
+}
+
+.definition a.hint:hover {
+    color: #AAA;
+}
+
+.nightMode .definition a.hint {
+    color: Gray;
+    background-color: 575757;
+}
+
+.nightMode .definition a.hint:hover {
+    color: DarkGray;
+}
+
+/* Images */
+
+.images {
+    margin: 10px 0;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+    align-content: start;
+    justify-content: space-around;
+    gap: 5px;
+    grid-auto-columns: minmax(100px, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+.images br, .images > * {
+    display: none;
+}
+
+.images img {
+    display: block;
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 95vh;
+}
+.images img:nth-child(3n+1) {
+  grid-column: 1;
+}
+.images img:nth-child(3n+2) {
+  grid-column: 1;
+}
+.images img:nth-child(3n+3) {
+  grid-column: 2;
+}
+.images img:nth-child(3n+4) {
+  grid-column: 2;
+}
+
+.nightMode .images>img {
+    filter: sepia(0%);
+}
+
+/* Production cards */
+
+.production b,
+.production strong {
+    visibility: hidden;
+}
+
+.strokeorder {
+    text-align: center;
+    font-size: 150px;
+    font-family: KanjiStrokeOrders;
+}
+
+/* Fix for Yomichan defs */
+
+ul,
+ol {
+    list-style-type: none;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul li,
+ol li {
+    margin-bottom: .5em;
+}
+
+/* Fix for Yomichan pitch accents */
+
+.vocab ol>li {
+    display: inline;
+}
+
+.vocab ol>li:after {
+    content: "・";
+}
+
+.vocab ol>li:last-child:after {
+    content: "";
+}
+
+/* Don't select furigana */
+
+.jpsentence ruby rt {
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none; 
+}
+
+.jpword ruby rt {
+    user-select: none;
+}
+
+/* Hidden furigana on front */
+#question ruby rt {
+    visibility: hidden;
+}
+
+#question .jpword:hover rt {
+    visibility: visible;
+}
+
+#question .jpsentence:hover rt {
+    visibility: visible;
+}
+
+/* Hide context */
+
+.align-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+.hide-label {
+    background: #F0EBE2;
+    color: #555;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.hide-label:hover {
+    color: #aaa;
+}
+.hide-label:after {
+    content: "Reveal context";
+}
+.hide-btn {
+    display: none;
+}
+.hide-btn:checked ~ .hide-label {
+    background: #F0EBE2;
+    color: #aaa;
+}
+.hide-btn ~ div.jpsentence {
+    visibility: hidden;
+    display: none;
+}
+.hide-btn:checked ~ div.jpsentence {
+    visibility: visible;
+    display: block;
+}
+.hide-btn ~ div.hint {
+    visibility: hidden;
+}
+.hide-btn:checked ~ div.hint {
+    visibility: visible;
+}
+.nightMode .hide-label {
+    background: #444;
+    color: #ddd;
+}
+.nightMode .hide-label:hover {
+    color: #999;
+}
+.nightMode .hide-btn:checked ~ .hide-label {
+    background: #4f4f4f;
+    color: #aaa;
+}
