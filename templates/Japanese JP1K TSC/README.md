@@ -35,16 +35,16 @@ Fields added: `VocabDefMono`, `Source` (added by Cyphar), I added `Hint`
 Below are the screenshots of *Recognition* cards.  *Production* cards are not
 much different.
 
-![Night front](https://raw.githubusercontent.com/Alksindrs/AnkiNoteTypes/main/templates/Japanese%20JP1K%20TSC/night%20front.webp)<br/>
+![Night front](https://raw.githubusercontent.com/Alksindrs/AnkiNoteTypes/main/templates/Japanese%20JP1K%20TSC/night%20front.webp?raw=true)<br/>
 *The front of the card showing the `Hint` field*
 
-![Night back](/Japanese JP1K TSC/night back.webp?raw=true)<br/>
+![Night back](https://github.com/Alksindrs/AnkiNoteTypes/blob/main/templates/Japanese%20JP1K%20TSC/night%20back.webp?raw=true)<br/>
 *Bilingual definition hidden and a bolded word on monolingual definition.*
 
-![Day front](/Japanese JP1K TSC/day front.webp?raw=true)<br/>
+![Day front](https://github.com/Alksindrs/AnkiNoteTypes/blob/main/templates/Japanese%20JP1K%20TSC/day%20front.webp?raw=true)<br/>
 *Day mode*
 
-![Day back](/Japanese JP1K TSC/day back.webp?raw=true)<br/>
+![Day back](https://github.com/Alksindrs/AnkiNoteTypes/blob/main/templates/Japanese%20JP1K%20TSC/day%20back.webp?raw=true)<br/>
 *`VocabDef` shown after pressing button.*
 
 
