@@ -75,9 +75,6 @@ In `subs2srs.conf` of miscinfo is mapped to Notes by default, make sure to chang
 
 ## To be used with the following Anki addons
 
-*AJT Furigana 
-*AJT Pitch Accent
-*anki-forvo-dl
-*Edit Field During Review (Cloze)
+AJT Furigana, AJT Pitch Accent, anki-forvo-dl, Edit Field During Review (Cloze)
 
 And mpvacious or similar mpv scripts that work with Yomichan and AnkiConnect.
