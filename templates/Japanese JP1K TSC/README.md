@@ -22,7 +22,6 @@ Fields added: `VocabDefMono`, `Source` (added by Cyphar), I added `Hint`
   * Furigana is shown for the whole sentence when hovered, not just the hovered word.
   * There was a tag separation problem that is now fixed. Also changed the hand pointer of the tags because it made it seem as if they linked to somewhere.
   * Furigana made unselectable so you can copy the vocab or sentence cleanly. (this works on Windows Anki but not on Ankidroid, don't know why)
-  * There are several {{edit:____}} tagged fields that work with the Edit Field During Review Cloze so you can edit them using Ctrl+click. (Though you should know that making `SentFurigana` and `VocabFurigana` editable fields will make this not work unless you Right click->Copy, so I left them not editable). Note that when an editable field is conditioned to not appear, the editable empty space is also gone so you have to use the Editor.
   * Fixed the image columns when there are several images.
   * Production cards are basically left the same. Did the same links fix like in the back of recognition cards.
   * Please mind that Production cards only work when there's a 1)Vocab field present, 2)has furigana generated and 3)the `MakeProductionCard` field is not empty. Best to use it with Vocab+Sentence notes but also admits only Vocab notes.
