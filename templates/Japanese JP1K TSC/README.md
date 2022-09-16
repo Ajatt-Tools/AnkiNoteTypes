@@ -15,19 +15,19 @@ Use this note type if you:
 Fields removed: `MorphManFocus`, `VocabPitchNum` (removed by nb)
 Fields added: `VocabDefMono`, `Source` (added by Cyphar), I added `Hint`
 
-  * I don't use MorphMan but you can add the needed field and it will work fine. I find Pitch accent coloration and numbering scheme not that useful when you have a graph and `VocabAudio`.
-  * The Translate link didn't work anymore so I changed the site to DeepL and the Image link sends you to DuckDuckGo and only uses the VocabKanji field. It used to search for the whole sentence which showed inaccurate results.
-  * Furigana is shown for the whole sentence when hovered, not just the hovered word.
   * Added the `Hint` field which is always shown. SentFurigana is prioritized on front just like JP1K so adding a hint furigana to `SentKanji` can't be used, I found best not to mess with it and use the `Hint` field instead. This field is also to ease the transition for people who are migrating from Word Context Cards that use hints and don't want to lose that info. If you're coming from WCC, when changing to sentence cards you'll notice that a lot of the hints are just extensions of the sentence but there are other ways of using this field that work with sentence cards like warning about repeatedly wrong readings or meanings.
   * The bolded words in the sentence are not only colored but also made a little bit bigger for a better grip on the sight. Also implemented bolded and colored words in the `VocabDef` and `VocabDefMono` for when sometimes there's more than one definition but want to highlight the one that fits the context. Although I think these should be filled minimally, there are times when you will find useful details about a word and want to keep that info to help your study.
   * Took from Cyphar the idea of hiding `VocabDef` as a hint when there's a monolingual definition. This is to help commit to the monolingual definitions, I found that if I had both, my eyes would automatically go for the latin script. If you don't want to use this feature you can have any definition on `VocabDef` and it will display as usual as long as `VocabDefMono` is empty.
+  * The Translate link didn't work anymore so I changed the site to DeepL and the Image link sends you to DuckDuckGo and only uses the VocabKanji field. It used to search for the whole sentence which showed inaccurate results.
+  * Furigana is shown for the whole sentence when hovered, not just the hovered word.
   * There was a tag separation problem that is now fixed. Also changed the hand pointer of the tags because it made it seem as if they linked to somewhere.
   * Furigana made unselectable so you can copy the vocab or sentence cleanly. (this works on Windows Anki but not on Ankidroid, don't know why)
   * There are several {{edit:____}} tagged fields that work with the Edit Field During Review Cloze so you can edit them using Ctrl+click. (Though you should know that making `SentFurigana` and `VocabFurigana` editable fields will make this not work unless you Right click->Copy, so I left them not editable). Note that when an editable field is conditioned to not appear, the editable empty space is also gone so you have to use the Editor.
   * Fixed the image columns when there are several images.
   * Production cards are basically left the same. Did the same links fix like in the back of recognition cards.
-  * Broke apart the Night Mode section in the CSS template as it made my editing easier. I put the parts bellow their corresponding Day Mode counterparts.
   * Please mind that Production cards only work when there's a 1)Vocab field present, 2)has furigana generated and 3)the `MakeProductionCard` field is not empty. Best to use it with Vocab+Sentence notes but also admits only Vocab notes.
+  * Broke apart the Night Mode section in the CSS template as it made my editing easier. I put the parts bellow their corresponding Day Mode counterparts.
+  * I don't use MorphMan but you can add the needed field and it will work fine. I find Pitch accent coloration and numbering scheme not that useful when you have a graph and `VocabAudio`.
 
 
 ## Screenshots
