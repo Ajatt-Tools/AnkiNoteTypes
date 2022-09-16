@@ -35,7 +35,7 @@ Fields added: `VocabDefMono`, `Source` (added by Cyphar), I added `Hint`
 Below are the screenshots of *Recognition* cards.  *Production* cards are not
 much different.
 
-![Night front]([/Japanese JP1K TSC/night front.webp?raw=true](https://raw.githubusercontent.com/Alksindrs/AnkiNoteTypes/main/templates/Japanese%20JP1K%20TSC/night%20front.webp))<br/>
+![Night front](https://raw.githubusercontent.com/Alksindrs/AnkiNoteTypes/main/templates/Japanese%20JP1K%20TSC/night%20front.webp)<br/>
 *The front of the card showing the `Hint` field*
 
 ![Night back](/Japanese JP1K TSC/night back.webp?raw=true)<br/>
