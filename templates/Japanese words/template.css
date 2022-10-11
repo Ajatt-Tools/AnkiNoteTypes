@@ -80,11 +80,9 @@ header .tags {
 
 /* question */
 
-#question {
-    font-family: "acgyosyo", "Yu Mincho";
-}
+#question,
 #question ruby rt {
-    font-family: "acgyosyo", "Yu Mincho";
+    font-family: "acgyosyo", "Yu Mincho", "Noto Serif", "Noto Serif CJK JP";
 }
 .japanese {
     text-align: center;
