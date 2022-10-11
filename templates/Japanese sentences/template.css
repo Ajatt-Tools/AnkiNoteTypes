@@ -140,6 +140,9 @@ header>div:not(:last-child) {
 .jpsentence {
     font-size: 35px;
 }
+.jpsentence b {
+    display: inline-block;
+}
 
 /* Hide front side when the back is shown. */
 
