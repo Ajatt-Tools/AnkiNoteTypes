@@ -3,8 +3,8 @@
 
     <div class="sent-center">
         <div class="jpsentence" lang="ja">
-            {{edit:furigana:SentFurigana}}
-	    {{^SentFurigana}}{{edit:furigana:SentKanji}}{{/SentFurigana}}
+            <div class="background">{{furigana:SentFurigana}}{{^SentFurigana}}{{furigana:SentKanji}}{{/SentFurigana}}</div>
+            <div class="overlay">{{edit:furigana:SentFurigana}}{{^SentFurigana}}{{edit:furigana:SentKanji}}{{/SentFurigana}}</div>
         </div>
         {{#SentEng}}
         <div class="ensentence" lang="en">{{hint:SentEng}}</div>
@@ -12,35 +12,39 @@
     </div>
 
     <div class="vocab">
-        {{VocabAudio}}{{SentAudio}}{{VocabPitchPattern}}
-	{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}
-	{{#VocabPitchNum}}<span class="tags" id="pitchnum">{{VocabPitchNum}}</span>{{/VocabPitchNum}}
-	{{#VocabKanji}}【{{text:kanji:VocabKanji}}】{{/VocabKanji}}
+        {{VocabAudio}}{{SentAudio}}
+        <div class="reading">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
+        {{#VocabPitchNum}}<span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>{{/VocabPitchNum}}
+        {{#VocabKanji}}<div class="target_word">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
     </div>
 
     {{#VocabDef}}
     <div class="definitions">{{edit:furigana:VocabDef}}</div>
     {{/VocabDef}}
+
     {{#Notes}}
     <div class="notes">
         <div class="tags">Notes</div>
         <div>{{furigana:Notes}}</div>
     </div>
     {{/Notes}}
+
     {{#Image}}
     <div class="images">{{Image}}</div>
     {{/Image}}
 
-    <hr />
+    <hr>
 
     <footer>
-        {{#SentKanji}}<a title="Translate with SimplyTranslate"
-            href="https://simplytranslate.org/?engine=google&text={{text:kanji:SentKanji}}&sl=ja&tl=en">Translate</a><a
-            href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}" title="Sentence on Jisho">Jisho</a><a
-            href="https://www.google.co.jp/search?q={{text:kanji:SentKanji}}&tbm=isch"
-            title="Search images">Images</a>{{/SentKanji}}{{#VocabKanji}}<a
-            href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a><a
-            href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}
+        {{#SentKanji}}
+        <a href="https://simplytranslate.org/?engine=google&text={{text:kanji:SentKanji}}&sl=ja&tl=en" title="Translate with SimplyTranslate">Translate</a>
+        <a href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}" title="Sentence on Jisho">Jisho</a>
+        <a href="https://www.google.co.jp/search?q={{text:kanji:SentKanji}}&tbm=isch" title="Search images">Images</a>
+        {{/SentKanji}}
+        {{#VocabKanji}}
+        <a href="http://www.weblio.jp/content/{{text:VocabKanji}}" title="Vocab on Weblio">Weblio</a>
+        <a href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>
+        {{/VocabKanji}}
     </footer>
 </div> <!-- /wrap -->
 
@@ -51,6 +55,7 @@
             elem.innerText = "Reveal English translation";
         }
     }
+
     function removePitchBrackets() {
         const tags = document.getElementById("pitchnum");
         if (tags !== null) {
