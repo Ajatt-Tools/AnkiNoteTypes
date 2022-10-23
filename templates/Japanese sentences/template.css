@@ -116,6 +116,7 @@ notext strong {
 header {
     display: flex;
     clear: both;
+    margin: 0 0 8px;
 }
 
 header .tags {
