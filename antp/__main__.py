@@ -25,7 +25,7 @@ def wrap_errors(fn: Callable):
 def print_help():
     options = (
         ("import", "Add one of the available note types to Anki."),
-        ("update", "Overwrite a previously imported note type with new data."),
+        ("update", "Overwrite a previously imported note type with new data. Fields will not be updated."),
         ("export", "Save your note type as a template."),
         ("-v, --verbose", "Show detailed info when errors occur."),
     )
