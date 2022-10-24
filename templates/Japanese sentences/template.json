@@ -5,7 +5,6 @@
         "SentFurigana",
         "SentEng",
         "SentAudio",
-        "MorphManFocus",
         "VocabKanji",
         "VocabFurigana",
         "VocabPitchPattern",
@@ -14,7 +13,8 @@
         "VocabAudio",
         "Image",
         "Notes",
-        "MakeProductionCard"
+        "MakeProductionCard",
+        "Focus"
     ],
     "cardTemplates": [
         "Recognition",

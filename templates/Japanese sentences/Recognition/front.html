@@ -5,9 +5,9 @@ Thu Oct 20 02:37:35 PM UTC 2022
 
 <div class="wrap">
     <header>
-        {{#MorphManFocus}}
-        <div class="tags">{{MorphManFocus}}</div>
-        {{/MorphManFocus}}
+        {{#Focus}}
+        <div class="tags">{{Focus}}</div>
+        {{/Focus}}
         {{#Tags}}
         <div class="tags">{{Tags}}</div>
         {{/Tags}}
@@ -93,7 +93,7 @@ Thu Oct 20 02:37:35 PM UTC 2022
     function splitTagDiv() {
         const header = document.querySelector("header");
         if (!header) return;
-        const split = `{{MorphManFocus}} {{Tags}}`.split(" ");
+        const split = `{{Focus}} {{Tags}}`.split(" ");
 
         header.innerHTML = "";
 
