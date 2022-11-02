@@ -473,7 +473,11 @@ ruby rt {
 }
 .jpsentence>.overlay {
     position: absolute;
-    inset: 0;
+    /* Some versions of Anki don't understand inset. */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 .jpsentence>.background,
 .jpsentence>.overlay ruby rt {
