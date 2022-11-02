@@ -94,11 +94,12 @@ Thu Oct 20 02:37:35 PM UTC 2022
         const header = document.querySelector("header");
         if (!header) return;
         const split = `{{Focus}} {{Tags}}`.split(" ");
+        const dont_show = ['imageonfront', 'tolearn', 'marked', ];
 
         header.innerHTML = "";
 
         for (const tag of split) {
-            if (tag.length < 1) continue;
+            if (tag.length < 1 || dont_show.includes(tag)) continue;
             const tag_elem = document.createElement("div");
             tag_elem.className = "tags";
             tag_elem.innerText = tag;
