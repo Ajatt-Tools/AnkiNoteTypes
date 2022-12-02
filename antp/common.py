@@ -1,6 +1,7 @@
 # Copyright: Ren Tatsumoto <tatsu at autistici.org>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
+import dataclasses
 import re
 from dataclasses import dataclass
 
@@ -24,6 +25,11 @@ class NoteType:
     fields: list[str]
     css: str
     templates: list[CardTemplate]
+
+    def rename(self, new_name: str):
+        _d = dataclasses.asdict(self)
+        del _d['name']
+        return type(self)(name=new_name, **_d)
 
 
 def read_num(msg: str = "Input number: ", min_val: int = 0, max_val: int = None) -> int:

@@ -8,6 +8,7 @@ from urllib.error import URLError
 from .common import ANTPError
 from .exporter import export_note_type
 from .importer import import_note_type
+from .overwriter import overwrite_note_type
 from .updater import update_note_type
 
 
@@ -24,8 +25,11 @@ def wrap_errors(fn: Callable):
 
 def print_help():
     options = (
-        ("import", "Add one of the available note types to Anki."),
-        ("update", "Overwrite a previously imported note type with new data. Fields will not be updated."),
+        ("import", "Add one of the stored note types to Anki."),
+        ("update", "Overwrite a previously imported note type with new data. "
+                   "Fields will not be updated."),
+        ("overwrite", "Overwrite a note type in Anki with new data from a stored note type. "
+                      "Fields will not be updated."),
         ("export", "Save your note type as a template."),
         ("-v, --verbose", "Show detailed info when errors occur."),
     )
@@ -55,6 +59,8 @@ def main():
                 action = import_note_type
             case 'update':
                 action = update_note_type
+            case 'overwrite':
+                action = overwrite_note_type
             case '-v' | '--verbose':
                 wrap = False
 
