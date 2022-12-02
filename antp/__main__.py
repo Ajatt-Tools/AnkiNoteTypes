@@ -1,11 +1,13 @@
 # Copyright: Ren Tatsumoto <tatsu at autistici.org>
 # License: GNU GPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
+import os
 import sys
 from typing import Callable
 from urllib.error import URLError
 
 from .common import ANTPError
+from .consts import NOTE_TYPES_DIR
 from .exporter import export_note_type
 from .importer import import_note_type
 from .overwriter import overwrite_note_type
@@ -31,6 +33,7 @@ def print_help():
         ("overwrite", "Overwrite a note type in Anki with new data from a stored note type. "
                       "Fields will not be updated."),
         ("export", "Save your note type as a template."),
+        ("list", "List models stored in the templates folder."),
         ("-v, --verbose", "Show detailed info when errors occur."),
     )
     print(
@@ -40,6 +43,10 @@ def print_help():
     col_width = [max(len(word) for word in col) + 2 for col in zip(*options)]
     for row in options:
         print(" " * 4, "".join(col.ljust(col_width[i]) for i, col in enumerate(row)), sep='')
+
+
+def list_stored_note_types():
+    print('\n'.join(os.listdir(NOTE_TYPES_DIR)))
 
 
 def main():
@@ -61,6 +68,8 @@ def main():
                 action = update_note_type
             case 'overwrite':
                 action = overwrite_note_type
+            case 'list':
+                action = list_stored_note_types
             case '-v' | '--verbose':
                 wrap = False
 
