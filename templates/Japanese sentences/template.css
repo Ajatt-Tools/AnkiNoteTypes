@@ -141,6 +141,7 @@ header>div:not(:last-child) {
 .jpsentence {
     font-size: 35px;
 }
+
 .jpsentence b {
     display: inline-block;
 }
@@ -267,16 +268,16 @@ footer>a:not(:last-child)::after {
     gap: 5px;
 }
 
-.vocab > .reading,
-.vocab > .target_word {
+.vocab>.reading,
+.vocab>.target_word {
     word-break: keep-all;
 }
 
-.vocab > .target_word::before {
+.vocab>.target_word::before {
     content: "【";
 }
 
-.vocab > .target_word::after {
+.vocab>.target_word::after {
     content: "】";
 }
 
@@ -410,30 +411,30 @@ ol {
 /* Night Mode */
 
 .nightMode.card {
-    background-color: #2F2F31;
+    background-color: #2f2f31;
 }
 
 .nightMode .wrap {
-    color: #FFFFFF;
+    color: #ffffff;
     background-color: inherit;
 }
 
 .nightMode .tags {
-    background-color: #FFFFFF;
-    color: #2F2F31;
+    background-color: #ffffff;
+    color: #2f2f31;
 }
 
 .nightMode a.replay-button svg path {
-    fill: #2F2F31;
+    fill: #2f2f31;
 }
 
 .nightMode a.replay-button svg circle {
-    fill: #FFFFFF;
+    fill: #ffffff;
 }
 
 .nightMode .replaybutton span svg {
-    fill: #2F2F31;
-    background: #FFFFFF;
+    fill: #2f2f31;
+    background: #ffffff;
 }
 
 .nightMode a {
@@ -454,13 +455,13 @@ ol {
 }
 
 .nightMode div.ensentence>a.hint {
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF;
+    color: #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .nightMode div.ensentence>a.hint:hover {
     color: gray;
-    background-color: rgba(0, 0, 0, 0.20);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Fix: Don't select furigana */
@@ -468,9 +469,11 @@ ol {
 ruby rt {
     user-select: none;
 }
+
 .jpsentence {
     position: relative;
 }
+
 .jpsentence>.overlay {
     position: absolute;
     /* Some versions of Anki don't understand inset. */
@@ -479,10 +482,21 @@ ruby rt {
     bottom: 0;
     left: 0;
 }
+
 .jpsentence>.background,
 .jpsentence>.overlay ruby rt {
     visibility: hidden;
 }
+
 .jpsentence>.background ruby rt {
     visibility: visible;
+}
+
+/* Outline editable fields */
+
+div[contenteditable="true"] {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 3px;
+    box-shadow: 10px 5px 5px gray;
 }
