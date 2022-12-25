@@ -190,6 +190,7 @@ div.ensentence>a.hint:hover {
 }
 
 /* AnkiDroid replay button */
+/* a.replaybutton > span > svg */
 
 .replaybutton {
     margin: 0;
@@ -211,6 +212,7 @@ div.ensentence>a.hint:hover {
 }
 
 /* PC replay button */
+/* a.replay-button > svg */
 
 a.replay-button {
     top: -0.125em;
