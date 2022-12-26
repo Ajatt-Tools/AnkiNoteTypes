@@ -169,6 +169,13 @@ div.ensentence>a.hint:hover {
     background-color: rgba(0, 0, 0, 0.03);
 }
 
+/* Definition */
+
+.definitions,
+.notes {
+    font-weight: 300;
+}
+
 /* Tags */
 
 .tags {
