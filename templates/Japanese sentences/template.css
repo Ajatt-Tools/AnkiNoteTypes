@@ -1,40 +1,39 @@
 @charset "utf-8";
 
-@media screen and (min-width: 900px) {
-
-    /* Limit font loading to wide screens to avoid performance hits on mobile. */
-    @font-face {
-        font-family: "KanjiStrokeOrders";
-        src: local("KanjiStrokeOrders"), url("_kso.ttf");
-    }
-
-    @font-face {
-        font-family: "Yu Mincho";
-        src: local("Yu Mincho"), local("游明朝"), url("_yumin.ttf");
-    }
-
-    @font-face {
-        font-family: "Yu Mincho";
-        src: local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
-        font-weight: 600;
-    }
-
-    b,
-    strong {
-        font-weight: 600;
-    }
+@font-face {
+    font-family: "KanjiStrokeOrders";
+    src: local("KanjiStrokeOrders"), url("_kso.ttf");
 }
 
-* {
+@font-face {
+    font-family: "Local Mincho";
+    src: local("Yu Mincho"), local("游明朝"), local("IPAexMincho"), local("IPAex明朝"), local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"), local("TakaoEx明朝"), url("_yumin.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Local Mincho";
+    src: local("Noto Serif CJK JP SemiBold"), local("Noto Serif CJK JP DemiLight"), local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+    font-weight: 600;
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
+b,
+strong {
+    font-weight: 600;
+}
+
 .card {
     background-color: #fffaf0;
     color: #2a1b0a;
-    font-family: "Noto Serif", "Noto Serif CJK JP", Yu Mincho, "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
+    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
     font-size: 24px;
     text-align: left;
     line-height: 1.4;
