@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: "Local Mincho";
-    src: local("Yu Mincho"), local("游明朝"), local("IPAexMincho"), local("IPAex明朝"), local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"), local("TakaoEx明朝"), url("_yumin.ttf");
+    src: local("Yu Mincho"), local("游明朝"), local("Noto Serif CJK JP"), local("IPAexMincho"), local("IPAex明朝"), local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"), local("TakaoEx明朝"), url("_yumin.ttf");
     font-weight: normal;
 }
 
