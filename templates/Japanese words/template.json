@@ -4,10 +4,12 @@
         "VocabKanji",
         "VocabFurigana",
         "VocabPitchPattern",
+        "VocabPitchNum",
         "VocabDef",
         "VocabAudio",
         "Image",
-        "MorphManFocus"
+        "Notes",
+        "Focus"
     ],
     "cardTemplates": [
         "Recognition"
