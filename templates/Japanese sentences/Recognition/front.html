@@ -1,6 +1,6 @@
 <!--
-mpvacious cards, version 14.0
-Thu Oct 20 02:37:35 PM UTC 2022
+mpvacious cards, version 15.0
+Sun Mar  5 12:08:06 AM UTC 2023
 -->
 
 <div class="wrap">
@@ -94,7 +94,7 @@ Thu Oct 20 02:37:35 PM UTC 2022
         const header = document.querySelector("header");
         if (!header) return;
         const split = `{{Focus}} {{Tags}}`.split(" ");
-        const dont_show = ['imageonfront', 'tolearn', 'marked', ];
+        const dont_show = ['imageonfront', 'tolearn', 'marked',];
 
         header.innerHTML = "";
 
@@ -115,7 +115,31 @@ Thu Oct 20 02:37:35 PM UTC 2022
         }
     }
 
+    function formatNewRuby(kanji, readings) {
+        console.log(kanji, readings)
+        if (readings.length > 1) {
+            return `<ruby>${formatNewRuby(kanji, readings.slice(0, -1))}</ruby><rt>${readings.slice(-1)}</rt>`
+        } else {
+            return `<rb>${kanji}</rb><rt>${readings.join('')}</rt>`
+        }
+    }
+
+    function reformatMultiFurigana() {
+        const separators = /[\s,.、・。]+/iu;
+        document.querySelectorAll("ruby").forEach(ruby => {
+            const kanji = ruby.querySelector("rb").textContent
+            const readings = ruby.querySelector("rt")
+                .textContent.split(separators)
+                .map(str => str.trim())
+                .filter(str => str.length)
+            if (readings.length > 1) {
+                ruby.innerHTML = formatNewRuby(kanji, readings)
+            }
+        })
+    }
+
     markPitch();
     splitTagDiv();
     setImageOnFront();
+    reformatMultiFurigana();
 </script>
