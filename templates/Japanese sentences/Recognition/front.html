@@ -116,7 +116,6 @@ Sun Mar  5 12:08:06 AM UTC 2023
     }
 
     function formatNewRuby(kanji, readings) {
-        console.log(kanji, readings)
         if (readings.length > 1) {
             return `<ruby>${formatNewRuby(kanji, readings.slice(0, -1))}</ruby><rt>${readings.slice(-1)}</rt>`
         } else {
@@ -125,15 +124,19 @@ Sun Mar  5 12:08:06 AM UTC 2023
     }
 
     function reformatMultiFurigana() {
-        const separators = /[\s,.、・。]+/iu;
+        const separators = /[\s;,.、・。]+/iu;
         document.querySelectorAll("ruby").forEach(ruby => {
-            const kanji = ruby.querySelector("rb").textContent
-            const readings = ruby.querySelector("rt")
-                .textContent.split(separators)
-                .map(str => str.trim())
-                .filter(str => str.length)
-            if (readings.length > 1) {
-                ruby.innerHTML = formatNewRuby(kanji, readings)
+            try {
+                const kanji = (ruby.querySelector("rb") || ruby.firstChild).textContent.trim()
+                const readings = ruby.querySelector("rt").textContent
+                    .split(separators)
+                    .map(str => str.trim())
+                    .filter(str => str.length)
+                if (readings.length > 1) {
+                    ruby.innerHTML = formatNewRuby(kanji, readings)
+                }
+            } catch (error) {
+                console.error(error);
             }
         })
     }
