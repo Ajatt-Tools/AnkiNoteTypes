@@ -1,6 +1,6 @@
 <!--
-Simple Word Cards, version 5.0
-Thu Feb  4 01:06:07 AM UTC 2021
+Simple Word Cards, version 6.0
+Fri Feb 24 07:22:23 PM UTC 2023
 -->
 <div class="wrap">
     {{#Tags}}
@@ -50,7 +50,34 @@ Thu Feb  4 01:06:07 AM UTC 2021
         }
     }
 
-    splitTagDiv()
-    highlightNames()
-    applyQuizFont()
+    function formatNewRuby(kanji, readings) {
+        if (readings.length > 1) {
+            return `<ruby>${formatNewRuby(kanji, readings.slice(0, -1))}</ruby><rt>${readings.slice(-1)}</rt>`
+        } else {
+            return `<rb>${kanji}</rb><rt>${readings.join('')}</rt>`
+        }
+    }
+
+    function reformatMultiFurigana() {
+        const separators = /[\s;,.、・。]+/iu;
+        document.querySelectorAll("ruby").forEach(ruby => {
+            try {
+                const kanji = (ruby.querySelector("rb") || ruby.firstChild).textContent.trim()
+                const readings = ruby.querySelector("rt").textContent
+                    .split(separators)
+                    .map(str => str.trim())
+                    .filter(str => str.length)
+                if (readings.length > 1) {
+                    ruby.innerHTML = formatNewRuby(kanji, readings)
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        })
+    }
+
+    splitTagDiv();
+    highlightNames();
+    applyQuizFont();
+    reformatMultiFurigana();
 </script>
