@@ -241,6 +241,7 @@ footer>a:last-child:after {
     width: 0;
 }
 
+.pitch_number,
 .tags {
     font-family:
         "Noto Sans",
@@ -262,6 +263,11 @@ footer>a:last-child:after {
     border-radius: 3px;
     font-size: 12px;
     line-height: 14px;
+}
+
+.pitch_number {
+    align-self: flex-start;
+    vertical-align: top;
 }
 
 /*

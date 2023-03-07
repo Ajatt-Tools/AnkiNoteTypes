@@ -67,11 +67,15 @@
         const has_no_data = (tag) => tag.innerText.toLowerCase().includes("no pitch accent");
         const pitch_num = document.getElementById("pitchnum");
         const pitch_pattern = document.getElementById("pitchpattern");
+        const pitch_num_inside_html = document.querySelector(".pitch_number");
         if (pitch_num && has_no_data(pitch_num)) {
             pitch_num.remove();
         }
         if (pitch_pattern && has_no_data(pitch_pattern)) {
             pitch_pattern.innerHTML = `{{text:kana:VocabFurigana}}`;
+        }
+        if (pitch_num && pitch_num_inside_html) {
+            pitch_num.remove();
         }
     }
 

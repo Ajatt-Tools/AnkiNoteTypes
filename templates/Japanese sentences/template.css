@@ -210,6 +210,7 @@ div.ensentence>a.hint:hover {
 
 /* Tags */
 
+.pitch_number,
 .tags {
     font-family:
         "Noto Sans",
@@ -346,6 +347,7 @@ footer>a:not(:last-child)::after {
     display: none;
 }
 
+.vocab .pitch_number,
 .vocab .tags {
     align-self: flex-start;
     vertical-align: top;
