@@ -56,7 +56,7 @@ def select(items: list[str], msg: str = "Select item number: ") -> str | None:
 
 
 def get_used_fonts(template_css: str):
-    return re.findall(r"url\([\"'](\w+\.[ot]tf)[\"']\)", template_css, re.IGNORECASE)
+    return re.findall(r"url\([\"'](\w+\.(?:[ot]tf|woff\d?))[\"']\)", template_css, re.IGNORECASE)
 
 
 def init():
