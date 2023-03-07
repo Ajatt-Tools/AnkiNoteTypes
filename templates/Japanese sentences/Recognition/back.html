@@ -13,7 +13,7 @@
 
     <div class="vocab">
         {{VocabAudio}}{{SentAudio}}
-        <div class="reading">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
+        <div class="reading" id="pitchpattern">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
         {{#VocabPitchNum}}<span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>{{/VocabPitchNum}}
         {{#VocabKanji}}<div class="target_word">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
     </div>
@@ -62,7 +62,21 @@
             tags.innerHTML = tags.innerHTML.replace(/[\[\]]/g, "");
         }
     }
+
+    function removeNoPitchAccentDataText() {
+        const has_no_data = (tag) => tag.innerText.toLowerCase().includes("no pitch accent");
+        const pitch_num = document.getElementById("pitchnum");
+        const pitch_pattern = document.getElementById("pitchpattern");
+        if (pitch_num && has_no_data(pitch_num)) {
+            pitch_num.remove();
+        }
+        if (pitch_pattern && has_no_data(pitch_pattern)) {
+            pitch_pattern.innerHTML = `{{text:kana:VocabFurigana}}`;
+        }
+    }
+
     markPitch();
     removePitchBrackets();
     tweak_reveal_text();
+    removeNoPitchAccentDataText();
 </script>
