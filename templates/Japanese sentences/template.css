@@ -2,18 +2,40 @@
 
 @font-face {
     font-family: "KanjiStrokeOrders";
-    src: local("KanjiStrokeOrders"), url("_kso.ttf");
+    src:
+        local("KanjiStrokeOrders"),
+        url("_kso.woff2") format("woff2"),
+        url("_kso.ttf");
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src: local("Yu Mincho"), local("游明朝"), local("Noto Serif CJK JP"), local("IPAexMincho"), local("IPAex明朝"), local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"), local("TakaoEx明朝"), url("_yumin.ttf");
+    src:
+        local("Yu Mincho"),
+        local("游明朝"),
+        local("Noto Serif CJK JP"),
+        local("IPAexMincho"),
+        local("IPAex明朝"),
+        local("IPAMincho"),
+        local("IPA明朝"),
+        local("IPAPMincho"),
+        local("IPA P明朝"),
+        local("TakaoExMincho"),
+        local("TakaoEx明朝"),
+        url("_yumin.woff2") format("woff2"),
+        url("_yumin.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src: local("Noto Serif CJK JP SemiBold"), local("Noto Serif CJK JP DemiLight"), local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+    src:
+        local("Noto Serif CJK JP SemiBold"),
+        local("Noto Serif CJK JP DemiLight"),
+        local("Yu Mincho Demibold"),
+        local("游明朝 Demibold"),
+        url("_yumindb.woff2") format("woff2"),
+        url("_yumindb.ttf");
     font-weight: 600;
 }
 
@@ -33,7 +55,17 @@ strong {
 .card {
     background-color: #fffaf0;
     color: #2a1b0a;
-    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
+    font-family:
+        "Noto Serif",
+        "Noto Serif CJK JP",
+        "IPAexMincho",
+        "Yu Mincho",
+        "Local Mincho",
+        "Liberation Serif",
+        "Times New Roman",
+        Times,
+        Georgia,
+        Serif;
     font-size: 24px;
     text-align: left;
     line-height: 1.4;
@@ -179,7 +211,24 @@ div.ensentence>a.hint:hover {
 /* Tags */
 
 .tags {
-    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Arial, Sans, sans-serif;
+    font-family:
+        "Noto Sans",
+        "Droid Sans",
+        "DejaVu Sans",
+        "Liberation Sans",
+        Roboto,
+        Cantarell,
+        "Segoe UI",
+        Arial,
+        Meiryo,
+        Oxygen,
+        Ubuntu,
+        "Helvetica Neue",
+        Helvetica,
+        "Noto Color Emoji",
+        "Noto Sans CJK JP",
+        Sans,
+        sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;

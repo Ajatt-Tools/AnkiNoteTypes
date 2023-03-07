@@ -2,24 +2,49 @@
 
 @font-face {
     font-family: "KanjiStrokeOrders";
-    src: local("KanjiStrokeOrders"), url("_kso.ttf");
+    src:
+        local("KanjiStrokeOrders"),
+        url("_kso.woff2") format("woff2"),
+        url("_kso.ttf");
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src: local("Yu Mincho"), local("游明朝"), local("IPAexMincho"), local("IPAex明朝"), local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"), local("TakaoEx明朝"), url("_yumin.ttf");
+    src:
+        local("Yu Mincho"),
+        local("游明朝"),
+        local("IPAexMincho"),
+        local("IPAex明朝"),
+        local("IPAMincho"),
+        local("IPA明朝"),
+        local("IPAPMincho"),
+        local("IPA P明朝"),
+        local("TakaoExMincho"),
+        local("TakaoEx明朝"),
+        url("_yumin.woff2") format("woff2"),
+        url("_yumin.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src: local("Noto Serif CJK JP SemiBold"), local("Noto Serif CJK JP DemiLight"), local("Yu Mincho Demibold"), local("游明朝 Demibold"), url("_yumindb.ttf");
+    src:
+        local("Noto Serif CJK JP SemiBold"),
+        local("Noto Serif CJK JP DemiLight"),
+        local("Yu Mincho Demibold"),
+        local("游明朝 Demibold"),
+        url("_yumindb.woff2") format("woff2"),
+        url("_yumindb.ttf");
     font-weight: 600;
 }
 
 @font-face {
     font-family: "acgyosyo";
-    src: local("acgyosyo"), local("英椎行書"), url("_acgyosyo.ttf");
+    src:
+        local("acgyosyo"),
+        local("英椎行書"),
+        url("_acgyosyo.woff2") format("woff2"),
+        url("_acgyosyo.ttf");
 }
 
 *,
@@ -46,7 +71,17 @@ strong {
 
 .card,
 ruby rt {
-    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
+    font-family:
+        "Noto Serif",
+        "Noto Serif CJK JP",
+        "IPAexMincho",
+        "Yu Mincho",
+        "Local Mincho",
+        "Liberation Serif",
+        "Times New Roman",
+        Times,
+        Georgia,
+        Serif;
 }
 
 @media screen and (min-width: 820px) {
@@ -97,7 +132,18 @@ header .tags {
 /* question */
 
 #question {
-    font-family: "acgyosyo", "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif", "Times New Roman", Times, Georgia, Serif;
+    font-family:
+        "acgyosyo",
+        "Noto Serif",
+        "Noto Serif CJK JP",
+        "IPAexMincho",
+        "Yu Mincho",
+        "Local Mincho",
+        "Liberation Serif",
+        "Times New Roman",
+        Times,
+        Georgia,
+        Serif;
 }
 .japanese {
     text-align: center;
@@ -179,7 +225,15 @@ footer > a:last-child:after {
 }
 
 .tags {
-    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Arial, Sans, IPAGothic, Yu Gothic, sans-serif;
+    font-family:
+        "Noto Sans",
+        "Noto Sans CJK JP",
+        "Liberation Sans",
+        Arial,
+        Sans,
+        IPAGothic,
+        Yu Gothic,
+        sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
