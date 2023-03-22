@@ -32,7 +32,7 @@ def print_help():
                    "Fields will not be updated."),
         ("overwrite", "Overwrite a note type in Anki with new data from a stored note type. "
                       "Fields will not be updated."),
-        ("export", "Save your note type as a template."),
+        ("export", "Save your note type to disk as a template."),
         ("list", "List models stored in the templates folder."),
         ("-v, --verbose", "Show detailed info when errors occur."),
     )
