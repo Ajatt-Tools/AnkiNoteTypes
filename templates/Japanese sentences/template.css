@@ -4,8 +4,7 @@
     font-family: "KanjiStrokeOrders";
     src:
         local("KanjiStrokeOrders"),
-        url("_kso.woff2") format("woff2"),
-        url("_kso.ttf");
+        url("_kso.woff2") format("woff2");
 }
 
 @font-face {
@@ -22,8 +21,7 @@
         local("IPA P明朝"),
         local("TakaoExMincho"),
         local("TakaoEx明朝"),
-        url("_yumin.woff2") format("woff2"),
-        url("_yumin.ttf");
+        url("_yumin.woff2") format("woff2");
     font-weight: normal;
 }
 
@@ -34,8 +32,7 @@
         local("Noto Serif CJK JP DemiLight"),
         local("Yu Mincho Demibold"),
         local("游明朝 Demibold"),
-        url("_yumindb.woff2") format("woff2"),
-        url("_yumindb.ttf");
+        url("_yumindb.woff2") format("woff2");
     font-weight: 600;
 }
 
