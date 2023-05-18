@@ -48,6 +48,10 @@ b,
 strong {
     font-weight: 600;
 }
+.jpsentence b,
+.jpsentence strong {
+    color: #f026cb;
+}
 
 .card {
     background-color: #fffaf0;
