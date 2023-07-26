@@ -1,6 +1,6 @@
 <!--
 mpvacious cards, version 15.0
-Sun Mar  5 12:08:06 AM UTC 2023
+Fri Jul  7 06:33:50 PM UTC 2023
 -->
 
 <div class="wrap">
@@ -14,7 +14,7 @@ Sun Mar  5 12:08:06 AM UTC 2023
     </header>
 
     <div class="sent-center">
-        <div class="jpsentence on-front" lang="ja">
+        <div class="jpsentence" lang="ja">
             {{edit:furigana:SentKanji}}
             {{^SentKanji}}
             <nokana>{{edit:kanji:SentFurigana}}</nokana>
@@ -22,7 +22,12 @@ Sun Mar  5 12:08:06 AM UTC 2023
         </div>
     </div>
 
-    {{#Image}}<div class="images on-front">{{Image}}</div>{{/Image}}
+    {{#Image}}
+    <details class="images-on-front images-details">
+        <summary>Image</summary>
+        <div class="images">{{Image}}</div>
+    </details>
+    {{/Image}}
 </div> <!-- /wrap -->
 
 <div style="display:none;">
@@ -107,14 +112,6 @@ Sun Mar  5 12:08:06 AM UTC 2023
         }
     }
 
-    function setImageOnFront() {
-        const tags = `{{Tags}}`.split(" ");
-        const front_img = document.querySelector("div.images.on-front");
-        if (front_img && tags.includes("imageonfront")) {
-            front_img.classList.toggle("on-front");
-        }
-    }
-
     function formatNewRuby(kanji, readings) {
         if (readings.length > 1) {
             return `<ruby>${formatNewRuby(kanji, readings.slice(0, -1))}</ruby><rt>${readings.slice(-1)}</rt>`
@@ -125,15 +122,25 @@ Sun Mar  5 12:08:06 AM UTC 2023
 
     function reformatMultiFurigana() {
         const separators = /[\s;,.、・。]+/iu;
-        document.querySelectorAll("ruby").forEach(ruby => {
+        const max_inline = 2;
+        document.querySelectorAll("ruby:not(ruby ruby)").forEach(ruby => {
             try {
-                const kanji = (ruby.querySelector("rb") || ruby.firstChild).textContent.trim()
+                const kanji = (ruby.querySelector("rb") || ruby.firstChild).textContent.trim();
                 const readings = ruby.querySelector("rt").textContent
                     .split(separators)
                     .map(str => str.trim())
-                    .filter(str => str.length)
+                    .filter(str => str.length);
+
                 if (readings.length > 1) {
-                    ruby.innerHTML = formatNewRuby(kanji, readings)
+                    ruby.innerHTML = formatNewRuby(kanji, readings.slice(0, max_inline));
+                }
+                if (readings.length > max_inline) {
+                    const sequence = readings.map(reading => `<span class="tooltip-reading">${reading}</span>`).join('');
+                    const wrapper = document.createElement("span");
+                    wrapper.classList.add("tooltip");
+                    wrapper.innerHTML += `<span class="tooltip-text">${sequence}</span>`;
+                    ruby.replaceWith(wrapper);
+                    wrapper.appendChild(ruby);
                 }
             } catch (error) {
                 console.error(error);
@@ -141,8 +148,32 @@ Sun Mar  5 12:08:06 AM UTC 2023
         })
     }
 
+    function isMobile() {
+        return document
+            .getElementsByTagName("html")[0]
+            .classList
+            .contains("mobile");
+    }
+
+    /* If a card has the "imageonfront" tag set, show images on the front side. */
+    function setVisibleImageOnFront() {
+        if (`{{Tags}}`.split(" ").includes("imageonfront")) {
+            for (const frontImg of document.querySelectorAll(".images-on-front")) {
+                frontImg.setAttribute("visible", true);
+            }
+        }
+    }
+
+    /* Hide images on mobile devices. */
+    function toggleImageDetails() {
+        for (const detailsElement of document.querySelectorAll(".images-details")) {
+            detailsElement.toggleAttribute("open", !isMobile());
+        }
+    }
+
     markPitch();
     splitTagDiv();
-    setImageOnFront();
     reformatMultiFurigana();
+    setVisibleImageOnFront();
+    toggleImageDetails();
 </script>

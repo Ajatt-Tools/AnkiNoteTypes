@@ -11,26 +11,31 @@
         {{/SentEng}}
     </div>
 
-    <div class="vocab">
-        {{VocabAudio}}{{SentAudio}}
-        <div class="reading" id="pitchpattern">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
-        {{#VocabPitchNum}}<span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>{{/VocabPitchNum}}
-        {{#VocabKanji}}<div class="target_word">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
-    </div>
-
     {{#VocabDef}}
-    <div class="definitions">{{edit:furigana:VocabDef}}</div>
+    <section class="headword_section">
+        <div class="vocab">
+            <span id="vocab-audio">{{VocabAudio}}</span>
+            <span id="sent-audio">{{SentAudio}}</span>
+            <div class="reading" id="pitchpattern">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
+            {{#VocabPitchNum}}<span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>{{/VocabPitchNum}}
+            {{#VocabKanji}}<div class="target_word">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
+        </div>
+        <div class="definitions">{{edit:furigana:VocabDef}}</div>
+    </section>
     {{/VocabDef}}
 
     {{#Notes}}
-    <div class="notes">
-        <div class="tags">Notes</div>
+    <details open class="notes">
+        <summary>Notes</summary>
         <div>{{furigana:Notes}}</div>
-    </div>
+    </details>
     {{/Notes}}
 
     {{#Image}}
-    <div class="images">{{Image}}</div>
+    <details class="images-details">
+        <summary>Image</summary>
+        <div class="images">{{Image}}</div>
+    </details>
     {{/Image}}
 
     <hr>
@@ -79,9 +84,18 @@
         }
     }
 
+    function removeAudioIfMarkedX() {
+        const pr = document.getElementById("vocab-audio");
+        if (pr && pr.innerText.match(/^[x×]/i)) {
+            pr.style.display = "none";
+        }
+    }
+
     markPitch();
     removePitchBrackets();
     tweakRevealText();
     removeNoPitchAccentDataText();
     reformatMultiFurigana();
+    removeAudioIfMarkedX();
+    toggleImageDetails();
 </script>

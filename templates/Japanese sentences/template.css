@@ -48,6 +48,7 @@ b,
 strong {
     font-weight: 600;
 }
+
 .jpsentence b,
 .jpsentence strong {
     color: #f026cb;
@@ -181,7 +182,9 @@ header>div:not(:last-child) {
 /* Hide front side when the back is shown. */
 
 .fside .jpsentence,
-.fside .images {
+.fside .sent-center,
+.fside .images,
+.fside .images-details {
     display: none;
 }
 
@@ -191,15 +194,15 @@ div.ensentence>a.hint {
     color: #555;
     font-size: 14px;
     display: block;
-    border: 1px solid #ccc;
+    border: 1px solid hsl(0deg 80% 50% / 15%);
     border-radius: 2.2px;
     padding: 2px 10px;
-    margin: 4px 0;
+    margin: 0.4rem 0;
 }
 
 div.ensentence>a.hint:hover {
-    color: #111;
-    background-color: rgba(0, 0, 0, 0.03);
+    color: hsl(20deg 100% 20% / 80%);
+    background-color: hsl(0deg 80% 50% / 3%);
 }
 
 /* Definition */
@@ -322,7 +325,7 @@ footer>a:not(:last-child)::after {
 .vocab {
     display: flex;
     flex-flow: row wrap;
-    margin-top: 16px;
+    margin-top: 2px;
     align-items: center;
     gap: 5px;
 }
@@ -394,7 +397,7 @@ footer>a:not(:last-child)::after {
 
 /* Images on front, toggled by JavaScript if "imageonfront" tag is set. */
 
-.images.on-front {
+.images-on-front:not([visible="true"]) {
     display: none;
 }
 
@@ -466,6 +469,61 @@ ol {
     content: "";
 }
 
+/* Fix: Don't select furigana */
+
+ruby rt {
+    user-select: none;
+}
+
+.jpsentence {
+    position: relative;
+}
+
+.jpsentence>.overlay {
+    position: absolute;
+    /* Some versions of Anki don't understand inset. */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.jpsentence>.background,
+.jpsentence>.overlay ruby rt {
+    visibility: hidden;
+}
+
+.jpsentence>.background ruby rt {
+    visibility: visible;
+}
+
+/* Outline editable fields */
+
+div[contenteditable="true"] {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 3px;
+    box-shadow: 10px 5px 5px gray;
+}
+
+/* Details */
+
+details,
+.headword_section {
+    background-color: hsl(0deg 80% 50% / 3%);
+    border-radius: 4px;
+    padding: 3px;
+    margin-block-end: 0.4rem;
+    border: 1px solid hsl(0deg 80% 50% / 15%);
+    ;
+}
+
+summary {
+    font-size: 18px;
+    color: hsl(0 80% 10% / 70%);
+    font-weight: 500;
+}
+
 /* Night Mode */
 
 .nightMode.card {
@@ -475,6 +533,7 @@ ol {
 .nightMode .wrap {
     color: #ffffff;
     background-color: inherit;
+    border-color: #6d6868;
 }
 
 .nightMode .tags {
@@ -522,39 +581,67 @@ ol {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* Fix: Don't select furigana */
-
-ruby rt {
-    user-select: none;
+.nightMode summary {
+    color: hsl(0 80% 100% / 70%);
 }
 
-.jpsentence {
+/* Tooltips */
+
+.tooltip {
     position: relative;
+    display: inline-block;
 }
 
-.jpsentence>.overlay {
+.tooltip::after {
+    content: "";
+    display: block;
     position: absolute;
-    /* Some versions of Anki don't understand inset. */
-    top: 0;
+    bottom: 5px;
     right: 0;
-    bottom: 0;
     left: 0;
+    border-bottom: 2px dotted hsl(0 80% 40% / 20%);
 }
 
-.jpsentence>.background,
-.jpsentence>.overlay ruby rt {
+.tooltip>.tooltip-text {
+    font-weight: 500;
+    font-size: 18px;
     visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 0 2px;
+    position: absolute;
+    z-index: 999;
+    top: calc(100% + 6px);
+    left: 50%;
+    margin-left: -60px;
+    word-break: keep-all;
 }
 
-.jpsentence>.background ruby rt {
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltip-text {
     visibility: visible;
 }
 
-/* Outline editable fields */
+.tooltip>.tags {
+    position: absolute;
+    top: 0px;
+    right: -9px;
+}
 
-div[contenteditable="true"] {
-    background-color: white;
-    border: 1px solid gray;
-    padding: 3px;
-    box-shadow: 10px 5px 5px gray;
+.tooltip-text>.tooltip-reading:not(:last-child)::after {
+    content: "; ";
+    color: #f6a192;
 }
