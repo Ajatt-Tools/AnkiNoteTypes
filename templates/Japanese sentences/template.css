@@ -522,6 +522,7 @@ summary {
     font-size: 18px;
     color: hsl(0 80% 10% / 70%);
     font-weight: 500;
+    user-select: none;
 }
 
 /* Night Mode */
