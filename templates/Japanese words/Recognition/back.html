@@ -7,15 +7,35 @@
         <div class="definition">{{edit:furigana:VocabDef}}</div>
     {{/VocabDef}}
     {{#Image}}
+    <details id="details">
+    <summary>Image</summary>
         <div class="images">{{Image}}</div>
+    </details>
     {{/Image}}
     {{#VocabAudio}}
-    <div class="pronunciation">{{VocabAudio}}</div>
+    <div class="pronunciation" id="pronunciation">{{VocabAudio}}</div>
     {{/VocabAudio}}
     <hr>
     <footer><a href="https://jisho.org/search/{{kanji:text:VocabKanji}}">Jisho</a><a href="https://duckduckgo.com/?q={{kanji:text:VocabKanji}}&iax=images&ia=images&kp=-2&kl=jp-jp">Images</a><a href="http://www.weblio.jp/content/{{kanji:text:VocabKanji}}">Weblio</a><a href="https://wadoku.de/search/?q={{kanji:text:VocabKanji}}">Wadoku</a><a href="https://chan.sankakucomplex.com/post/index?tags={{kanji:text:VocabKanji}} order:popular solo rating:safe">Sankaku</a></footer>
 </div>
 
 <script>
+    function removeAudioIfMarkedX() {
+        const pr = document.getElementById("pronunciation");
+        if (pr && pr.innerText.match(/^[x×]/i)) {
+            pr.style.display = "none";
+        }
+    }
+    function isMobile() {
+        return document.getElementsByTagName("html")[0].classList.contains("mobile");
+    }
+    function toggleDetails() {
+        const detailsElement = document.getElementById("details");
+        if (detailsElement) {
+            detailsElement.toggleAttribute("open", !isMobile());
+        }
+    }
     reformatMultiFurigana();
+    removeAudioIfMarkedX();
+    toggleDetails();
 </script>
