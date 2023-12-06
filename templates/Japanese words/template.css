@@ -35,14 +35,6 @@
     font-weight: 600;
 }
 
-@font-face {
-    font-family: "acgyosyo";
-    src:
-        local("acgyosyo"),
-        local("英椎行書"),
-        url("_acgyosyo.woff2") format("woff2");
-}
-
 *,
 *::before,
 *::after {
@@ -134,7 +126,6 @@ header .tags {
 
 #question {
     font-family:
-        "acgyosyo",
         "Noto Serif",
         "Noto Serif CJK JP",
         "IPAexMincho",

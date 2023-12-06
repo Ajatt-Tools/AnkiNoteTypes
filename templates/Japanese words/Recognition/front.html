@@ -14,16 +14,6 @@ Fri Feb 24 07:22:23 PM UTC 2023
 </div>
 
 <script>
-    function applyQuizFont() {
-        const tags = `{{Tags}}`;
-        const questionword = document.getElementById("question");
-        // Add this tag if you notice that letters don't render properly
-        if (tags.includes("DisableGyousyo")) {
-            // nuke ID to remove specified font styling.
-            questionword.removeAttribute("id");
-        }
-    }
-
     function highlightNames() {
         const tags_elems = document.getElementsByClassName("tags");
         for (const tag_elem of tags_elems) {
@@ -78,6 +68,5 @@ Fri Feb 24 07:22:23 PM UTC 2023
 
     splitTagDiv();
     highlightNames();
-    applyQuizFont();
     reformatMultiFurigana();
 </script>
