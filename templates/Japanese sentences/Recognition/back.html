@@ -16,9 +16,9 @@
         <div class="vocab">
             <span id="vocab-audio">{{VocabAudio}}</span>
             <span id="sent-audio">{{SentAudio}}</span>
-            <div class="reading" id="pitchpattern">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
+            <div class="reading" id="pitchpattern" lang="ja">{{VocabPitchPattern}}{{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}</div>
             {{#VocabPitchNum}}<span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>{{/VocabPitchNum}}
-            {{#VocabKanji}}<div class="target_word">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
+            {{#VocabKanji}}<div class="target_word" lang="ja">{{text:kanji:VocabKanji}}</div>{{/VocabKanji}}
         </div>
         <div class="definitions">{{edit:furigana:VocabDef}}</div>
     </section>
