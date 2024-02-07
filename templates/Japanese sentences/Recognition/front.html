@@ -31,7 +31,7 @@ Fri Jul  7 06:33:50 PM UTC 2023
 </div> <!-- /wrap -->
 
 <div style="display:none;">
-    <div id="vocab_kanji">{{VocabKanji}}</div>
+    <div id="vocab_kanji_hidden">{{VocabKanji}}</div>
     <div id="pitchnum_hidden">{{VocabPitchNum}}</div>
     <div id="kanaword_hidden">{{kana:VocabFurigana}}</div>
 </div>
@@ -82,30 +82,16 @@ Fri Jul  7 06:33:50 PM UTC 2023
 
     function odaka(pitch_num) {
         // word is odaka if number of moras is equal to pitch accent position
-        const vocab_kana = document.getElementById("kanaword_hidden");
-        if (vocab_kana === null) {
-            return false;
-        }
-        let moras = vocab_kana.innerHTML
+        const moras = document.getElementById("kanaword_hidden").innerText
             .replace(/[（(＜].*[＞)）]/, "") // remove （お）, (する), ＜する＞, ＜な＞, etc
             .replace(/[ャュョゃゅょ]/g, "") // small っ is one mora; ゃゅょ are parts of single mora
             .trim();
-
-        let n_moras;
         // first determine if な is part of pronunciation or な-adjective (e.g. 女)
-        const vocab_kanji = document.getElementById("vocab_kanji").innerHTML.trim();
-        if (/な$/.test(vocab_kanji)) {
-            // な-adjectives don't change pitch
-            n_moras = moras.replace(/な$/, "").length;
-        } else {
-            n_moras = moras.length;
-        }
-
-        if (n_moras == pitch_num) {
-            return true;
-        } else {
-            return false;
-        }
+        const vocab_kanji = document.getElementById("vocab_kanji_hidden")
+            .innerText
+            .trim();
+        const n_moras = (/な$/.test(vocab_kanji)) ? moras.replace(/な$/, "").length : moras.length;
+        return (n_moras == pitch_num);
     }
 
     /* Splits tags into separate divs */
