@@ -381,6 +381,10 @@ footer>a:not(:last-child)::after {
     display: none;
     visibility: hidden;
 }
+.images div { /* some unfortunate apps insert divs in cards */
+    display: contents;
+    visibility: visible;
+}
 
 .images img {
     display: block;
