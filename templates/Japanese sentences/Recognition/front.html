@@ -185,7 +185,7 @@ Wed Feb  7 08:30:09 PM UTC 2024
     function toggle_JP1K_mode() {
         const tsc_el = document.querySelector("#tsc");
         const jp1k_el = document.querySelector("#jp1k-tsc");
-        const is_jp1k_mode = `{{Tags}}`.split(" ").includes("jp1k");
+        const is_jp1k_mode = `{{Tags}}`.toLowerCase().split(" ").includes("jp1k");
         jp1k_el.setAttribute("visible", is_jp1k_mode);
         tsc_el.setAttribute("visible", !is_jp1k_mode);
     }
