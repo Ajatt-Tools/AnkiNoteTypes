@@ -7,19 +7,24 @@ Wed Feb  7 08:30:09 PM UTC 2024
     <header>
         {{#Focus}}
         <div class="tags">{{Focus}}</div>
-        {{/Focus}}
-        {{#Tags}}
+        {{/Focus}} {{#Tags}}
         <div class="tags">{{Tags}}</div>
         {{/Tags}}
     </header>
 
-    <div class="sent-center">
+    <div class="sent-center" id="tsc" visible="true">
+        <!-- this tag is hidden on the front. -->
         <div class="jpsentence" lang="ja">
-            {{edit:furigana:SentKanji}}
-            {{^SentKanji}}
+            {{edit:furigana:SentKanji}} {{^SentKanji}}
             <nokana>{{edit:kanji:SentFurigana}}</nokana>
             {{/SentKanji}}
         </div>
+    </div>
+
+    <div class="sent-center" id="jp1k-tsc" visible="false">
+        <!-- JP1K mode is active only if note has been tagged as jp1k. -->
+        <div class="jpsentence" lang="ja">{{furigana:SentFurigana}}</div>
+        <button class="toggle_furigana_button" onclick="toggle_jp1k_furigana();">Toggle Readings</button>
     </div>
 
     {{#Image}}
@@ -28,7 +33,8 @@ Wed Feb  7 08:30:09 PM UTC 2024
         <div class="images">{{Image}}</div>
     </details>
     {{/Image}}
-</div> <!-- /wrap -->
+</div>
+<!-- /wrap -->
 
 <div style="display: none">
     <div id="vocab_kanji_hidden">{{VocabKanji}}</div>
@@ -47,15 +53,12 @@ Wed Feb  7 08:30:09 PM UTC 2024
         let pitchNumber = document.getElementById("pitchnum_hidden");
         if (pitchNumber === null) {
             return;
-        } else {
-            pitchNumber = pitchNumber.innerHTML.match(/\d/);
         }
+        pitchNumber = pitchNumber.innerHTML.match(/\d/);
         if (pitchNumber === null) {
             return;
-        } else {
-            pitchNumber = Number(pitchNumber);
         }
-
+        pitchNumber = Number(pitchNumber);
         /* Then decide what color to use and change font color accordingly. */
         if (pitchNumber == 0) {
             // use blue for 平板
@@ -64,7 +67,7 @@ Wed Feb  7 08:30:09 PM UTC 2024
             // use red for 頭高
             paintTargetWord("red");
         } else if (pitchNumber > 1) {
-            if (odaka(pitchNumber)) {
+            if (is_odaka(pitchNumber)) {
                 // use green for 尾高
                 paintTargetWord("green");
             } else {
@@ -80,7 +83,7 @@ Wed Feb  7 08:30:09 PM UTC 2024
         }
     }
 
-    function odaka(pitch_num) {
+    function is_odaka(pitch_num) {
         // word is odaka if number of moras is equal to pitch accent position
         const moras = document
             .getElementById("kanaword_hidden")
@@ -97,7 +100,9 @@ Wed Feb  7 08:30:09 PM UTC 2024
     /* Splits tags into separate divs */
     function splitTagDiv() {
         const header = document.querySelector("header");
-        if (!header) return;
+        if (!header) {
+            return;
+        }
         const split = `{{Focus}} {{Tags}}`.split(" ");
         const dont_show = ["imageonfront", "tolearn", "marked"];
 
@@ -152,10 +157,7 @@ Wed Feb  7 08:30:09 PM UTC 2024
     }
 
     function isMobile() {
-        return document
-            .getElementsByTagName("html")[0]
-            .classList
-            .contains("mobile");
+        return document.getElementsByTagName("html")[0].classList.contains("mobile");
     }
 
     /* If a card has the "imageonfront" tag set, show images on the front side. */
@@ -174,9 +176,31 @@ Wed Feb  7 08:30:09 PM UTC 2024
         }
     }
 
+    function toggle_jp1k_furigana() {
+        for (const element of document.querySelectorAll("#jp1k-tsc ruby rt")) {
+            element.style.visibility = !element.style.visibility ? "visible" : "";
+        }
+    }
+
+    function toggleJP1KMode() {
+        const tsc_el = document.querySelector("#tsc");
+        const jp1k_el = document.querySelector("#jp1k-tsc");
+        const is_jp1k_mode = `{{Tags}}`.split(" ").includes("jp1k");
+        jp1k_el.setAttribute("visible", is_jp1k_mode);
+        tsc_el.setAttribute("visible", !is_jp1k_mode);
+    }
+
     markPitch();
     splitTagDiv();
     reformatMultiFurigana();
     setVisibleImageOnFront();
     toggleImageDetails();
+    toggleJP1KMode();
+    document.addEventListener("keydown", (event) => {
+        /* Press "P" to reveal furigana for all words */
+        const P_KEY = 80;
+        if (event.keyCode === P_KEY) {
+            toggle_jp1k_furigana();
+        }
+    });
 </script>

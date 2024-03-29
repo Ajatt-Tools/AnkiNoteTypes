@@ -168,6 +168,10 @@ header>div:not(:last-child) {
     justify-content: center;
     flex-flow: column nowrap;
 }
+.sent-center:where(#tsc, #jp1k-tsc):not([visible="true"]) {
+    /* toggles between JP1K mode and regular TSC mode. */
+    display: none;
+}
 
 /* Japanese sentence */
 
@@ -649,4 +653,34 @@ summary {
 .tooltip-text>.tooltip-reading:not(:last-child)::after {
     content: "; ";
     color: #f6a192;
+}
+
+/* Toggle furigana button - JP1K mode */
+
+.toggle_furigana_button {
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 4px;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fffaf0;
+    border: 0;
+    outline: 0;
+    margin: 0 0 6px;
+}
+.toggle_furigana_button:hover,
+.toggle_furigana_button:active {
+    background-color: #4f4f4f;
+    background: #4f4f4f;
+    border: none;
+}
+
+/* Hidden furigana on front - JP1K mode */
+
+#jp1k-tsc ruby rt {
+    visibility: hidden;
+}
+#jp1k-tsc ruby:hover rt {
+    visibility: visible;
 }
