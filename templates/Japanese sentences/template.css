@@ -684,3 +684,26 @@ summary {
 #jp1k-tsc ruby:hover rt {
     visibility: visible;
 }
+
+/* Styles for SVG pitch graphs */
+
+.reading:has(.ajt__pitch_svg) {
+    font-size: 0px; /* hide reading separators */
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+}
+.reading:not(:hover, :active, :focus) .ajt__pitch_svg:nth-child(n+3) {
+    height: 0px;
+    width: 0px;
+}
+.reading:not(:hover, :active, :focus):has(.ajt__pitch_svg:nth-child(3))::after {
+    content: '\2807';
+    display: block;
+    font-size: 32px;
+    margin-top: 8px;
+    color: red;
+    rotate: 90deg;
+}
