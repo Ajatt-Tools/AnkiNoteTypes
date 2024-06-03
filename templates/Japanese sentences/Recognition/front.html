@@ -190,17 +190,20 @@ Mon Jun  3 02:27:40 PM UTC 2024
         tsc_el.setAttribute("visible", !is_jp1k_mode);
     }
 
+    function listenToPKey() {
+        document.addEventListener("keydown", (event) => {
+            /* Press "P" to reveal furigana for all words */
+            if (event.code === "KeyP") {
+                toggle_jp1k_furigana();
+            }
+        }, true);
+    }
+
     markPitch();
     splitTagDiv();
     reformatMultiFurigana();
     setVisibleImageOnFront();
     toggleImageDetails();
     toggleJP1KMode();
-    document.addEventListener("keydown", (event) => {
-        /* Press "P" to reveal furigana for all words */
-        const P_KEY = 80;
-        if (event.keyCode === P_KEY) {
-            toggle_jp1k_furigana();
-        }
-    });
+    listenToPKey();
 </script>
