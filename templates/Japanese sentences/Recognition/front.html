@@ -1,6 +1,6 @@
 <!--
-mpvacious cards, version 17.0
-Fri Mar 29 10:55:21 AM UTC 2024
+mpvacious cards, version 18.0
+Mon Jun  3 02:27:40 PM UTC 2024
 -->
 
 <div class="wrap">
@@ -182,7 +182,7 @@ Fri Mar 29 10:55:21 AM UTC 2024
         }
     }
 
-    function toggle_JP1K_mode() {
+    function toggleJP1KMode() {
         const tsc_el = document.querySelector("#tsc");
         const jp1k_el = document.querySelector("#jp1k-tsc");
         const is_jp1k_mode = `{{Tags}}`.toLowerCase().split(" ").includes("jp1k");
@@ -195,7 +195,7 @@ Fri Mar 29 10:55:21 AM UTC 2024
     reformatMultiFurigana();
     setVisibleImageOnFront();
     toggleImageDetails();
-    toggle_JP1K_mode();
+    toggleJP1KMode();
     document.addEventListener("keydown", (event) => {
         /* Press "P" to reveal furigana for all words */
         const P_KEY = 80;
