@@ -1,6 +1,6 @@
 <!--
-Simple Word Cards, version 6.0
-Fri Feb 24 07:22:23 PM UTC 2023
+Simple Word Cards, version 7.0
+Thu May  2 01:59:45 PM UTC 2024
 -->
 <div class="wrap">
     {{#Tags}}
@@ -19,6 +19,8 @@ Fri Feb 24 07:22:23 PM UTC 2023
         for (const tag_elem of tags_elems) {
             if (tag_elem.innerHTML.includes("キャラ") || tag_elem.innerHTML.includes("有名人")) {
                 tag_elem.style.backgroundColor = "brown";
+            } else if (tag_elem.innerHTML.includes("部首")) {
+                tag_elem.style.backgroundColor = "green";
             }
         }
     }
