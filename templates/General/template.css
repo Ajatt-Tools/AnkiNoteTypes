@@ -10,6 +10,7 @@
     text-align: left;
     color: black;
     background-color: #fffaf0;
+    overflow-wrap: break-word;
 }
 li {
     margin-left: 1em;
@@ -52,40 +53,8 @@ img {
     max-width: 100%;
 }
 
-/* .replaybutton is an <a> tag with a <span> that has an <svg> inside */
-.replaybutton {
-    margin: 0;
-    margin-right: 3px;
-    text-decoration: none;
-}
-.replaybutton span {
-    padding: 0;
-    font-size: 16px;
-}
-.replaybutton span svg {
-    fill: #fffaf0;
-    background: #333;
-    border-radius: 3px;
-    vertical-align: top;
-    min-width: 16px;
-    min-height: 16px;
-}
-a.replay-button {
-    top: -0.125em;
-    position: relative;
-}
-a.replay-button svg {
-    height: 1em;
-    width: 1em;
-}
-a.replay-button svg path {
-    fill: #fffaf0;
-}
-a.replay-button svg circle {
-    fill: #333;
-}
-
 /* syntax highlighting for code */
+
 table.highlighttable {
     overflow: auto;
     display: block;
@@ -105,8 +74,14 @@ pre {
     overflow: auto;
     margin: 8px 0;
 }
-code {
-    color: #351214;
+:not(pre)>code {
+  color: #351214;
+  padding: 2px;
+  margin: 0;
+  font-size: 100%;
+  white-space: break-spaces;
+  background-color: rgba(175,184,193,0.2);
+  border-radius: 6px;
 }
 
 /* style tables */
@@ -123,4 +98,51 @@ td {
 th,
 td {
     padding: 2px;
+}
+
+/* AnkiDroid replay button */
+/* .replaybutton is an <a> tag with a <span> that has an <svg> inside */
+
+.replaybutton {
+    margin: 0;
+    text-decoration: none;
+}
+
+.replaybutton span {
+    padding: 0;
+    font-size: 16px;
+}
+
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #333;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* PC replay button */
+/* .replay-button is an <a> that has an <svg> inside */
+
+a.replay-button {
+    top: -0.125em;
+    position: relative;
+    margin: 0;
+    user-select: none;
+    cursor: pointer;
+}
+
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+    user-select: none;
+}
+
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+
+a.replay-button svg circle {
+    fill: #333;
 }
