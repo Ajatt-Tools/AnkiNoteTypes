@@ -6,8 +6,14 @@
 
 A collection of user-created note types for Anki 2.1. It includes a super user-friendly mechanism of importing and exporting them, and everyone is welcome to add their templates by making a pull request.
 
-## Usage
-## Windows
+## Installation
+
+### GNU/Linux
+
+Install [Python](https://wiki.archlinux.org/title/Python) 3.10 or later if you haven't already.
+
+### Windows
+
 Install Python from the Microsoft Store or check if you already have the good version putting on your file explorer search bar
 ````
 %LOCALAPPDATA%\Microsoft\WindowsApps\python3
@@ -21,15 +27,21 @@ If you have the correct version, you can just close the python's window that jus
 If you don't have the python installed, when you'll put this command into the search bar, it will open a microsoft store window directly on the correct python version and you just need to click Download
 
 After doing this step, you can make sure that everything is good by opening the command prompt with ``Windows+R``, ``cmd`` and put the command:
+
 ```
 python3 -m
 ```
+
 If everything's good, you should get a response like : ``Argument expected for the -m option``
 
 When you're done, you can import the different available note types [here](https://github.com/Ajatt-Tools/AnkiNoteTypes?tab=readme-ov-file#importing)
 
-## Linux
-Install [Python](https://wiki.archlinux.org/title/Python) 3.10 or later if you haven't already.
+## Usage
+
+Make sure Anki is running, and you have
+[AnkiConnect](https://ankiweb.net/shared/info/2055492159)
+installed.
+
 Clone the repository and `cd` into it.
 If you have never cloned a repository before,
 you need to install [git](https://git-scm.com/).
@@ -40,10 +52,6 @@ open your terminal and type the following commands.
 git clone "https://github.com/Ajatt-Tools/AnkiNoteTypes.git"
 cd AnkiNoteTypes
 ```
-
-Make sure Anki is running, and you have
-[AnkiConnect](https://ankiweb.net/shared/info/2055492159)
-installed.
 
 ### Importing
 
