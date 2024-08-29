@@ -1,0 +1,10 @@
+{
+    "modelName": "General cloze",
+    "inOrderFields": [
+        "Text",
+        "Extra"
+    ],
+    "cardTemplates": [
+        "Cloze"
+    ]
+}
