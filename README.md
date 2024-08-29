@@ -14,6 +14,10 @@ Install Python from the Microsoft Store or check if you already have the good ve
 ````
 If you have the correct version, you can just close the python's window that just popped up and execute the [following commands](https://github.com/Ajatt-Tools/AnkiNoteTypes?tab=readme-ov-file#importing)
 
+**Make sure to add python3 in your PATH**
+
+**The path you need to add should look like C:\Users\[YourUsername]\AppData\Local\Microsoft\WindowsApps\python3**
+
 If you don't have the python installed, when you'll put this command into the search bar, it will open a microsoft store window directly on the correct python version and you just need to click Download
 
 After doing this step, you can make sure that everything is good by opening the command prompt with ``Windows+R``, ``cmd`` and put the command:
