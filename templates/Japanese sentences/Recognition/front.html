@@ -152,23 +152,31 @@ Fri Sep 20 07:03:09 PM UTC 2024
     }
 
     function listenToPKey() {
-        document.addEventListener("keydown", (event) => {
-            /* Press "P" to reveal furigana for all words */
-            if (event.code === "KeyP") {
-                toggle_jp1k_furigana();
-            }
-        }, true);
+        document.addEventListener(
+            "keydown",
+            (event) => {
+                /* Press "P" to reveal furigana for all words */
+                if (event.code === "KeyP") {
+                    toggle_jp1k_furigana();
+                }
+            },
+            true
+        );
     }
 
     function listenToXKey() {
-        document.addEventListener("keydown", (event) => {
-            /* Press "x" to reveal all hints */
-            if (event.code == "KeyX") {
-                for (const elem of document.querySelectorAll("a.hint")) {
-                     elem.click();
+        document.addEventListener(
+            "keydown",
+            (event) => {
+                /* Press "x" to reveal all hints */
+                if (event.code == "KeyX") {
+                    for (const elem of document.querySelectorAll("a.hint")) {
+                        elem.click();
+                    }
                 }
-            }
-        }, true);
+            },
+            true
+        );
     }
 
     markPitch();

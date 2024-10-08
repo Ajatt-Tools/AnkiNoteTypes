@@ -2,37 +2,21 @@
 @import url("_ajt_japanese_24.10.8.1.css");
 @font-face {
     font-family: "KanjiStrokeOrders";
-    src:
-        local("KanjiStrokeOrders"),
-        url("_kso.woff2") format("woff2");
+    src: local("KanjiStrokeOrders"), url("_kso.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src:
-        local("Yu Mincho"),
-        local("游明朝"),
-        local("Noto Serif CJK JP"),
-        local("IPAexMincho"),
-        local("IPAex明朝"),
-        local("IPAMincho"),
-        local("IPA明朝"),
-        local("IPAPMincho"),
-        local("IPA P明朝"),
-        local("TakaoExMincho"),
-        local("TakaoEx明朝"),
-        url("_yumin.woff2") format("woff2");
+    src: local("Yu Mincho"), local("游明朝"), local("Noto Serif CJK JP"), local("IPAexMincho"), local("IPAex明朝"),
+        local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"),
+        local("TakaoEx明朝"), url("_yumin.woff2") format("woff2");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src:
-        local("Noto Serif CJK JP SemiBold"),
-        local("Noto Serif CJK JP DemiLight"),
-        local("Yu Mincho Demibold"),
-        local("游明朝 Demibold"),
-        url("_yumindb.woff2") format("woff2");
+    src: local("Noto Serif CJK JP SemiBold"), local("Noto Serif CJK JP DemiLight"), local("Yu Mincho Demibold"),
+        local("游明朝 Demibold"), url("_yumindb.woff2") format("woff2");
     font-weight: 600;
 }
 
@@ -57,17 +41,8 @@ strong {
 .card {
     background-color: #fffaf0;
     color: #2a1b0a;
-    font-family:
-        "Noto Serif",
-        "Noto Serif CJK JP",
-        "IPAexMincho",
-        "Yu Mincho",
-        "Local Mincho",
-        "Liberation Serif",
-        "Times New Roman",
-        Times,
-        Georgia,
-        Serif;
+    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif",
+        "Times New Roman", Times, Georgia, Serif;
     font-size: 24px;
     text-align: left;
     line-height: 1.4;
@@ -156,7 +131,7 @@ header .tags {
     border-radius: 0px 0px 3px 3px;
 }
 
-header>div:not(:last-child) {
+header > div:not(:last-child) {
     margin-right: 3px;
 }
 
@@ -194,7 +169,7 @@ header>div:not(:last-child) {
 
 /* English */
 
-div.ensentence>a.hint {
+div.ensentence > a.hint {
     color: #555;
     font-size: 14px;
     display: block;
@@ -204,7 +179,7 @@ div.ensentence>a.hint {
     margin: 0.4rem 0;
 }
 
-div.ensentence>a.hint:hover {
+div.ensentence > a.hint:hover {
     color: hsl(20deg 100% 20% / 80%);
     background-color: hsl(0deg 80% 50% / 3%);
 }
@@ -220,24 +195,8 @@ div.ensentence>a.hint:hover {
 
 .pitch_number,
 .tags {
-    font-family:
-        "Noto Sans",
-        "Droid Sans",
-        "DejaVu Sans",
-        "Liberation Sans",
-        Roboto,
-        Cantarell,
-        "Segoe UI",
-        Arial,
-        Meiryo,
-        Oxygen,
-        Ubuntu,
-        "Helvetica Neue",
-        Helvetica,
-        "Noto Color Emoji",
-        "Noto Sans CJK JP",
-        Sans,
-        sans-serif;
+    font-family: "Noto Sans", "Droid Sans", "DejaVu Sans", "Liberation Sans", Roboto, Cantarell, "Segoe UI", Arial,
+        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", Sans, sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
@@ -312,12 +271,12 @@ footer {
     align-items: center;
 }
 
-footer>a {
+footer > a {
     text-decoration: none;
     cursor: pointer;
 }
 
-footer>a:not(:last-child)::after {
+footer > a:not(:last-child)::after {
     content: "·";
     color: brown;
     display: inline-block;
@@ -334,16 +293,16 @@ footer>a:not(:last-child)::after {
     gap: 5px;
 }
 
-.vocab>.reading,
-.vocab>.target_word {
+.vocab > .reading,
+.vocab > .target_word {
     word-break: keep-all;
 }
 
-.vocab>.target_word::before {
+.vocab > .target_word::before {
     content: "【";
 }
 
-.vocab>.target_word::after {
+.vocab > .target_word::after {
     content: "】";
 }
 
@@ -381,11 +340,12 @@ footer>a:not(:last-child)::after {
 }
 
 .images br,
-.images> :not(img) {
+.images > :not(img) {
     display: none;
     visibility: hidden;
 }
-.images div { /* some unfortunate apps insert divs in cards */
+.images div {
+    /* some unfortunate apps insert divs in cards */
     display: contents;
     visibility: visible;
 }
@@ -465,15 +425,15 @@ ol {
 
 /* Fix for Yomichan pitch accents */
 
-.vocab ol>li {
+.vocab ol > li {
     display: inline;
 }
 
-.vocab ol>li:after {
+.vocab ol > li:after {
     content: "・";
 }
 
-.vocab ol>li:last-child:after {
+.vocab ol > li:last-child:after {
     content: "";
 }
 
@@ -487,7 +447,7 @@ ruby rt {
     position: relative;
 }
 
-.jpsentence>.overlay {
+.jpsentence > .overlay {
     position: absolute;
     /* Some versions of Anki don't understand inset. */
     top: 0;
@@ -496,13 +456,13 @@ ruby rt {
     left: 0;
 }
 
-.jpsentence>.background,
-.jpsentence>.overlay ruby rt {
+.jpsentence > .background,
+.jpsentence > .overlay ruby rt {
     visibility: hidden;
     pointer-events: none;
 }
 
-.jpsentence>.background ruby rt {
+.jpsentence > .background ruby rt {
     visibility: visible;
 }
 
@@ -524,7 +484,6 @@ details,
     padding: 3px;
     margin-block-end: 0.4rem;
     border: 1px solid hsl(0deg 80% 50% / 15%);
-    ;
 }
 
 summary {
@@ -577,16 +536,16 @@ summary {
     color: gray;
 }
 
-.nightMode .images>img {
+.nightMode .images > img {
     filter: sepia(0%);
 }
 
-.nightMode div.ensentence>a.hint {
+.nightMode div.ensentence > a.hint {
     color: #ffffff;
     border: 1px solid #ffffff;
 }
 
-.nightMode div.ensentence>a.hint:hover {
+.nightMode div.ensentence > a.hint:hover {
     color: gray;
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -633,14 +592,13 @@ summary {
     flex-flow: row wrap;
     align-items: center;
     justify-content: flex-start;
-
 }
-.reading:not(:hover, :active, :focus) .ajt__pitch_svg:nth-child(n+3) {
+.reading:not(:hover, :active, :focus) .ajt__pitch_svg:nth-child(n + 3) {
     height: 0px;
     width: 0px;
 }
 .reading:not(:hover, :active, :focus):has(.ajt__pitch_svg:nth-child(3))::after {
-    content: '\2807';
+    content: "\2807";
     display: block;
     font-size: 32px;
     margin-top: 8px;
