@@ -437,6 +437,15 @@ del.morphmanhide {
     content: "";
 }
 
+/* Furigana style */
+
+rt {
+    color: black;
+}
+.nightMode rt {
+    color: white;
+}
+
 /* Fix: Don't select furigana */
 
 ruby rt {
