@@ -415,8 +415,8 @@ del.morphmanhide {
 
 /* Fix for Yomichan defs */
 
-ul,
-ol {
+.headword_section ul,
+.headword_section ol {
     list-style-type: none;
     display: inline;
     margin: 0px;
