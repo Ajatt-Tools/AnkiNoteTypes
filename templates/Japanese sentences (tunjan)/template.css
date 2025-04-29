@@ -1,0 +1,982 @@
+@charset "utf-8";
+@import url("_ajt_japanese_24.10.8.1.css");
+
+/* ======================================== */
+/* == 2. Variables (Custom Properties) == */
+/* ======================================== */
+
+:root {
+  /* Colors - Light Mode */
+  --color-text: #2a1b0a;
+  --color-text-subtle: #555;
+  --color-text-emphasis: #c25e00;
+  --color-text-inverse: #fffaf0;
+  --color-text-link: #532f2f;
+  --color-text-link-hover: #722a2a;
+  --color-text-heading: #8b5a2b; /* For summary, target_word */
+  --color-text-accent: #d4a76a; /* For target_word pseudo-elements */
+
+  --color-background: #F6F3EF;
+  --color-background-wrap: linear-gradient(145deg, #fffaf0 0%, #fcf7ed 100%);
+  --color-background-section: #fdfaf4; /* headword, images */
+  --color-background-alt: #f3e9d9; /* tags, pitch-tag */
+  --color-background-ensentence: rgba(212, 167, 106, 0.08);
+  --color-background-interactive: #333; /* pitch_number */
+  --color-background-tooltip: black;
+
+  --color-border: rgba(139, 90, 43, 0.2);
+  --color-border-wrap: rgba(210, 180, 140, 0.8);
+  --color-border-subtle: rgba(212, 167, 106, 0.25); /* summary bottom border */
+  --color-border-focus: var(--color-text-link-hover); /* Focus outline */
+  --color-border-tooltip-line: hsl(0 80% 40% / 20%);
+
+  --color-shadow-soft: rgba(0, 0, 0, 0.04);
+  --color-shadow-medium: rgba(0, 0, 0, 0.06);
+  --color-shadow-interactive: rgba(0, 0, 0, 0.1);
+
+  /* Typography */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-size-base: 1rem; /* Typically 16px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-xxl: 1.375rem; /* 22px */
+  --font-size-display: 1.75rem; /* 28px */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-base: 1.5;
+  --line-height-loose: 1.6;
+
+  /* Spacing (Based on 8px grid) */
+  --space-xxs: 0.25rem; /* 4px */
+  --space-xs: 0.5rem;  /* 8px */
+  --space-s: 0.75rem;  /* 12px */
+  --space-m: 1rem;    /* 16px */
+  --space-l: 1.5rem;  /* 24px */
+  --space-xl: 1.75rem; /* 28px */
+  --space-xxl: 2.25rem; /* 36px */
+
+  /* Borders & Shadows */
+  --border-radius-small: 3px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 12px;
+  --border-radius-round: 50%;
+  --shadow-soft: 0 3px 8px var(--color-shadow-soft);
+  --shadow-medium: 0 6px 10px var(--color-shadow-medium);
+  --shadow-interactive: 0 2px 4px var(--color-shadow-interactive);
+
+  /* Transitions */
+  --transition-duration: 0.3s;
+  --transition-timing: ease;
+  --transition-short: 0.2s;
+
+  /* Focus Outline */
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 2px;
+  --focus-outline: var(--focus-outline-width) solid var(--color-border-focus);
+}
+
+/* ======================================== */
+/* == 3. Base & Reset Styles == */
+/* ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background-color: var(--color-background); /* Moved from .card */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  transition: color var(--transition-short) var(--transition-timing);
+}
+
+a:hover {
+  color: var(--color-text-link-hover);
+}
+
+/* Base focus styles for accessibility */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+  border-radius: var(--border-radius-small); /* Optional: match focus outline to element */
+}
+/* Remove default outline when custom :focus-visible is applied */
+a:focus, button:focus, summary:focus, input:focus, [tabindex]:not([tabindex="-1"]):focus {
+  outline: none;
+}
+
+
+rt {
+  color: var(--color-text); /* Base color for ruby text */
+  user-select: none; /* Keep for ruby text */
+}
+
+summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+font-size: var(--font-size-base);
+  list-style-type: none; /* Removed default marker */
+  user-select: none; /* Keep for summary */
+  padding: var(--space-xs) 0; /* Add some base padding */
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-heading);
+  transition: color var(--transition-short) var(--transition-timing);
+}
+
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+
+div[contenteditable="true"] {
+  padding: var(--space-xxs) var(--space-xs);
+  background-color: white; /* Keep white distinct */
+  border: 1px solid gray;
+  box-shadow: 10px 5px 5px gray; /* Keep specific shadow if needed */
+  border-radius: var(--border-radius-small);
+}
+
+/* ======================================== */
+/* == 4. Layout Styles == */
+/* ======================================== */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px; /* Consider using rem/em if scalable width is needed */
+  min-height: 65vh;
+  margin: var(--space-l) auto; /* Use spacing variables */
+  padding: var(--space-xl);
+  overflow: hidden;
+  position: relative;
+  background: var(--color-background-wrap);
+  border: 2px solid var(--color-border-wrap);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium); /* Use variable */
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-m); /* Use gap for spacing */
+  margin-bottom: var(--space-m);
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-s) var(--space-l);
+  margin-top: auto;
+  padding-top: var(--space-xxl);
+  position: relative;
+  z-index: 1;
+}
+
+/* ======================================== */
+/* == 5. Component Styles == */
+/* ======================================== */
+
+/* --- Card --- */
+.card {
+  /* Background/color moved to body/root */
+  font-size: var(--font-size-xl); /* Base card font size */
+  text-align: left;
+}
+
+.card1 {
+  color: inherit;
+}
+
+/* --- Japanese Sentence --- */
+.sent-center {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--space-xxl) 0;
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-normal); /* Use normal weight for better readability */
+  line-height: var(--line-height-loose); /* More spacing for larger text */
+}
+
+/* Furigana visibility control */
+.jpsentence > .background,
+.jpsentence > .overlay ruby rt {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.jpsentence > .background ruby rt {
+  visibility: visible;
+}
+
+/* Card-specific furigana hover */
+.card2 .jpsentence ruby rt {
+  opacity: 0;
+  visibility: hidden; /* Ensure hidden initially */
+  transition: opacity var(--transition-duration) var(--transition-timing),
+              visibility var(--transition-duration) var(--transition-timing);
+}
+
+.card2 .jpsentence:hover ruby rt {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styling for emphasized text - simplified */
+.jpsentence b,
+.jpsentence strong {
+  color: var(--color-text-emphasis);
+  font-weight: var(--font-weight-semibold); /* Ensure clear emphasis */
+  /* Removed ::after underline for cleaner look */
+}
+
+/* --- English Sentence --- */
+.ensentence {
+  margin: var(--space-m) 0;
+  padding: var(--space-xs) var(--space-m);
+  position: relative;
+  background-color: var(--color-background-ensentence);
+  border-radius: var(--border-radius-large);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  line-height: var(--line-height-base);
+}
+
+.ensentence > a {
+  color: var(--color-text-heading); /* Use heading color for contrast */
+  font-weight: var(--font-weight-medium);
+}
+.ensentence > a:hover {
+  color: var(--color-text-emphasis);
+}
+
+/* --- Headword Section (Details/Summary) --- */
+.headword_section {
+  margin: var(--space-m) 0;
+  padding: var(--space-m);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-background-section);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-medium);
+  transition: box-shadow var(--transition-duration) var(--transition-timing); /* Only transition shadow */
+}
+
+.headword_section summary { /* Style summary specifically */
+  padding: 0 0 var(--space-xs) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  /* Inherits base summary styles */
+}
+
+/* --- Vocabulary Details --- */
+.vocab {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-xs) 0;
+}
+
+.reading {
+  font-size: var(--font-size-xxl);
+  color: var(--color-text);
+}
+
+.target_word {
+  color: var(--color-text-heading);
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-duration) var(--transition-timing);
+}
+.target_word:hover {
+  color: var(--color-text-emphasis);
+}
+
+.target_word::before,
+.target_word::after {
+  color: var(--color-text-accent);
+  margin: 0 var(--space-xxs);
+}
+.target_word::before { content: "【"; }
+.target_word::after { content: "】"; }
+
+.definitions {
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-loose);
+  margin-top: var(--space-s);
+}
+
+.notes-content {
+  padding: var(--space-xs) 0 0 0;
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-loose);
+}
+
+/* --- Pitch Number / Tag (Harmonized) --- */
+.pitch_number,
+.pitch-tag {
+  display: inline-block;
+  padding: var(--space-xxs) var(--space-xs);
+  border-radius: var(--border-radius-small);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2; /* Adjust line height */
+  text-align: center;
+  user-select: none;
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+}
+
+.pitch_number { /* Interactive style */
+  background-color: var(--color-background-interactive);
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  text-transform: lowercase;
+}
+.pitch_number:hover {
+  background-color: var(--color-text-heading);
+}
+
+.pitch-tag { /* Informational style */
+  background: var(--color-background-alt);
+  color: var(--color-text-heading);
+  font-weight: var(--font-weight-semibold);
+  /* Removed gradient/shadow for simplicity, restore if preferred */
+}
+
+/* --- Replay Button --- */
+.replay-button {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: var(--space-xxs);
+  padding: var(--space-xxs); /* Add padding for focus ring */
+  border-radius: var(--border-radius-round); /* Make focus ring round */
+  line-height: 0; /* Prevent extra space */
+  color: var(--color-text); /* Set base color for icon fill */
+  transition: color var(--transition-duration) var(--transition-timing),
+              background-color var(--transition-duration) var(--transition-timing);
+}
+
+.replay-button svg {
+  width: 20px; /* Consider using rem/em */
+  height: 20px;
+  display: block;
+}
+
+.replay-button svg circle { /* Keep original if needed for animation */
+  fill: transparent;
+  stroke: transparent;
+}
+
+.replay-button svg path {
+  fill: currentColor; /* Use text color for fill */
+}
+
+.replay-button:hover,
+.replay-button:focus-visible { /* Subtle hover/focus */
+  color: var(--color-text-link-hover);
+  background-color: rgba(0, 0, 0, 0.05); /* Slight background */
+}
+/* Override base focus for round shape */
+.replay-button:focus-visible {
+  outline-offset: 1px;
+}
+
+/* --- Images Section --- */
+.images-details {
+  margin: var(--space-l) 0;
+  padding: var(--space-l);
+  position: relative;
+  background-color: var(--color-background-section);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-duration) var(--transition-timing),
+              box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+.images-details:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
+.images-details summary {
+  /* Style summary specifically here if needed, e.g., remove border */
+  border-bottom: none;
+  margin-bottom: var(--space-m);
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); /* Responsive columns */
+  gap: var(--space-l);
+  /* margin-top: var(--space-m); Removed, summary has margin-bottom */
+}
+
+.images img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-soft);
+  filter: sepia(10%);
+  transition: transform var(--transition-duration) var(--transition-timing),
+              box-shadow var(--transition-duration) var(--transition-timing),
+              filter var(--transition-duration) var(--transition-timing);
+}
+
+.images img:hover {
+  filter: sepia(0%);
+  transform: scale(1.03);
+  box-shadow: var(--shadow-medium);
+}
+/* Add focus state for images if they are links/interactive */
+/*
+.images a:focus-visible img {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+*/
+
+
+/* --- Footer Links --- */
+.footer-link {
+  padding: var(--space-xs) var(--space-m);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-medium); /* Match buttons */
+  color: var(--color-text-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+}
+.footer-link:hover {
+  background-color: var(--color-background-alt);
+  color: var(--color-text-link-hover);
+}
+
+/* --- Toggle Switch --- */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 54px; /* Keep fixed size for now */
+  height: 28px;
+  cursor: pointer;
+}
+
+.toggle-switch input { /* Hide the actual checkbox */
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,rgba(145, 168, 181, 1) 0%, rgba(132, 164, 184, 1) 100%);
+  border-radius: 24px; /* Height / 2 + padding */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+  transition: background var(--transition-duration) var(--transition-timing);
+}
+
+.slider:before { /* The moving knob */
+  content: "";
+  position: absolute;
+  bottom: 3px; /* Adjust based on height/border */
+  left: 3px;  /* Adjust based on height/border */
+  height: 22px; /* width - 2 * left */
+  width: 22px;
+  background: #fafafa;
+  border-radius: var(--border-radius-round);
+  transition: transform var(--transition-duration) var(--transition-timing);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Add subtle shadow to knob */
+}
+
+.slider:after { /* The icon/text inside */
+  content: "あ";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 9px;
+  color: #dee;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  transition: left var(--transition-duration) var(--transition-timing),
+              right var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+}
+
+/* Checked State */
+input:checked + .slider {
+  background: linear-gradient(145deg, var(--color-text-accent), #c69c6d); /* Use variable */
+}
+
+input:checked + .slider:before {
+  /* transform: translateX(calc(54px - 22px - 2 * 3px)); */ /* Calculate offset */
+   transform: translateX(26px); /* Keep fixed if calculation is complex */
+}
+
+input:checked + .slider:after {
+  content: "あ";
+  left: 9px;
+  right: auto;
+  color: #eee;
+}
+
+/* Hover States */
+input:not(:checked) + .slider:hover {
+   background: linear-gradient(90deg,rgba(125, 148, 161, 1) 0%, rgba(112, 144, 164, 1) 100%); /* Darken slightly */
+}
+
+input:checked + .slider:hover {
+  background: linear-gradient(145deg, #c69c6d, #b88d5e);
+}
+
+/* Focus State for the hidden input affects the slider */
+input:focus-visible + .slider {
+   outline: var(--focus-outline);
+   outline-offset: var(--focus-outline-offset);
+   border-radius: 24px; /* Match slider radius */
+}
+
+/* --- Tooltip --- */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dotted underline */
+.tooltip::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 2px; /* Adjust closer to text */
+    left: 0;
+    right: 0;
+    border-bottom: 2px dotted var(--color-border-tooltip-line);
+}
+
+/* Tooltip text bubble */
+.tooltip > .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: calc(100% + var(--space-xs)); /* Position above + gap */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: max-content;
+    max-width: 180px;
+    padding: var(--space-xs) var(--space-s);
+    background-color: var(--color-background-tooltip);
+    border-radius: var(--border-radius-medium);
+    color: var(--color-text-inverse);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    text-align: left;
+    word-break: keep-all;
+    box-shadow: var(--shadow-medium);
+    transition: visibility var(--transition-short) linear var(--transition-short),
+                opacity var(--transition-short) var(--transition-timing);
+}
+
+/* Tooltip arrow */
+.tooltip > .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--color-background-tooltip) transparent transparent transparent;
+}
+
+.tooltip:hover > .tooltip-text,
+.tooltip:focus-within > .tooltip-text { /* Show on hover or when child has focus */
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+/* Positioning for tags within a tooltip element */
+.tooltip > .tags {
+    position: absolute;
+    top: -5px; /* Adjust for overlap */
+    right: -9px;
+    z-index: 1; /* Ensure above dotted line */
+}
+
+/* Styling for readings within the tooltip text */
+.tooltip-text > .tooltip-reading:not(:last-child)::after {
+    content: "; ";
+    color: var(--color-text-accent); /* Use accent color */
+}
+
+
+/* ======================================== */
+/* == 6. Utility Styles == */
+/* ======================================== */
+
+.tags {
+  padding: var(--space-xxs) var(--space-xs);
+  background-color: var(--color-background-alt);
+  border-radius: var(--border-radius-small);
+  color: var(--color-text-heading);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.7px;
+  line-height: 1.2; /* Adjust line height */
+}
+
+.tags-container {
+	display:flex;
+	gap: 0.5em;
+}
+
+a.hint {
+  display: block;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+/* ======================================== */
+/* == 7. Theme Styles (Night Mode) == */
+/* ======================================== */
+
+.nightMode {
+  /* Override root variables for night mode */
+  --color-text: #ccc;
+  --color-text-subtle: #bbb;
+  --color-text-emphasis: #e6a157;
+  --color-text-inverse: #333;
+  --color-text-link: #bd9362; /* Adjusted link color */
+  --color-text-link-hover: #e6a157;
+  --color-text-heading: #bd9362;
+  --color-text-accent: #e6a157;
+
+  --color-background: #272727;
+  --color-background-wrap: linear-gradient(145deg, #333333 0%, #2c2c2c 100%);
+  --color-background-section: #383838;
+  --color-background-alt: #4a4a4a;
+  --color-background-ensentence: rgba(189, 147, 98, 0.1);
+  --color-background-interactive: #555;
+  --color-background-tooltip: #eee;
+
+  --color-border: rgba(189, 147, 98, 0.2);
+  --color-border-wrap: #444;
+  --color-border-subtle: rgba(189, 147, 98, 0.2);
+  --color-border-focus: var(--color-text-link-hover);
+  --color-border-tooltip-line: hsl(0 80% 90% / 20%);
+
+  --color-shadow-soft: rgba(0, 0, 0, 0.1);
+  --color-shadow-medium: rgba(0, 0, 0, 0.15);
+  --color-shadow-interactive: rgba(0, 0, 0, 0.15);
+}
+
+/* Specific overrides needed beyond variables */
+.nightMode rt {
+  color: white; /* Explicit override if needed */
+}
+
+.nightMode .reading {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.nightMode .target_word {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.nightMode .replay-button:hover,
+.nightMode .replay-button:focus-visible {
+   background-color: rgba(255, 255, 255, 0.1); /* Lighter hover background */
+}
+
+.nightMode .footer-link:hover {
+  background-color: #555; /* Match interactive bg */
+  color: var(--color-text-link-hover);
+}
+
+.nightMode input:checked + .slider {
+  background: linear-gradient(145deg, var(--color-text-accent), #a37e53);
+}
+
+.nightMode input:checked + .slider:hover {
+  background: linear-gradient(145deg, #a37e53, #8d6a44);
+}
+
+.nightMode .tooltip > .tooltip-text {
+    color: #333; /* Dark text on light tooltip */
+}
+.nightMode .tooltip > .tooltip-text::after {
+    border-color: var(--color-background-tooltip) transparent transparent transparent;
+}
+
+/* ======================================== */
+/* == 8. Specific Overrides & Modes == */
+/* ======================================== */
+
+/* --- Hide Furigana Modes --- */
+.nokana ruby rt {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Use class instead of ID */
+.jp1k-mode ruby rt {
+  visibility: hidden;
+}
+
+.jp1k-mode ruby:hover rt {
+  visibility: visible;
+}
+
+/* --- Hide Base Text Mode --- */
+.notext b,
+.notext strong {
+  background-color: var(--color-background-interactive); /* Use variable */
+  color: transparent;
+  border-radius: var(--border-radius-small); /* Add radius */
+  padding: 0 0.1em; /* Add slight padding */
+}
+.nightMode .notext b,
+.nightMode .notext strong {
+   background-color: var(--color-background-interactive); /* Variable handles night mode */
+}
+
+/* --- Visibility Toggle for Sentence Center --- */
+.sent-center:where(.tsc, .jp1k-mode):not([visible="true"]) {
+    display: none;
+}
+
+/* --- Toggle Furigana Button --- */
+.toggle_furigana_button {
+  display: inline-block; /* Ensure block characteristics */
+  padding: var(--space-xs) var(--space-m); /* Consistent padding */
+  margin: var(--space-l) 0;
+  background-color: var(--color-background-section);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-medium) !important; /* Removed !important */
+  box-shadow: none; /* Removed !important */
+  color: var(--color-text-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--transition-duration) var(--transition-timing),
+              border-color var(--transition-duration) var(--transition-timing),
+              color var(--transition-duration) var(--transition-timing);
+  cursor: pointer;
+}
+.toggle_furigana_button:hover {
+  background-color: var(--color-background-alt);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-link-hover);
+}
+
+
+/* Focus state inherited from base button styles */
+
+/* --- Pitch Accent SVG Styles --- */
+.reading:has(.ajt__pitch_svg) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xxs); /* Add small gap between SVGs */
+  font-size: 0; /* Hide text nodes */
+}
+
+.reading:has(.ajt__pitch_svg) > span { /* Assuming separators are spans */
+    display: none; /* Explicitly hide separators if needed */
+}
+
+.reading:not(:hover, :active, :focus-within) .ajt__pitch_svg:nth-child(n + 3) {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-short) var(--transition-timing),
+              height var(--transition-short) var(--transition-timing),
+              width var(--transition-short) var(--transition-timing);
+}
+
+/* Indicator for multiple pitch graphs */
+.reading:not(:hover, :active, :focus-within):has(.ajt__pitch_svg:nth-child(3))::after {
+  content: "..."; /* Use simple ellipsis */
+  display: inline-block;
+  font-size: var(--font-size-xl);
+  line-height: 1;
+  margin-left: var(--space-xs);
+  color: var(--color-text-subtle); /* Subtle color */
+  font-weight: var(--font-weight-bold);
+  vertical-align: middle;
+}
+
+/* ======================================== */
+/* == 9. Media Queries == */
+/* ======================================== */
+
+@media screen and (max-width: 768px) {
+  :root { /* Adjust base font size slightly for tablets */
+      /* font-size: 0.9375rem; /* 15px */
+      /* Adjust spacing variables if needed */
+      --space-xl: 1.5rem;
+      --space-xxl: 2rem;
+  }
+
+  .wrap {
+    padding: var(--space-l); /* Use adjusted variable */
+    margin: var(--space-m) auto;
+  }
+
+  .sent-center,
+  .jpsentence {
+    font-size: 1.625rem; /* Adjust display size (26px) */
+  }
+
+  .ensentence {
+    font-size: var(--font-size-base); /* Back to 1rem (16px) */
+  }
+
+  .definitions,
+  .reading,
+  .target_word {
+    font-size: var(--font-size-xl); /* 20px */
+  }
+  .reading:has(.ajt__pitch_svg) {
+      font-size: 0; /* Ensure text nodes remain hidden */
+  }
+
+
+  .images {
+     grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+     gap: var(--space-m);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root { /* Adjust base font size for mobile */
+      font-size: 0.875rem; /* 14px */
+      --space-l: 1.25rem;
+      --space-xl: 1.25rem; /* Further reduce padding */
+      --space-xxl: 1.75rem;
+  }
+
+  .wrap {
+    padding: var(--space-m); /* Reduce padding further */
+    min-height: 0;
+  }
+
+  .sent-center,
+  .jpsentence {
+    font-size: 1.5rem; /* ~24px */
+  }
+
+  .ensentence {
+      font-size: var(--font-size-sm); /* 14px based on new root */
+  }
+
+  .definitions,
+  .reading,
+  .target_word {
+      font-size: var(--font-size-lg); /* ~18px */
+  }
+  .reading:has(.ajt__pitch_svg) {
+     font-size: 0; /* Ensure text nodes remain hidden */
+  }
+
+  header {
+    flex-direction: column;
+    align-items: stretch; /* Stretch items full width */
+    gap: var(--space-s);
+  }
+
+  .toggle-container {
+    align-self: flex-end; /* Keep toggle right */
+    margin-top: var(--space-xs);
+  }
+
+  .images {
+     grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+     gap: var(--space-s);
+  }
+
+  footer {
+      gap: var(--space-xs) var(--space-s);
+  }
+
+   .footer-link {
+      font-size: var(--font-size-sm);
+      padding: var(--space-xs) var(--space-s);
+   }
+}
+
+.tsc:not([visible="true"]),
+.jp1k-mode:not([visible="true"]) {
+    display: none;
+}
+
+/* Optional: Classes for pitch accent colors */
+.pitch-heiban { color: #3366CC; }
+.pitch-atamadaka { color: red; }
+.pitch-odaka { color: green; }
+.pitch-nakadaka { color: #eb8500; }
+
+.font-mincho {
+  font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;
+}
+
+.font-sans {
+  font-family: 'Hiragino Sans', sans-serif; /* Or your default sans-serif stack */
+}
