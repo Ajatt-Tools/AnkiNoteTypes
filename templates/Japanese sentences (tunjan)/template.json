@@ -1,5 +1,5 @@
 {
-    "modelName": "Japanese sentences (tunjan)",
+    "modelName": "Japanese sentences+",
     "inOrderFields": [
         "SentKanji",
         "SentFurigana",
@@ -8,12 +8,12 @@
         "VocabKanji",
         "VocabFurigana",
         "VocabPitchPattern",
+        "VocabPitchNum",
         "VocabDef",
         "VocabAudio",
         "Notes",
-        "Image",
-        "Source",
-        "MakeProductionCard"
+        "MakeProductionCard",
+        "Focus"
     ],
     "cardTemplates": [
         "Recognition",
