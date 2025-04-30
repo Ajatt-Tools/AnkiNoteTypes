@@ -43,62 +43,6 @@ Fri Sep 20 07:03:09 PM UTC 2024
 </div>
 
 <script>
-    /* Paints the question word according to its Pitch Accent number.
-     * blue for 平板
-     * red for 頭高
-     * orange for 中高
-     * green for 尾高
-     *
-     * DEPRECATED: use AJT Japanese instead.
-     */
-    function markPitch() {
-        let pitchNumber = document.getElementById("pitchnum_hidden");
-        if (pitchNumber === null) {
-            return;
-        }
-        pitchNumber = pitchNumber.innerHTML.match(/\d/);
-        if (pitchNumber === null) {
-            return;
-        }
-        pitchNumber = Number(pitchNumber);
-        /* Then decide what color to use and change font color accordingly. */
-        if (pitchNumber == 0) {
-            // use blue for 平板
-            paintTargetWord("#3366CC");
-        } else if (pitchNumber == 1) {
-            // use red for 頭高
-            paintTargetWord("red");
-        } else if (pitchNumber > 1) {
-            if (is_odaka(pitchNumber)) {
-                // use green for 尾高
-                paintTargetWord("green");
-            } else {
-                // use orange for 中高
-                paintTargetWord("#eb8500");
-            }
-        }
-    }
-
-    function paintTargetWord(color) {
-        for (const word of document.querySelectorAll(".jpsentence b, .jpsentence strong")) {
-            word.style.color = color;
-        }
-    }
-
-    function is_odaka(pitch_num) {
-        // word is odaka if number of moras is equal to pitch accent position
-        const moras = document
-            .getElementById("kanaword_hidden")
-            .innerText.replace(/[（(＜].*[＞)）]/, "") // remove （お）, (する), ＜する＞, ＜な＞, etc
-            .replace(/[ャュョゃゅょ]/g, "") // small っ is one mora; ゃゅょ are parts of single mora
-            .trim();
-        // first determine if な is part of pronunciation or な-adjective (e.g. 女)
-        const vocab_kanji = document.getElementById("vocab_kanji_hidden").innerText.trim();
-        // な-adjectives don't change pitch
-        const n_moras = /な$/.test(vocab_kanji) ? moras.replace(/な$/, "").length : moras.length;
-        return n_moras == pitch_num;
-    }
-
     /* Splits tags into separate divs */
     function splitTagDiv() {
         const header = document.querySelector("header");
