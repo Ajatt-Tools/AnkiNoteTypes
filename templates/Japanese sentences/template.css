@@ -158,12 +158,18 @@ header > div:not(:last-child) {
     display: inline-block;
 }
 
-/* Hide front side when the back is shown. */
+/* Hide front side when the back is shown. Hide the back side when  */
 
-.fside .jpsentence,
-.fside .sent-center,
-.fside .images,
-.fside .images-details {
+body[answer_revealed="true"] .ajt__front_side {
+    display: none;
+}
+body[answer_revealed="false"] .ajt__back_side {
+    display: none;
+}
+
+/* Images on front, toggled by JavaScript if "imageonfront" tag is set. */
+
+body[answer_revealed="false"] .images-details:not([images_on_front="true"]) {
     display: none;
 }
 
@@ -363,12 +369,6 @@ footer > a:not(:last-child)::after {
     width: auto;
 }
 
-/* Images on front, toggled by JavaScript if "imageonfront" tag is set. */
-
-.images-on-front:not([visible="true"]) {
-    display: none;
-}
-
 /* Production cards */
 
 .production b,
@@ -382,38 +382,7 @@ footer > a:not(:last-child)::after {
     font-family: KanjiStrokeOrders;
 }
 
-/* Morphman coloring */
-
-.fside .jpsentence:hover [mtype="unknown"] {
-    background-color: #ffff99;
-}
-
-.fside .jpsentence:hover [mtype="seen"] {
-    background-color: #ffd1b3;
-}
-
-.fside .jpsentence:hover [mtype="known"] {
-    background-color: #b3e6cc;
-}
-
-.fside .jpsentence:hover [mtype="mature"] {
-    background-color: transparent;
-}
-
-.fside .jpsentence:hover [priority="true"] {
-    color: inherit;
-}
-
-.fside .jpsentence:hover [frequency="true"] {
-    color: inherit;
-}
-
-del.MorphManHide,
-del.morphmanhide {
-    display: none;
-}
-
-/* Fix for Yomichan defs */
+/* Fix for Rikaitan defs */
 
 .headword_section ul,
 .headword_section ol {
@@ -423,7 +392,7 @@ del.morphmanhide {
     padding: 0px;
 }
 
-/* Fix for Yomichan pitch accents */
+/* Fix for Rikaitan pitch accents */
 
 .vocab ol > li {
     display: inline;
