@@ -160,10 +160,10 @@ header > div:not(:last-child) {
 
 /* Hide front side when the back is shown. Hide the back side when  */
 
-body[answer_revealed="true"] .ajt__front_side {
+body[answer_revealed="true"] .tsc__front_side {
     display: none;
 }
-body[answer_revealed="false"] .ajt__back_side {
+body[answer_revealed="false"] .tsc__back_side {
     display: none;
 }
 

@@ -15,7 +15,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
     </header>
 
     <!-- Front side. This tag is hidden on the back. -->
-    <div class="ajt__front_side">
+    <div class="tsc__front_side">
         <div class="sent-center" id="tsc" visible="true">
             <div class="jpsentence" lang="ja">
                 {{edit:furigana:SentKanji}}
@@ -42,7 +42,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
     {{/Image}}
 
     <!-- Back side. This tag is hidden on the front. -->
-    <div class="ajt__back_side">
+    <div class="tsc__back_side">
         <div class="sent-center">
             <div class="jpsentence" lang="ja">
                 <div class="background">
@@ -64,7 +64,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
 
         {{#VocabDef}}
         <section class="headword_section">
-            <div class="vocab" id="ajt__headword_section">
+            <div class="vocab" id="tsc__headword_section">
                 <!-- Insert vocabulary audio and sentence audio here. -->
                 <div class="reading" id="pitchpattern" lang="ja">
                     {{VocabPitchPattern}}
@@ -81,7 +81,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
         {{/VocabDef}}
 
         <!-- Fallback location for audio files -->
-        <div id="ajt__backside_audio"></div>
+        <div id="tsc__backside_audio"></div>
 
         <!-- Notes -->
         {{#Notes}}
@@ -92,7 +92,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
         {{/Notes}}
 
         <!-- Place images here -->
-        <div id="ajt__backside_images"></div>
+        <div id="tsc__backside_images"></div>
 
         <hr>
 
@@ -142,7 +142,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
             <a class="replay-button"><svg><circle>...</circle>...</svg></a>
             */
             const headword_section =
-                document.querySelector("#ajt__headword_section") || document.querySelector("#ajt__backside_audio");
+                document.querySelector("#tsc__headword_section") || document.querySelector("#tsc__backside_audio");
             if (headword_section) {
                 headword_section.prepend(document.querySelector("#vocab-audio"));
                 headword_section.prepend(document.querySelector("#sent-audio"));
@@ -175,7 +175,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
 
         function move_images_under_notes() {
             /* When the back side is visible, Images should be placed after (under) notes. */
-            const images_anchor = document.querySelector("#ajt__backside_images");
+            const images_anchor = document.querySelector("#tsc__backside_images");
             if (images_anchor) {
                 for (const img_container of document.querySelectorAll(".images-details")) {
                     images_anchor.after(img_container);
