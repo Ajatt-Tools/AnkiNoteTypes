@@ -1,0 +1,476 @@
+<div class="wrap">
+    <header>
+      {{#Focus}}
+      <div class="tags">{{Focus}}</div>
+      {{/Focus}}
+
+      {{#Tags}}
+      <div class="tags-container">
+        <div class="tags">{{Tags}}</div>
+      </div>
+      {{/Tags}}
+		<div class="toggle-container">
+  			<label class="toggle-switch">
+				<input type="checkbox" id="fontToggle">
+    			<span class="slider"></span>
+  			</label>
+		</div>
+    </header>
+
+
+    <div class="sent-center tsc" visible="true">
+        <!-- this tag is hidden on the front. -->
+        <div class="jpsentence" lang="ja">
+            {{edit:furigana:VocabKanji}} {{^VocabKanji}}
+            <nokana>{{edit:kanji:VocabFurigana}}</nokana>
+            {{/VocabKanji}}
+        </div>
+    </div>
+
+    <div class="sent-center jp1k-mode" visible="false">
+        <!-- JP1K mode is active only if note has been tagged as jp1k. -->
+        <div class="jpsentence" lang="ja">
+      {{furigana:VocabFurigana}}
+       </div>
+        <button class="toggle_furigana_button">Toggle Readings</button>
+    </div>
+
+    
+    <details class="images-on-front images-details">
+        <summary>Image</summary>
+        <div class="images"></div>
+    </details>
+    
+</div>
+<!-- /wrap -->
+
+<div style="display: none">
+    <div id="vocab_kanji_hidden">{{VocabKanji}}</div>
+    <div id="pitchnum_hidden">{{VocabPitchNum}}</div>
+    <div id="kanaword_hidden">{{kana:VocabFurigana}}</div>
+</div>
+
+
+<script>
+(function() {
+    'use strict';
+
+    // --- Helper Functions ---
+
+    function isMobile() {
+        // Check if the html element has the 'mobile' class (common in Anki)
+        return document.documentElement.classList.contains("mobile");
+    }
+
+    /**
+     * Applies a specific CSS class to target word elements for pitch accent.
+     * @param {string | null} className - The CSS class name to add (e.g., 'pitch-heiban'), or null to remove all pitch classes.
+     */
+    function styleTargetWord(className) {
+        const pitchClasses = ['pitch-heiban', 'pitch-atamadaka', 'pitch-odaka', 'pitch-nakadaka'];
+        document.querySelectorAll(".jpsentence b, .jpsentence strong").forEach(word => {
+            // Remove any existing pitch classes first
+            word.classList.remove(...pitchClasses);
+            // Add the new class if one is provided
+            if (className) {
+                word.classList.add(className);
+            }
+        });
+    }
+
+    /**
+     * Determines if a word is Odaka based on pitch number and mora count.
+     * Relies on hidden divs for data.
+     * @param {number} pitch_num - The pitch accent number.
+     * @returns {boolean} - True if the word is Odaka, false otherwise.
+     */
+    function is_odaka(pitch_num) {
+        const kanaElement = document.getElementById("kanaword_hidden");
+        const kanjiElement = document.getElementById("vocab_kanji_hidden");
+
+        if (!kanaElement || !kanjiElement || !kanaElement.textContent || !kanjiElement.textContent) return false;
+
+        try {
+            const morasText = kanaElement.innerText.replace(/[（(＜].*[＞)）]/, "");
+            const morasCount = morasText.replace(/[ャュョゃゅょァィゥェォ]/g, "").trim().length;
+            const vocab_kanji = kanjiElement.innerText.trim();
+            const n_moras = /な$/.test(vocab_kanji) && morasText.endsWith('な')
+                ? morasCount - 1
+                : morasCount;
+            return n_moras === pitch_num;
+        } catch (e) {
+            console.error("Error in is_odaka:", e);
+            return false;
+        }
+    }
+
+    /**
+     * Recursively formats ruby HTML for multiple readings (Anki compatibility focus).
+     * @param {string} kanji - The base text (kanji).
+     * @param {string[]} readings - Array of readings.
+     * @returns {string} - Formatted HTML string.
+     */
+    function formatNewRuby(kanji, readings) {
+         // Simplified structure often more compatible with Anki's rendering
+        if (readings.length === 1) {
+            return `<rb>${kanji}</rb><rt>${readings[0]}</rt>`;
+        } else if (readings.length > 1) {
+            // For multiple, try placing multiple <rt> after <rb> if nested doesn't work well
+            // return `<rb>${kanji}</rb>` + readings.map(r => `<rt>${r}</rt>`).join('');
+            // Or revert to potentially fragile nested version if required:
+            return `<ruby>${formatNewRuby(kanji, readings.slice(0, -1))}</ruby><rt>${readings.slice(-1)}</rt>`;
+        } else {
+             return `<rb>${kanji}</rb>`; // Handle case with no readings?
+        }
+    }
+
+    // --- Core Feature Functions ---
+
+    /**
+     * Styles the target word based on its pitch accent number from hidden div.
+     */
+    function markPitch() {
+        const pitchElement = document.getElementById("pitchnum_hidden");
+        if (!pitchElement || !pitchElement.textContent) {
+             // Optionally reset style if element is missing/empty
+             styleTargetWord(null);
+             return;
+        }
+
+        const pitchMatch = pitchElement.textContent.match(/\d/);
+        if (!pitchMatch) {
+            styleTargetWord(null); // Reset color if no valid number found
+            return;
+        }
+
+        const pitchNumber = Number(pitchMatch[0]);
+
+        if (pitchNumber === 0) styleTargetWord("pitch-heiban");
+        else if (pitchNumber === 1) styleTargetWord("pitch-atamadaka");
+        else if (pitchNumber > 1) {
+            styleTargetWord(is_odaka(pitchNumber) ? "pitch-odaka" : "pitch-nakadaka");
+        }
+        else styleTargetWord(null); // Reset for unexpected cases
+    }
+
+    /**
+     * Splits Anki tags into separate div elements within the .tags-container.
+     */
+    function splitTagDiv() {
+        const tagsContainer = document.querySelector("header .tags-container");
+        if (!tagsContainer) return;
+
+        const initialTagsDiv = tagsContainer.querySelector(".tags");
+        let rawTagsString = "";
+        if (initialTagsDiv && initialTagsDiv.textContent) {
+            rawTagsString = initialTagsDiv.textContent;
+        }
+
+        // Also check for {{Focus}} tag outside the container
+        const focusTagDiv = document.querySelector("header > .tags:not(.tags-container .tags)");
+        const focusTag = focusTagDiv ? focusTagDiv.textContent.trim() : "";
+
+        // Combine tags from both sources
+        const allTagsString = focusTag ? `${focusTag} ${rawTagsString}` : rawTagsString;
+        const individualTags = allTagsString.split(" ")
+                                           .map(t => t.trim())
+                                           .filter(Boolean);
+
+        const tagsToExclude = ["imageonfront", "tolearn", "marked"];
+
+        // Clear the container *and* remove the initial focus tag div
+        tagsContainer.innerHTML = '';
+        if(focusTagDiv) focusTagDiv.remove();
+
+        let tagsAdded = false;
+        individualTags.forEach(tag => {
+            if (!tagsToExclude.includes(tag)) {
+                const tagElem = document.createElement("div");
+                tagElem.className = "tags";
+                tagElem.textContent = tag;
+                // Append *all* tags (including the focus one) to the container now
+                tagsContainer.appendChild(tagElem);
+                tagsAdded = true;
+            }
+        });
+        // Ensure container is visible if tags were added, hide if not (optional)
+        tagsContainer.style.display = tagsAdded ? '' : 'none';
+    }
+
+
+    /**
+     * Reformats ruby elements with multiple readings, potentially adding tooltips.
+     */
+    function reformatMultiFurigana() {
+        const separators = /[\s;,.、・。]+/iu;
+        const maxInlineReadings = 1; // Show only the first reading inline
+
+        document.querySelectorAll("ruby:not(ruby ruby)").forEach(ruby => {
+            try {
+                const baseTextNode = ruby.querySelector("rb") ?? ruby.firstChild;
+                let kanji = baseTextNode?.textContent?.trim();
+                const rtElement = ruby.querySelector("rt");
+
+                if (!kanji || !rtElement?.textContent) return;
+
+                 // Handle edge case where baseTextNode might include the rt content in some Anki versions
+                 if (baseTextNode === ruby.firstChild && baseTextNode.nodeType === Node.TEXT_NODE && rtElement.previousSibling === baseTextNode) {
+                    kanji = kanji.replace(rtElement.textContent, '').trim();
+                 }
+
+                const readings = rtElement.textContent.split(separators)
+                    .map(str => str.trim())
+                    .filter(str => str.length > 0);
+
+                if (readings.length > maxInlineReadings) {
+                    const inlineRuby = document.createElement('ruby');
+                    inlineRuby.innerHTML = formatNewRuby(kanji, readings.slice(0, maxInlineReadings)); // Use helper
+
+                    const tooltipTextSpan = document.createElement("span");
+                    tooltipTextSpan.className = "tooltip-text";
+                    tooltipTextSpan.innerHTML = readings
+                        .map(reading => `<span class="tooltip-reading">${reading}</span>`)
+                        .join("");
+
+                    const tooltipWrapper = document.createElement("span");
+                    tooltipWrapper.className = "tooltip";
+                    tooltipWrapper.appendChild(inlineRuby);
+                    tooltipWrapper.appendChild(tooltipTextSpan);
+
+                    ruby.replaceWith(tooltipWrapper);
+                }
+            } catch (error) {
+                console.error("Error processing ruby element:", ruby, error);
+            }
+        });
+    }
+
+    /**
+     * Shows elements with class .images-on-front if 'imageonfront' tag is present.
+     */
+    function setVisibleImageOnFront() {
+        // This relies on {{Tags}} being accessible, which might only be reliable
+        // if the hidden data divs are added OR if this runs on the Front template.
+        // A safer approach might involve checking the container directly if {{Tags}} isn't available.
+        try {
+             const tags = `{{Tags}}`; // Anki field replacement placeholder
+             if (tags.split(" ").includes("imageonfront")) {
+                 document.querySelectorAll(".images-on-front").forEach(imgContainer => {
+                     imgContainer.setAttribute("visible", "true");
+                 });
+             }
+        } catch(e) {
+            console.warn("Could not check {{Tags}} for image visibility. Field might be missing.");
+        }
+    }
+
+    /**
+     * Sets the 'open' attribute on image details sections based on mobile status.
+     */
+    function toggleImageDetails() {
+        const shouldBeOpen = !isMobile();
+        document.querySelectorAll(".images-details").forEach(detailsElement => {
+            detailsElement.open = shouldBeOpen; // Directly set the boolean property
+        });
+    }
+
+    /**
+     * Toggles the inline visibility style of furigana within JP1K mode elements.
+     */
+    function toggleJP1KFurigana() {
+        document.querySelectorAll(".jp1k-mode ruby rt").forEach(rtElement => {
+            rtElement.style.visibility = rtElement.style.visibility === 'visible' ? '' : 'visible';
+        });
+    }
+
+    /**
+     * Sets the visibility attribute of TSC vs JP1K mode containers based on the 'jp1k' tag.
+     */
+    function toggleJP1KModeVisibility() {
+        const tscElement = document.querySelector(".tsc");
+        const jp1kElement = document.querySelector(".jp1k-mode");
+        if (!tscElement || !jp1kElement) return; // Need both elements
+
+        // Similar issue to setVisibleImageOnFront - relies on {{Tags}}.
+        try {
+            const tags = `{{Tags}}`; // Anki field replacement placeholder
+            const isJP1KMode = tags.toLowerCase().split(" ").includes("jp1k");
+
+            jp1kElement.setAttribute("visible", isJP1KMode ? "true" : "false");
+            tscElement.setAttribute("visible", !isJP1KMode ? "true" : "false");
+        } catch(e) {
+            console.warn("Could not check {{Tags}} for JP1K mode visibility. Field might be missing.");
+            // Default to showing TSC mode if tags check fails?
+             jp1kElement.setAttribute("visible", "false");
+             tscElement.setAttribute("visible", "true");
+        }
+    }
+
+    // --- Back Card Specific Cleanup ---
+
+    function tweakRevealText() {
+        const elem = document.querySelector("div.ensentence > a.hint");
+        if (elem) {
+            elem.innerText = "Reveal English translation";
+        }
+    }
+
+    function removePitchBrackets() {
+        const pitchElement = document.getElementById("pitchnum"); // Element displayed on back
+        if (pitchElement) {
+            pitchElement.innerHTML = pitchElement.innerHTML.replace(/[\[\]]/g, "");
+        }
+    }
+
+    function removeNoPitchAccentDataText() {
+        const hasNoData = (element) => element && element.textContent.toLowerCase().includes("no pitch accent");
+
+        const pitchNumElement = document.getElementById("pitchnum"); // Displayed on back
+        const pitchPatternElement = document.getElementById("pitchpattern"); // Displayed on back
+        // Note: .pitch_number class might not exist/be relevant on the back depending on CSS/HTML
+        const pitchNumInlineSpan = pitchPatternElement?.querySelector(".ajt__pitch_number_tag"); // More specific?
+
+        if (hasNoData(pitchNumElement)) {
+            pitchNumElement.remove();
+        }
+        if (hasNoData(pitchNumInlineSpan)) {
+             pitchNumInlineSpan.remove();
+        }
+
+        if (hasNoData(pitchPatternElement)) {
+            const kanaWordElement = document.getElementById("kanaword_hidden");
+            pitchPatternElement.textContent = kanaWordElement ? kanaWordElement.textContent : '';
+        }
+    }
+
+    function removeAudioIfMarkedX() {
+        const audioContainer = document.getElementById("vocab-audio");
+        if (audioContainer && audioContainer.textContent.trim().match(/^[x×]/i)) {
+            audioContainer.style.display = "none";
+        }
+         // Also check SentAudio if it exists
+         const sentAudioContainer = document.getElementById("sent-audio");
+          if (sentAudioContainer && sentAudioContainer.textContent.trim().match(/^[x×]/i)) {
+            sentAudioContainer.style.display = "none";
+        }
+    }
+
+    // --- Event Listener Setup ---
+
+    /**
+     * Sets up the font toggle checkbox functionality using CSS classes.
+     */
+    function setupFontToggle() {
+        const fontToggle = document.getElementById('fontToggle');
+        if (!fontToggle) return;
+
+        const jpSentences = document.querySelectorAll('.jpsentence');
+        if (jpSentences.length === 0) return;
+
+        const applyFontPreference = (isChecked) => {
+            const classToAdd = isChecked ? 'font-mincho' : 'font-sans';
+            const classToRemove = isChecked ? 'font-sans' : 'font-mincho';
+            jpSentences.forEach(element => {
+                element.classList.remove(classToRemove);
+                element.classList.add(classToAdd);
+            });
+            try {
+                localStorage.setItem('fontPreference', isChecked ? 'mincho' : 'sans');
+            } catch (e) { /* Ignore */ }
+        };
+
+        fontToggle.addEventListener('change', function() {
+            applyFontPreference(this.checked);
+        });
+
+        // Initialize state
+        try {
+            let initialCheckedState = (localStorage.getItem('fontPreference') === 'mincho');
+            fontToggle.checked = initialCheckedState;
+            applyFontPreference(initialCheckedState);
+        } catch (e) {
+            fontToggle.checked = false; // Default to false on error
+            applyFontPreference(false);
+        }
+    }
+
+    /**
+     * Sets up keyboard listeners for 'P' (toggle furigana) and 'A' (reveal hints).
+     */
+    function setupKeyListeners() {
+        // Only add listeners if we are likely on the front card (where interaction happens)
+        if (document.querySelector(".tsc") || document.querySelector(".jp1k-mode")) {
+            document.addEventListener("keydown", (event) => {
+                const key = event.key?.toUpperCase() || event.code;
+                if (key === "P" || key === "KEYP") {
+                    toggleJP1KFurigana();
+                } else if (key === "A" || key === "KEYA") {
+                    document.querySelectorAll("a.hint").forEach(elem => elem.click());
+                }
+            }, true);
+        }
+    }
+
+    /**
+     * Sets up the click listener for the JP1K furigana toggle button.
+     */
+    function setupJP1KButtonListener() {
+        const toggleButton = document.querySelector(".jp1k-mode .toggle_furigana_button");
+        if (toggleButton) {
+            toggleButton.addEventListener('click', toggleJP1KFurigana);
+        }
+    }
+
+
+    // --- Initialization ---
+
+    /**
+     * Main initialization function, calls appropriate functions based on context.
+     */
+    function initialize() {
+        console.log("Card script initializing...");
+
+        // --- Functions needed on BOTH Front and Back ---
+        setupFontToggle(); // Reads/sets preference, needed always
+        splitTagDiv();     // Process tags display if container exists
+        reformatMultiFurigana(); // Process ruby if it exists
+        toggleImageDetails();    // Set initial image details state (open/closed)
+
+        // --- Front-only Functions (Check for elements unique to Front) ---
+        const isFront = document.querySelector(".tsc") || document.querySelector(".jp1k-mode");
+        if (isFront) {
+             console.log("Running Front-specific setup...");
+             setupKeyListeners();
+             setupJP1KButtonListener();
+             setVisibleImageOnFront(); // Checks {{Tags}} placeholder
+             toggleJP1KModeVisibility(); // Checks {{Tags}} placeholder
+        }
+
+        // --- Back-only Functions (Check for elements unique to Back) ---
+        const isBack = document.querySelector(".definitions") || document.querySelector(".notes-content") || document.getElementById("pitchnum");
+        if (isBack) {
+            console.log("Running Back-specific setup...");
+             // Requires hidden divs on Back template!
+            if (document.getElementById('pitchnum_hidden')) {
+                 markPitch();
+            } else {
+                 console.warn("Cannot mark pitch: #pitchnum_hidden not found on Back.");
+            }
+            tweakRevealText();
+            removePitchBrackets();
+            removeNoPitchAccentDataText();
+            removeAudioIfMarkedX();
+        }
+         console.log("Card script initialization complete.");
+    }
+
+    // Wait for the DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+        // DOM is already ready
+        initialize();
+    }
+
+})();
+</script>
