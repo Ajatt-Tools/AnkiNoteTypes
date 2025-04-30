@@ -108,7 +108,8 @@ a.hint {
 }
 
 /* Hide furigana on front */
-nokana ruby rt {
+/* <div class="nokana">{{edit:kanji:SentFurigana}}</div> */
+.nokana ruby rt {
     opacity: 0;
     font-size: 0;
     display: none;
