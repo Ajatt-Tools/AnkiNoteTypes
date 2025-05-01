@@ -280,7 +280,20 @@ Wed Apr 30 11:17:13 AM UTC 2025
         function setup_reveal_furigana_button_listener() {
             /* <button type="button" class="toggle_furigana_button">...</button> */
             for (const button of document.querySelectorAll(".toggle_furigana_button")) {
-                button.addEventListener("click", (event) => {toggle_jp1k_furigana();});
+                button.addEventListener("click", (event) => {
+                    toggle_jp1k_furigana();
+                });
+            }
+        }
+
+        function hide_duplicate_pitch_number() {
+            /* Pitch graphs added by AJT Japanese may already include pitch numbers.
+               But this template also shows the pitch number if it was added to the VocabPitchNum field. */
+            const template_pitch_num = document.getElementById("pitchnum"); // Pitch number from VocabPitchNum
+            const addon_pitch_num = document.querySelector(".pitch_number"); // This tag is used by AJT Japanese.
+            if (template_pitch_num && addon_pitch_num) {
+                // If both are present, hide one.
+                template_pitch_num.remove();
             }
         }
 
@@ -303,6 +316,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 tweak_reveal_english_sentence_button();
                 remove_audio_if_marked_X();
                 remove_pitch_brackets();
+                hide_duplicate_pitch_number();
             } else {
                 console.log("Initializing the front side...");
                 toggle_visible_images_on_front();
