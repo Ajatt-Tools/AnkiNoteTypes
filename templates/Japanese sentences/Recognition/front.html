@@ -130,6 +130,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
 <script>
     (function () {
         "use strict";
+        const HIDDEN_TAGS = new Set(["imageonfront", "tolearn", "marked"]);
 
         function is_back_revealed() {
             return Boolean(document.querySelector(".ajt_answer_revealed"));
@@ -156,11 +157,10 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 return;
             }
             const tags_split = new Set(`{{Focus}} {{Tags}}`.split(" ").filter((word) => word.length > 0));
-            const dont_show = new Set(["imageonfront", "tolearn", "marked"]);
 
             header.innerHTML = "";
 
-            for (const tag of tags_split.difference(dont_show)) {
+            for (const tag of tags_split.difference(HIDDEN_TAGS)) {
                 const tag_elem = document.createElement("div");
                 tag_elem.className = "tags";
                 tag_elem.innerText = tag;
