@@ -158,11 +158,14 @@ header > div:not(:last-child) {
     display: inline-block;
 }
 
-/* Hide front side when the back is shown. Hide the back side when  */
+/* Hide the front side when the back is shown. */
 
 body[answer_revealed="true"] .tsc__front_side {
     display: none;
 }
+
+/* Hide the back side until the user reveals it. */
+
 body[answer_revealed="false"] .tsc__back_side {
     display: none;
 }
