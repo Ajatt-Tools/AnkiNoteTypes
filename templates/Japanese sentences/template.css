@@ -583,3 +583,20 @@ summary {
     color: red;
     rotate: 90deg;
 }
+
+/* Error reporting. Used to show JS errors.
+   Under normal circumstances, the user should never see this. */
+
+#error_report {
+    border: 2px brown solid;
+    background-color: #ecd4d4;
+    color: #2e0b0b;
+    display: none;
+    font-size: 1rem;
+    padding: 0.4rem;
+    overflow-x: auto;
+}
+
+#error_report[error_occurred="true"] {
+    display: block;
+}

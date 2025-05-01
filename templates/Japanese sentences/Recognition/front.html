@@ -14,6 +14,11 @@ Wed Apr 30 11:17:13 AM UTC 2025
         {{/Tags}}
     </header>
 
+    <!-- Used to print JS-related errors to the user. -->
+    <div id="error_report">
+        <pre class="error_msg"></pre>
+    </div>
+
     <!-- Front side. This tag is hidden on the back. -->
     <div class="tsc__front_side">
         <div class="sent-center" id="tsc" visible="true">
@@ -324,12 +329,25 @@ Wed Apr 30 11:17:13 AM UTC 2025
             console.log("Card script initialization complete.");
         }
 
+        function initialize_and_catch_errors() {
+            try {
+                initialize();
+            } catch (ex) {
+                console.error("AJT Error", ex.name, ex.message);
+                const err_div_element = document.getElementById("error_report");
+                const err_msg_element = err_div_element.querySelector(".error_msg");
+                err_div_element.setAttribute("error_occurred", true);
+                err_msg_element.innerText = ex.stack;
+                throw ex;
+            }
+        }
+
         /* Wait for the DOM to be ready */
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", initialize);
+            document.addEventListener("DOMContentLoaded", initialize_and_catch_errors);
         } else {
             /* DOM is already ready */
-            initialize();
+            initialize_and_catch_errors();
         }
     })();
 </script>
