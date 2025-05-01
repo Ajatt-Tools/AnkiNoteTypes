@@ -1,9 +1,30 @@
+/**
+ * Main Stylesheet - Refactored with Best Practices & Design Improvements
+ *
+ * Sections:
+ * 1. Imports & Charset
+ * 2. Variables (Custom Properties)
+ * 3. Base & Reset Styles
+ * 4. Layout Styles
+ * 5. Component Styles
+ * 6. Utility Styles
+ * 7. Theme Styles (Night Mode)
+ * 8. Specific Overrides & Modes
+ * 9. Media Queries
+ */
+
+/* ======================================== */
+/* == 1. Imports & Charset == */
+/* ======================================== */
+
+/* Note: For production, consider concatenating CSS files using a build tool instead of @import */
 @charset "utf-8";
-@import url("_ajt_japanese_24.10.8.1.css");
 
 /* ======================================== */
 /* == 2. Variables (Custom Properties) == */
 /* ======================================== */
+
+
 
 :root {
   /* Colors - Light Mode */
@@ -16,16 +37,16 @@
   --color-text-heading: #8b5a2b; /* For summary, target_word */
   --color-text-accent: #d4a76a; /* For target_word pseudo-elements */
 
-  --color-background: #F6F3EF;
-  --color-background-wrap: linear-gradient(145deg, #fffaf0 0%, #fcf7ed 100%);
-  --color-background-section: #fdfaf4; /* headword, images */
-  --color-background-alt: #f3e9d9; /* tags, pitch-tag */
-  --color-background-ensentence: rgba(212, 167, 106, 0.08);
+  --color-background: #f8f3eb;
+  --color-background-wrap: #fdfcfa;
+  --color-background-section: rgba(243, 237, 227, 0.3); /* headword, images */
+  --color-background-alt: rgba(243, 237, 227, 0.6); /* tags, pitch-tag */
+  --color-background-ensentence: rgba(243, 237, 227, 0.5);
   --color-background-interactive: #333; /* pitch_number */
   --color-background-tooltip: black;
 
-  --color-border: rgba(139, 90, 43, 0.2);
-  --color-border-wrap: rgba(210, 180, 140, 0.8);
+  --color-border: rgba(139, 90, 43, 0.1);
+  --color-border-wrap: rgba(0,0,0, 0.15);
   --color-border-subtle: rgba(212, 167, 106, 0.25); /* summary bottom border */
   --color-border-focus: var(--color-text-link-hover); /* Focus outline */
   --color-border-tooltip-line: hsl(0 80% 40% / 20%);
@@ -42,7 +63,7 @@
   --font-size-lg: 1.125rem; /* 18px */
   --font-size-xl: 1.25rem; /* 20px */
   --font-size-xxl: 1.375rem; /* 22px */
-  --font-size-display: 1.75rem; /* 28px */
+  --font-size-display: 2rem; /* 28px */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -66,11 +87,11 @@
   --border-radius-large: 12px;
   --border-radius-round: 50%;
   --shadow-soft: 0 3px 8px var(--color-shadow-soft);
-  --shadow-medium: 0 6px 10px var(--color-shadow-medium);
+  --shadow-medium: 0 2px 20px var(--color-shadow-medium);
   --shadow-interactive: 0 2px 4px var(--color-shadow-interactive);
 
   /* Transitions */
-  --transition-duration: 0.3s;
+  --transition-duration: 0.2s;
   --transition-timing: ease;
   --transition-short: 0.2s;
 
@@ -84,12 +105,86 @@
 /* == 3. Base & Reset Styles == */
 /* ======================================== */
 
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    /* === Visual Reset === */
+    /* Remove all default browser/OS styling */
+    appearance: none !important;
+    -webkit-appearance: none !important; /* For older Webkit browsers */
+    -moz-appearance: none !important;    /* For older Firefox */
+
+    /* Remove default background (color, gradient, image) */
+    background: none !important;
+    background-color: transparent !important; /* Explicitly ensure background color is transparent */
+
+    /* Reset text color to inherit from parent */
+    color: inherit !important;
+
+    /* Remove default border */
+    border: none !important;
+
+    /* Remove default padding and margin */
+    padding: 0 !important;
+    margin: 0 !important;
+
+    /* === Font & Text Reset === */
+    /* Inherit all font properties (family, size, weight, style, etc.) */
+    font: inherit !important;
+
+    /* Reset text alignment (browsers often center text in buttons) */
+    text-align: inherit !important; /* Or 'left', 'center', 'right' as needed */
+
+    /* Remove default text decoration (like underlines) */
+    text-decoration: none !important;
+
+    /* Ensure text wraps normally if it exceeds width */
+    white-space: normal !important; /* Use 'nowrap' if you explicitly don't want wrapping */
+
+    /* Inherit line height from parent */
+    line-height: inherit !important;
+
+    /* === Layout & Behavior Reset === */
+    /* Set display for predictable layout behavior (inline-block is common for custom buttons) */
+    display: inline-block !important;
+
+    /* Reset vertical alignment */
+    vertical-align: baseline !important; /* Or 'middle' */
+
+    /* Keep the pointer cursor for interactivity */
+    cursor: pointer !important;
+
+    /* !!! WARNING: Removes the default focus outline. !!! */
+    /* This is BAD for keyboard users. You MUST add a custom focus style */
+    /* using `:focus-visible` or `:focus` after this reset. */
+    outline: none !important;
+
+    /* Use standard box model for consistent sizing */
+    box-sizing: border-box !important;
+
+    /* Ensure content is not clipped if it exceeds the element's bounds */
+    overflow: visible !important;
+
+    /* === Additional Potential Browser Quirks === */
+    /* Reset potential specific internal focus styles in Firefox */
+    &::-moz-focus-inner {
+        border: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Add more specific resets here if you encounter them */
+    /* e.g., letter-spacing, word-spacing, text-transform, etc. */
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  filter: none !important;
+    backdrop-filter: none !important;
 }
 
 html {
@@ -101,8 +196,6 @@ body {
   font-family: var(--font-family-base);
   color: var(--color-text);
   background-color: var(--color-background); /* Moved from .card */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -136,32 +229,12 @@ rt {
   user-select: none; /* Keep for ruby text */
 }
 
-summary {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-font-size: var(--font-size-base);
-  list-style-type: none; /* Removed default marker */
-  user-select: none; /* Keep for summary */
-  padding: var(--space-xs) 0; /* Add some base padding */
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-heading);
-  transition: color var(--transition-short) var(--transition-timing);
-}
 
 
 details[open] > summary::before {
   transform: rotate(90deg);
 }
 
-
-div[contenteditable="true"] {
-  padding: var(--space-xxs) var(--space-xs);
-  background-color: white; /* Keep white distinct */
-  border: 1px solid gray;
-  box-shadow: 10px 5px 5px gray; /* Keep specific shadow if needed */
-  border-radius: var(--border-radius-small);
-}
 
 /* ======================================== */
 /* == 4. Layout Styles == */
@@ -177,9 +250,9 @@ div[contenteditable="true"] {
   overflow: hidden;
   position: relative;
   background: var(--color-background-wrap);
-  border: 2px solid var(--color-border-wrap);
-  border-radius: var(--border-radius-large);
-  box-shadow: var(--shadow-medium); /* Use variable */
+  border: 1px solid var(--color-border-wrap);
+  border-radius: var(--border-radius-medium);
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 header {
@@ -213,6 +286,7 @@ footer {
   /* Background/color moved to body/root */
   font-size: var(--font-size-xl); /* Base card font size */
   text-align: left;
+
 }
 
 .card1 {
@@ -225,11 +299,11 @@ footer {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
-  margin: var(--space-xxl) 0;
+  margin: var(--space-xl) 0;
   position: relative;
   z-index: 1;
   font-size: var(--font-size-display);
-  font-weight: var(--font-weight-normal); /* Use normal weight for better readability */
+  font-weight: var(--font-weight-light); /* Use normal weight for better readability */
   line-height: var(--line-height-loose); /* More spacing for larger text */
 }
 
@@ -261,7 +335,7 @@ footer {
 .jpsentence b,
 .jpsentence strong {
   color: var(--color-text-emphasis);
-  font-weight: var(--font-weight-semibold); /* Ensure clear emphasis */
+  font-weight: var(--font-weight-normal); /* Ensure clear emphasis */
   /* Removed ::after underline for cleaner look */
 }
 
@@ -270,16 +344,20 @@ footer {
   margin: var(--space-m) 0;
   padding: var(--space-xs) var(--space-m);
   position: relative;
-  background-color: var(--color-background-ensentence);
-  border-radius: var(--border-radius-large);
+  # background-color: var(--color-background-ensentence);
+  border-radius: var(--border-radius-medium);
+	# border: 1px solid rgba(243, 237, 227, 1);
   font-size: var(--font-size-sm);
   text-align: center;
   line-height: var(--line-height-base);
+  font-weight: var(--font-weight-normal);
+
 }
 
 .ensentence > a {
   color: var(--color-text-heading); /* Use heading color for contrast */
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
+opacity: 0.8;
 }
 .ensentence > a:hover {
   color: var(--color-text-emphasis);
@@ -287,29 +365,48 @@ footer {
 
 /* --- Headword Section (Details/Summary) --- */
 .headword_section {
-  margin: var(--space-m) 0;
-  padding: var(--space-m);
+  margin: var(--space-m) auto;
   position: relative;
   overflow: hidden;
   background-color: var(--color-background-section);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-medium);
+  display: flex;
+	max-width: 80vw;
+	flex-direction: column;
+  /* justify-content: center; */
   transition: box-shadow var(--transition-duration) var(--transition-timing); /* Only transition shadow */
 }
 
-.headword_section summary { /* Style summary specifically */
-  padding: 0 0 var(--space-xs) 0;
-  border-bottom: 1px solid var(--color-border-subtle);
-  /* Inherits base summary styles */
-}
-
 /* --- Vocabulary Details --- */
+
 .vocab {
   display: flex;
-  flex-flow: row wrap;
   align-items: center;
   gap: var(--space-m);
-  padding: var(--space-xs) 0;
+}
+
+.item {
+  padding: var(--space-m) var(--space-m);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+
+
+h3 {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+font-size: var(--font-size-base);
+  list-style-type: none; /* Removed default marker */
+  user-select: none; /* Keep for summary */
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-heading);
+  transition: color var(--transition-short) var(--transition-timing);
 }
 
 .reading {
@@ -386,19 +483,20 @@ footer {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
-  margin: var(--space-xxs);
+  margin: var(--space-xs);
   padding: var(--space-xxs); /* Add padding for focus ring */
   border-radius: var(--border-radius-round); /* Make focus ring round */
   line-height: 0; /* Prevent extra space */
+  color: var(--color-text-link-hover);
+  background-color: rgba(139, 90, 43, 0.68); /* Slight background */
   color: var(--color-text); /* Set base color for icon fill */
   transition: color var(--transition-duration) var(--transition-timing),
               background-color var(--transition-duration) var(--transition-timing);
 }
 
 .replay-button svg {
-  width: 20px; /* Consider using rem/em */
-  height: 20px;
-  display: block;
+  width: 14px; /* Consider using rem/em */
+  height: 14px;
 }
 
 .replay-button svg circle { /* Keep original if needed for animation */
@@ -407,13 +505,13 @@ footer {
 }
 
 .replay-button svg path {
-  fill: currentColor; /* Use text color for fill */
+  fill: #fafafa; /* Use text color for fill */
 }
 
 .replay-button:hover,
 .replay-button:focus-visible { /* Subtle hover/focus */
   color: var(--color-text-link-hover);
-  background-color: rgba(0, 0, 0, 0.05); /* Slight background */
+  background-color: rgba(75, 108, 142, 0.68); /* Slight background */
 }
 /* Override base focus for round shape */
 .replay-button:focus-visible {
@@ -427,7 +525,7 @@ footer {
   position: relative;
   background-color: var(--color-background-section);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-large);
+  border-radius: var(--border-radius-medium);
   box-shadow: var(--shadow-soft);
   transition: transform var(--transition-duration) var(--transition-timing),
               box-shadow var(--transition-duration) var(--transition-timing);
@@ -543,6 +641,7 @@ footer {
 
 .slider:after { /* The icon/text inside */
   content: "あ";
+font-weight: 300;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -671,10 +770,10 @@ input:focus-visible + .slider {
 .tags {
   padding: var(--space-xxs) var(--space-xs);
   background-color: var(--color-background-alt);
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-medium);
   color: var(--color-text-heading);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0.7px;
   line-height: 1.2; /* Adjust line height */
 }
@@ -795,32 +894,27 @@ a.hint {
    background-color: var(--color-background-interactive); /* Variable handles night mode */
 }
 
-/* --- Visibility Toggle for Sentence Center --- */
-.sent-center:where(.tsc, .jp1k-mode):not([visible="true"]) {
-    display: none;
-}
-
 /* --- Toggle Furigana Button --- */
 .toggle_furigana_button {
-  display: inline-block; /* Ensure block characteristics */
-  padding: var(--space-xs) var(--space-m); /* Consistent padding */
-  margin: var(--space-l) 0;
-  background-color: var(--color-background-section);
-  border: 1px solid var(--color-border);
+  display: inline-block!important; /* Ensure block characteristics */
+  padding: var(--space-xs) var(--space-m)!important; /* Consistent padding */
+  margin: var(--space-m) 0!important;
+  background-color: var(--color-background-ensentence)!important;
+  border: 1px solid rgba(243, 237, 227, 1) !important;
   border-radius: var(--border-radius-medium) !important; /* Removed !important */
-  box-shadow: none; /* Removed !important */
-  color: var(--color-text-heading);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  box-shadow: none!important; /* Removed !important */
+  color: var(--color-text-heading)!important;
+  font-size: var(--font-size-sm)!important;
+  font-weight: var(--font-weight-light)!important;
   transition: background-color var(--transition-duration) var(--transition-timing),
               border-color var(--transition-duration) var(--transition-timing),
               color var(--transition-duration) var(--transition-timing);
-  cursor: pointer;
+  cursor: pointer!important;
 }
 .toggle_furigana_button:hover {
-  background-color: var(--color-background-alt);
-  border-color: var(--color-border-subtle);
-  color: var(--color-text-link-hover);
+  background-color: var(--color-background-alt)!important;
+  border-color: var(--color-border-subtle)!important;
+  color: var(--color-text-link-hover)!important;
 }
 
 
@@ -905,7 +999,7 @@ a.hint {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
   :root { /* Adjust base font size for mobile */
       font-size: 0.875rem; /* 14px */
       --space-l: 1.25rem;
@@ -962,16 +1056,26 @@ a.hint {
    }
 }
 
-.tsc:not([visible="true"]),
-.jp1k-mode:not([visible="true"]) {
-    display: none;
+.jpsentence b.pitch-heiban,
+.jpsentence strong.pitch-heiban {
+  color: #6A7A8F; /* Muted Slate Blue/Grey - Neutral contrast */
 }
 
-/* Optional: Classes for pitch accent colors */
-.pitch-heiban { color: #3366CC; }
-.pitch-atamadaka { color: red; }
-.pitch-odaka { color: green; }
-.pitch-nakadaka { color: #eb8500; }
+.jpsentence b.pitch-atamadaka,
+.jpsentence strong.pitch-atamadaka {
+  color: #B85C5C; /* Muted Terracotta/Russet - Warm but distinct */
+}
+
+.jpsentence b.pitch-odaka,
+.jpsentence strong.pitch-odaka {
+  color: #C88B48; /* Warm Ochre/Bronze - Relates to existing accents */
+}
+
+.jpsentence b.pitch-nakadaka,
+.jpsentence strong.pitch-nakadaka {
+  color: #556B2F; /* Dark Olive Green - Requested earthy tone */
+}
+
 
 .font-mincho {
   font-family: 'Hiragino Mincho ProN', 'MS PMincho', serif;
@@ -980,3 +1084,7 @@ a.hint {
 .font-sans {
   font-family: 'Hiragino Sans', sans-serif; /* Or your default sans-serif stack */
 }
+
+.hidden { display: none !important; }
+.visible { /* Your desired visible state, e.g., display: block; */ }
+.furigana-rt-visible { visibility: visible !important; /* or opacity: 1, etc. */ }
