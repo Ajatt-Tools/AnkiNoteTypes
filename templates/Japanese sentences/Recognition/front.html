@@ -131,6 +131,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
     (function () {
         "use strict";
         const HIDDEN_TAGS = new Set(["imageonfront", "tolearn", "marked"]);
+        const JP1K_TAG = "jp1k";
+        const IS_JP1K_MODE = `{{Tags}}`.toLowerCase().split(" ").includes(JP1K_TAG);
 
         function is_back_revealed() {
             return Boolean(document.querySelector(".ajt_answer_revealed"));
@@ -207,15 +209,16 @@ Wed Apr 30 11:17:13 AM UTC 2025
             */
             const tsc_element = document.querySelector("#tsc");
             const jp1k_element = document.querySelector("#jp1k-tsc");
-            const is_jp1k_mode = `{{Tags}}`.toLowerCase().split(" ").includes("jp1k");
-            jp1k_element.setAttribute("visible", is_jp1k_mode);
-            tsc_element.setAttribute("visible", !is_jp1k_mode);
+            jp1k_element.setAttribute("visible", IS_JP1K_MODE);
+            tsc_element.setAttribute("visible", !IS_JP1K_MODE);
         }
 
         function toggle_jp1k_furigana() {
             /* Flip visibilty of all RT tags. */
-            for (const element of document.querySelectorAll("#jp1k-tsc ruby rt")) {
-                element.style.visibility = !element.style.visibility ? "visible" : "";
+            if (IS_JP1K_MODE) {
+                for (const element of document.querySelectorAll("#jp1k-tsc ruby rt")) {
+                    element.style.visibility = !element.style.visibility ? "visible" : "";
+                }
             }
         }
 
