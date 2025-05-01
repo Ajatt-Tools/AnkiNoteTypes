@@ -38,7 +38,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
         </div>
     </div>
 
-    <!-- Images (can be shown on both the front side and the back side)-->
+    <!-- Images (can be shown on both the front side and the back side).
+         If a card has the "imageonfront" tag set, show images on the front side. -->
     {{#Image}}
     <details class="images-details">
         <summary>Image</summary>
@@ -135,7 +136,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
 <script>
     (function () {
         "use strict";
-        const HIDDEN_TAGS = new Set(["imageonfront", "tolearn", "marked"]);
+        const IMG_ON_FRONT_TAG = "imageonfront";
+        const HIDDEN_TAGS = new Set([IMG_ON_FRONT_TAG, "tolearn", "marked"]);
         const JP1K_TAG = "jp1k";
         const IS_JP1K_MODE = `{{Tags}}`.toLowerCase().split(" ").includes(JP1K_TAG);
 
@@ -192,7 +194,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
 
         function toggle_visible_images_on_front() {
             /* If a card has the "imageonfront" tag set, show images on the front side. */
-            const images_on_front_enabled = `{{Tags}}`.split(" ").includes("imageonfront");
+            const images_on_front_enabled = `{{Tags}}`.split(" ").includes(IMG_ON_FRONT_TAG);
             console.log(`Images on front are ${images_on_front_enabled ? "enabled" : "disabled"}.`);
             for (const img_container of document.querySelectorAll(".images-details")) {
                 img_container.setAttribute("images_on_front", images_on_front_enabled);
