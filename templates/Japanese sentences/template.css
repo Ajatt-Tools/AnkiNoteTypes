@@ -19,6 +19,57 @@
     font-weight: 600;
 }
 
+/* Color schemes
+   Anki applies .card and .nightMode classes to <body>. */
+
+.card {
+    --color-furigana: #000000;
+    --color-background: #fffaf0;
+    --color-text: #2a1b0a;
+    --color-background-wrap: #fffaf0;
+    --color-border-wrap: #c9bcbc;
+    --color-link: #532f2f;
+    --color-link-hover: #722a2a;
+    --color-headword: #ad1b82;
+    /* Tags (pitch, note tags) */
+    --color-text-tags: #fffaf0;
+    --color-background-tags: #333;
+    /* Hints (the English sentence is hidden under a hint) */
+    --color-text-hint: #555;
+    --color-hint-border: hsl(0deg 80% 50% / 15%);
+    --color-text-hint-hover: hsl(20deg 100% 20% / 80%);
+    --color-background-hint-hover: hsl(0deg 80% 50% / 3%);
+    /* Summary (labels for "notes" and "image")  */
+    --color-text-summary: hsl(0 80% 10% / 70%);
+    /* Audio replay button */
+    --color-play-symbol: #fffaf0;
+    --color-play-circle: #333;
+}
+
+.card.nightMode {
+    --color-furigana: #ffffff;
+    --color-background: #2f2f31;
+    --color-text: #ffffff;
+    --color-background-wrap: linear-gradient(145deg, #333333 0%, #2c2c2c 100%);
+    --color-border-wrap: #6d6868;
+    --color-link: #c7493a;
+    --color-link-hover: #a33327;
+    --color-headword: gray;
+    /* Tags (pitch numbers, note tags) */
+    --color-text-tags: #2f2f31;
+    --color-background-tags: #ffffff;
+    /* Hints (the English sentence is hidden under a hint) */
+    --color-text-hint: #fff;
+    --color-hint-border: #fff;
+    --color-text-hint-hover: gray;
+    --color-background-hint-hover: rgba(0, 0, 0, 0.2);
+    /* Summary (labels for "notes" and "image")  */
+    --color-text-summary: hsl(0 80% 100% / 70%);
+    /* Audio replay button */
+    --color-play-symbol: #2f2f31;
+    --color-play-circle: #ffffff;
+}
+
 *,
 *::before,
 *::after {
@@ -34,12 +85,12 @@ strong {
 
 .jpsentence b,
 .jpsentence strong {
-    color: #ad1b82;
+    color: var(--color-headword, pink);
 }
 
 .card {
-    background-color: #fffaf0;
-    color: #2a1b0a;
+    background-color: var(--color-background, pink);
+    color: var(--color-text, pink);
     font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif",
         "Times New Roman", Times, Georgia, Serif;
     font-size: 24px;
@@ -61,6 +112,7 @@ strong {
 }
 
 @media screen and (min-width: 820px) {
+    /* Large screens. */
     .card {
         background-color: #e5d7c9;
         display: flex;
@@ -70,17 +122,10 @@ strong {
     .wrap {
         width: 800px;
         padding: 0 5px 0;
-        background-color: #fffaf0;
-        border-left: 1px solid #c9bcbc;
-        border-right: 1px solid #c9bcbc;
+        background-color: var(--color-background-wrap, pink);
+        border-left: 1px solid var(--color-border-wrap, pink);
+        border-right: 1px solid var(--color-border-wrap, pink);
         min-height: 100vh;
-    }
-
-    .wrap .wrap {
-        width: auto;
-        padding: 0;
-        min-height: 0;
-        border: 0;
     }
 }
 
@@ -93,11 +138,11 @@ hr {
 
 /* links */
 a {
-    color: #532f2f;
+    color: var(--color-link, pink);
 }
 
 a:hover {
-    color: #722a2a;
+    color: var(--color-link-hover, pink);
 }
 
 a.hint {
@@ -106,16 +151,16 @@ a.hint {
     display: block;
 }
 
-/* Hide furigana on front */
-/* <div class="nokana">{{edit:kanji:SentFurigana}}</div> */
+/* Hide furigana on front
+   <div class="nokana">{{edit:kanji:SentFurigana}}</div> */
 .nokana ruby rt {
     opacity: 0;
     font-size: 0;
     display: none;
 }
 
-notext b,
-notext strong {
+.notext b,
+.notext strong {
     background-color: black;
     color: transparent;
 }
@@ -179,18 +224,18 @@ body[answer_revealed="false"] .images-details:not([images_on_front="true"]) {
 /* English */
 
 div.ensentence > a.hint {
-    color: #555;
+    color: var(--color-text-hint, pink);
     font-size: 14px;
     display: block;
-    border: 1px solid hsl(0deg 80% 50% / 15%);
+    border: 1px solid var(--color-hint-border, pink);
     border-radius: 2.2px;
     padding: 2px 10px;
     margin: 0.4rem 0;
 }
 
 div.ensentence > a.hint:hover {
-    color: hsl(20deg 100% 20% / 80%);
-    background-color: hsl(0deg 80% 50% / 3%);
+    color: var(--color-text-hint-hover, pink);
+    background-color: var(--color-background-hint-hover, pink);
 }
 
 /* Definition */
@@ -209,8 +254,8 @@ div.ensentence > a.hint:hover {
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
-    background-color: #333;
-    color: #fffaf0;
+    background-color: var(--color-background-tags, pink);
+    color: var(--color-text-tags, pink);
     font-weight: bold;
     padding: 1px 3px;
     margin: 0;
@@ -221,32 +266,12 @@ div.ensentence > a.hint:hover {
     user-select: none;
 }
 
-/* AnkiDroid replay button */
-/* a.replaybutton > span > svg */
-
-.replaybutton {
-    margin: 0;
-    text-decoration: none;
-}
-
-.replaybutton span {
-    padding: 0;
-    font-size: 16px;
-}
-
-.replaybutton span svg {
-    fill: #fffaf0;
-    background: #333;
-    border-radius: 3px;
-    vertical-align: top;
-    min-width: 16px;
-    min-height: 16px;
-}
-
-/* PC replay button */
-/* a.replay-button > svg */
+/* AnkiDroid replay button = a.replay-button > span > svg
+   https://github.com/ankidroid/Anki-Android/blob/1994d46b7627bf82b89b054f2b7a5d8f60c33435/AnkiDroid/src/main/java/com/ichi2/libanki/Sound.kt#L130
+   PC replay button = a.replay-button > svg */
 
 a.replay-button {
+    display: inline-flex;
     top: -0.125em;
     position: relative;
     margin: 0;
@@ -261,11 +286,13 @@ a.replay-button svg {
 }
 
 a.replay-button svg path {
-    fill: #fffaf0;
+    /* The play symbol ▶️ */
+    fill: var(--color-play-symbol, pink);
 }
 
 a.replay-button svg circle {
-    fill: #333;
+    /* The circle around the play symbol */
+    fill: var(--color-play-circle, pink);
 }
 
 /* Footer and links */
@@ -412,10 +439,7 @@ footer > a:not(:last-child)::after {
 /* Furigana style */
 
 rt {
-    color: black;
-}
-.nightMode rt {
-    color: white;
+    color: var(--color-furigana, black);
 }
 
 /* Fix: Don't select furigana */
@@ -469,70 +493,9 @@ details,
 
 summary {
     font-size: 18px;
-    color: hsl(0 80% 10% / 70%);
+    color: var(--color-text-summary, pink);
     font-weight: 500;
     user-select: none;
-}
-
-/* Night Mode */
-
-.nightMode.card {
-    background-color: #2f2f31;
-}
-
-.nightMode .wrap {
-    color: #ffffff;
-    background-color: inherit;
-    border-color: #6d6868;
-}
-
-.nightMode .tags {
-    background-color: #ffffff;
-    color: #2f2f31;
-}
-
-.nightMode a.replay-button svg path {
-    fill: #2f2f31;
-}
-
-.nightMode a.replay-button svg circle {
-    fill: #ffffff;
-}
-
-.nightMode .replaybutton span svg {
-    fill: #2f2f31;
-    background: #ffffff;
-}
-
-.nightMode a {
-    color: #c7493a;
-}
-
-.nightMode a:hover {
-    color: #a33327;
-}
-
-.nightMode .jpsentence b,
-.nightMode .jpsentence strong {
-    color: gray;
-}
-
-.nightMode .images > img {
-    filter: sepia(0%);
-}
-
-.nightMode div.ensentence > a.hint {
-    color: #ffffff;
-    border: 1px solid #ffffff;
-}
-
-.nightMode div.ensentence > a.hint:hover {
-    color: gray;
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-.nightMode summary {
-    color: hsl(0 80% 100% / 70%);
 }
 
 /* Toggle furigana button - JP1K mode */
