@@ -222,28 +222,21 @@ Wed Apr 30 11:17:13 AM UTC 2025
             }
         }
 
-        function listen_to_p_key() {
-            /* Press "p" to reveal furigana for all words. */
-            document.addEventListener(
-                "keydown",
-                (event) => {
-                    if (event.code === "KeyP") {
-                        toggle_jp1k_furigana();
-                    }
-                },
-                true
-            );
+        function click_all_hints() {
+            /* Reveal all hints by clicking on all hint elements.
+               The "hint" tag is set by Anki when {{hint:SentEng}} syntax is used. */
+            for (const elem of document.querySelectorAll("a.hint")) {
+                elem.click();
+            }
         }
 
-        function listen_to_x_key() {
-            /* Press "x" to reveal all hints */
+        function listen_to_key(key_code, callback) {
+            /* Press key_code to call callback */
             document.addEventListener(
                 "keydown",
                 (event) => {
-                    if (event.code == "KeyX") {
-                        for (const elem of document.querySelectorAll("a.hint")) {
-                            elem.click();
-                        }
+                    if (event.code === key_code && typeof callback === "function") {
+                        callback();
                     }
                 },
                 true
@@ -310,7 +303,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
             /* Functions that run on both front and back. */
             separate_tags_list();
             hide_images_details_on_mobile();
-            listen_to_x_key(); // Press "x" to reveal all hints.
+            listen_to_key("KeyX", click_all_hints); // Press "x" to reveal all hints.
 
             if (isBack) {
                 console.log("Initializing the back side...");
@@ -324,7 +317,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 console.log("Initializing the front side...");
                 toggle_visible_images_on_front();
                 toggle_jp1k_mode();
-                listen_to_p_key(); // used in the JP1K mode to reveal all furigana.
+                /* When in the JP1K mode, press "p" to reveal furigana for all words. */
+                listen_to_key("KeyP", toggle_jp1k_furigana);
                 setup_reveal_furigana_button_listener();
             }
             console.log("Card script initialization complete.");
