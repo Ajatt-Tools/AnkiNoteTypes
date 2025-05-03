@@ -401,15 +401,28 @@ footer > a:not(:last-child)::after {
 
 /* Production cards */
 
-.production b,
-.production strong {
+.production :is(b, strong):not([visible]) {
     visibility: hidden;
+}
+
+.production :is(b, strong)::before {
+    content: "【";
+}
+
+.production :is(b, strong)::after {
+    content: "】";
 }
 
 .strokeorder {
     text-align: center;
     font-size: 150px;
     font-family: KanjiStrokeOrders;
+}
+
+/* Production cards: Hide the back side until it's revealed. */
+
+body:not(:has(.tsc__answer_revealed)) .production__back_side {
+    display: none;
 }
 
 /* Fix for Rikaitan defs */

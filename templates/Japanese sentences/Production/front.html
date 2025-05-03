@@ -1,44 +1,150 @@
+<!--
+Production cards, version 20.0
+Wed Apr 30 11:17:13 AM UTC 2025
+-->
+
 {{#MakeProductionCard}}
+<!-- -->
 {{#SentKanji}}
 
 <div class="wrap">
+    <header>
+        {{#Tags}}
+        <div class="tags">{{Tags}}</div>
+        {{/Tags}}
+    </header>
 
-<header>{{#Tags}}<div class="tags">{{Tags}}</div>{{/Tags}}</header>
-{{#Image}}<div class="images">{{Image}}</div>{{/Image}}
-<div class="sent-center">
-<div class="jpsentence production">{{edit:furigana:SentFurigana}}</div>
-<div>{{VocabAudio}}{{SentAudio}}</div>
+    <!-- Used to print JS-related errors to the user. -->
+    <div id="error_report">
+        <pre class="error_msg"></pre>
+    </div>
+
+    <div class="production__front_side">
+        {{#Image}}
+        <div class="images">{{Image}}</div>
+        {{/Image}}
+
+        <div class="sent-center">
+            <div class="jpsentence production" lang="ja">{{edit:furigana:SentFurigana}}</div>
+            <div>{{VocabAudio}}{{SentAudio}}</div>
+        </div>
+    </div>
+
+    <div class="production__back_side">
+        <hr id="answer">
+
+        {{#SentEng}}
+        <div lang="en">{{SentEng}}</div>
+        {{/SentEng}}
+
+        <div class="strokeorder">{{VocabKanji}}</div>
+
+        {{#VocabKanji}}
+        <div class="vocab">
+            {{VocabPitchPattern}} {{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}} {{#VocabPitchNum}}
+            <span class="tags">{{VocabPitchNum}}</span>
+            {{/VocabPitchNum}} 【{{VocabKanji}}】
+        </div>
+        {{/VocabKanji}}
+
+        <!-- Definitions -->
+        {{#VocabDef}}
+        <div class="definitions">{{edit:furigana:VocabDef}}</div>
+        {{/VocabDef}} {{#Notes}}
+        <div class="notes">
+            <div class="tags">Notes</div>
+            <div>{{furigana:Notes}}</div>
+        </div>
+        {{/Notes}}
+
+        <hr>
+
+        <footer>
+            {{#SentKanji}}<a
+                title="Translate with SimplyTranslate"
+                href="https://translate.metalune.xyz/?engine=google&text={{text:kanji:SentKanji}}&sl=ja&tl=en"
+                >Translate</a
+            ><a href="https://jisho.org/search?keyword={{text:kanji:SentKanji}}" title="Sentence on Jisho">Jisho</a
+            ><a href="https://www.google.co.jp/search?q={{text:kanji:SentKanji}}&tbm=isch" title="Search images"
+                >Images</a
+            >{{/SentKanji}}{{#VocabKanji}}<a
+                href="http://www.weblio.jp/content/{{text:VocabKanji}}"
+                title="Vocab on Weblio"
+                >Weblio</a
+            ><a href="https://wadoku.de/search/?q={{text:VocabKanji}}" title="Vocab on Wadoku">Wadoku</a>{{/VocabKanji}}
+        </footer>
+    </div>
 </div>
-</div> <!-- /wrap -->
+<!-- /wrap -->
 
 <script>
-    function threeDots() {
-        for (const hidden of document.querySelectorAll(".production b, .production strong")) {
-            hidden.style.visibility = "visible";
-            hidden.innerText = "【" + hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "") + "】";
+    (function () {
+        "use strict";
+
+        function threeDots() {
+            for (const hidden of document.querySelectorAll(".production b, .production strong")) {
+                hidden.setAttribute("visible", true);
+                hidden.innerText = hidden.innerText.replace(/[^ぁ-んァ-ン]/g, "");
+            }
         }
-    }
-    /* Splits tags into separate divs */
-    function splitTagDiv() {
-        const header = document.querySelector("header");
-        if (!header) return;
-        const split = `{{Focus}} {{Tags}}`.split(' ');
 
-        header.innerHTML = "";
+        /* Splits tags into separate divs */
+        function splitTagDiv() {
+            const header = document.querySelector("header");
+            if (!header) {
+                return;
+            }
+            const split = `{{Focus}} {{Tags}}`.split(" ");
 
-        for (const tag of split) {
-            if (tag.length < 1)
-                continue;
-            const tag_elem = document.createElement("div");
-            tag_elem.className = "tags";
-            tag_elem.innerHTML = tag;
-            header.appendChild(tag_elem);
+            header.innerHTML = "";
+
+            for (const tag of split) {
+                if (tag.length < 1) continue;
+                const tag_elem = document.createElement("div");
+                tag_elem.className = "tags";
+                tag_elem.innerText = tag;
+                header.appendChild(tag_elem);
+            }
         }
-    }
 
-    threeDots()
-    splitTagDiv()
+        function initialize() {
+            /* Entry point. */
+            console.log("Card script initializing...");
+
+            /* Functions that run on both front and back. */
+            threeDots();
+            splitTagDiv();
+
+            console.log("Card script initialization complete.");
+        }
+
+        function error_to_html(error_text) {
+            const err_div_element = document.getElementById("error_report");
+            const err_msg_element = err_div_element.querySelector(".error_msg");
+            err_div_element.setAttribute("error_occurred", true);
+            err_msg_element.innerText = error_text;
+        }
+
+        function initialize_and_catch_errors() {
+            try {
+                initialize();
+            } catch (ex) {
+                console.error("AJT Error", ex.name, ex.message);
+                error_to_html(ex.stack);
+                throw ex;
+            }
+        }
+
+        /* Wait for the DOM to be ready */
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initialize_and_catch_errors);
+        } else {
+            /* DOM is already ready */
+            initialize_and_catch_errors();
+        }
+    })();
 </script>
 
 {{/SentKanji}}
+<!-- -->
 {{/MakeProductionCard}}
