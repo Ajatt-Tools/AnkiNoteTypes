@@ -205,19 +205,19 @@ header > div:not(:last-child) {
 
 /* Hide the front side when the back is shown. */
 
-body[answer_revealed="true"] .tsc__front_side {
+body:has(.tsc__answer_revealed) .tsc__front_side {
     display: none;
 }
 
 /* Hide the back side until the user reveals it. */
 
-body[answer_revealed="false"] .tsc__back_side {
+body:not(:has(.tsc__answer_revealed)) .tsc__back_side {
     display: none;
 }
 
 /* Images on front, toggled by JavaScript if "imageonfront" tag is set. */
 
-body[answer_revealed="false"] .images-details:not([images_on_front="true"]) {
+body:not(:has(.tsc__answer_revealed)) .images-details:not([images_on_front="true"]) {
     display: none;
 }
 

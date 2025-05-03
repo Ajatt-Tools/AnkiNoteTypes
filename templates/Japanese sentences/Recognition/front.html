@@ -142,7 +142,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
         const IS_JP1K_MODE = `{{Tags}}`.toLowerCase().split(" ").includes(JP1K_TAG);
 
         function is_back_revealed() {
-            return Boolean(document.querySelector(".ajt_answer_revealed"));
+            return Boolean(document.querySelector(".tsc__answer_revealed"));
         }
 
         function move_play_buttons_inside_headword() {
@@ -304,8 +304,6 @@ Wed Apr 30 11:17:13 AM UTC 2025
             /* Entry point. */
             console.log("Card script initializing...");
             const isBack = is_back_revealed();
-            /* Set the "answer_revealed" attribute. */
-            document.querySelector("body").setAttribute("answer_revealed", isBack);
 
             /* Functions that run on both front and back. */
             separate_tags_list();
