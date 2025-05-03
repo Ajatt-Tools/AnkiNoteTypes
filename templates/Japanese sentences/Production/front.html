@@ -39,25 +39,37 @@ Wed Apr 30 11:17:13 AM UTC 2025
 
         <div class="strokeorder">{{VocabKanji}}</div>
 
-        {{#VocabKanji}}
-        <div class="vocab">
-            {{VocabPitchPattern}} {{^VocabPitchPattern}}{{kana:VocabFurigana}}{{/VocabPitchPattern}} {{#VocabPitchNum}}
-            <span class="tags">{{VocabPitchNum}}</span>
-            {{/VocabPitchNum}} 【{{VocabKanji}}】
-        </div>
-        {{/VocabKanji}}
-
         <!-- Definitions -->
         {{#VocabDef}}
-        <div class="definitions">{{edit:furigana:VocabDef}}</div>
-        {{/VocabDef}} {{#Notes}}
-        <div class="notes">
-            <div class="tags">Notes</div>
+        <section class="headword_section">
+            <div class="vocab" id="tsc__headword_section">
+                <!-- Insert vocabulary audio and sentence audio here. -->
+                <div class="reading" id="pitchpattern" lang="ja">
+                    {{VocabPitchPattern}}
+                    <!-- If VocabPitchPattern is empty, show VocabFurigana. -->
+                    {{^VocabPitchPattern}}{{text:kana:VocabFurigana}}{{/VocabPitchPattern}}
+                </div>
+                {{#VocabPitchNum}}
+                <span class="tags" id="pitchnum">{{text:VocabPitchNum}}</span>
+                {{/VocabPitchNum}}
+                <!-- Word in kanji -->
+                {{#VocabKanji}}
+                <div class="target_word" lang="ja">{{text:kanji:VocabKanji}}</div>
+                {{/VocabKanji}}
+            </div>
+            <div class="definitions">{{edit:furigana:VocabDef}}</div>
+        </section>
+        {{/VocabDef}}
+
+        <!-- Notes -->
+        {{#Notes}}
+        <details open class="notes">
+            <summary>Notes</summary>
             <div>{{furigana:Notes}}</div>
-        </div>
+        </details>
         {{/Notes}}
 
-        <hr>
+        <hr />
 
         <footer>
             {{#SentKanji}}<a
