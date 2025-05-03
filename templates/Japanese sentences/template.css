@@ -23,6 +23,7 @@
    Anki applies .card and .nightMode classes to <body>. */
 
 .card {
+    --color-side-bars: #e5d7c9;
     --color-furigana: #000000;
     --color-background: #fffaf0;
     --color-text: #2a1b0a;
@@ -43,14 +44,16 @@
     --color-text-summary: hsl(0 80% 10% / 70%);
     /* Audio replay button */
     --color-play-symbol: #fffaf0;
-    --color-play-circle: #333;
+    --color-play-circle: var(--color-background-tags);
+    --color-play-circle-hover: #6b672f;
 }
 
 .card.nightMode {
+    --color-side-bars: #272413;
     --color-furigana: #ffffff;
     --color-background: #2f2f31;
     --color-text: #ffffff;
-    --color-background-wrap: linear-gradient(145deg, #333333 0%, #2c2c2c 100%);
+    --color-background-wrap: #221f15;
     --color-border-wrap: #6d6868;
     --color-link: #c7493a;
     --color-link-hover: #a33327;
@@ -68,6 +71,7 @@
     /* Audio replay button */
     --color-play-symbol: #2f2f31;
     --color-play-circle: #ffffff;
+    --color-play-circle-hover: rgba(204, 223, 173, 0.8);
 }
 
 *,
@@ -113,8 +117,10 @@ strong {
 
 @media screen and (min-width: 820px) {
     /* Large screens. */
-    .card {
-        background-color: #e5d7c9;
+    .card,
+    .card.nightMode {
+        /* .card.nightMode fixes Anki's default CSS */
+        background-color: var(--color-side-bars, yellow);
         display: flex;
         justify-content: center;
     }
@@ -270,29 +276,48 @@ div.ensentence > a.hint:hover {
    https://github.com/ankidroid/Anki-Android/blob/1994d46b7627bf82b89b054f2b7a5d8f60c33435/AnkiDroid/src/main/java/com/ichi2/libanki/Sound.kt#L130
    PC replay button = a.replay-button > svg */
 
+#vocab-audio,
+#sent-audio {
+    /* Fix for flexbox alignment */
+    display: contents;
+}
+
 a.replay-button {
-    display: inline-flex;
-    top: -0.125em;
-    position: relative;
+    /* Draw a circle around the play symbol */
+    --replay-button-scale: 0.7rem;
+
+    display: inline-grid;
+    place-items: center;
     margin: 0;
     user-select: none;
     cursor: pointer;
+    background-color: var(--color-play-circle, pink);
+    border-radius: 100vmax;
+    width: calc(2.25 * var(--replay-button-scale));
+    aspect-ratio: 1 / 1;
 }
 
-a.replay-button svg {
-    height: 1em;
-    width: 1em;
-    user-select: none;
+a.replay-button:hover,
+a.replay-button:focus-visible {
+    background-color: var(--color-play-circle-hover, yellow);
 }
 
-a.replay-button svg path {
+a.replay-button > * {
+    /* Delete the svg icon Anki places inside the link by default. */
+    display: none;
+}
+
+a.replay-button::after {
     /* The play symbol ▶️ */
-    fill: var(--color-play-symbol, pink);
-}
-
-a.replay-button svg circle {
-    /* The circle around the play symbol */
-    fill: var(--color-play-circle, pink);
+    user-select: none;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: calc(0.2 * var(--replay-button-scale));
+    border-top: calc(0.5 * var(--replay-button-scale)) solid transparent;
+    border-bottom: calc(0.5 * var(--replay-button-scale)) solid transparent;
+    border-left: calc(0.8 * var(--replay-button-scale)) solid var(--color-play-symbol, pink);
 }
 
 /* Footer and links */
@@ -326,6 +351,8 @@ footer > a:not(:last-child)::after {
     flex-flow: row wrap;
     margin-top: 2px;
     align-items: center;
+    align-content: flex-start;
+    justify-content: flex-start;
     gap: 5px;
 }
 
@@ -519,7 +546,7 @@ summary {
     cursor: pointer;
     padding: 8px 4px;
     border-radius: 4px;
-    background-color: #333;
+    background-color: var(--color-background-tags, yellow);
     color: #fffaf0;
     border: 0;
     outline: 0;
