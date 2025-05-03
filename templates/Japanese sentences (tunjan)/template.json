@@ -1,5 +1,5 @@
 {
-    "modelName": "Japanese sentences+",
+    "modelName": "Japanese sentences (tunjan)",
     "inOrderFields": [
         "SentKanji",
         "SentFurigana",
