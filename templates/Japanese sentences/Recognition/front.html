@@ -329,15 +329,19 @@ Wed Apr 30 11:17:13 AM UTC 2025
             console.log("Card script initialization complete.");
         }
 
+        function error_to_html(error_text) {
+            const err_div_element = document.getElementById("error_report");
+            const err_msg_element = err_div_element.querySelector(".error_msg");
+            err_div_element.setAttribute("error_occurred", true);
+            err_msg_element.innerText = error_text;
+        }
+
         function initialize_and_catch_errors() {
             try {
                 initialize();
             } catch (ex) {
                 console.error("AJT Error", ex.name, ex.message);
-                const err_div_element = document.getElementById("error_report");
-                const err_msg_element = err_div_element.querySelector(".error_msg");
-                err_div_element.setAttribute("error_occurred", true);
-                err_msg_element.innerText = ex.stack;
+                error_to_html(ex.stack);
                 throw ex;
             }
         }
