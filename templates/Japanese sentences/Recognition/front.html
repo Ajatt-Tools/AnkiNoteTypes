@@ -158,8 +158,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
             const headword_section =
                 document.querySelector("#tsc__headword_section") || document.querySelector("#tsc__backside_audio");
             if (headword_section) {
-                headword_section.prepend(document.querySelector("#vocab-audio"));
                 headword_section.prepend(document.querySelector("#sent-audio"));
+                headword_section.prepend(document.querySelector("#vocab-audio"));
             }
         }
 
