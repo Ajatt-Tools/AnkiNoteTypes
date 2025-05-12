@@ -3,6 +3,7 @@
 [Targeted sentence cards](https://tatsumoto-ren.github.io/blog/discussing-various-card-templates.html#targeted-sentence-cards-or-mpvacious-cards)
 for learning Japanese.
 Can be used for everyday sentence mining, as well as for storing premade sentence packs.
+
 A deck with example cards is available [here](https://ankiweb.net/shared/info/1557722832).
 
 ![screenshot](japanese_sentences.webp)
@@ -17,7 +18,7 @@ The sentence has one target word or phrase.
 I usually highlight the target word in bold.
 On the back you can put the definitions and pronunciations of the target word, as well as pictures.
 The note type also contains a separate field for Japanese pitch accent pattern.
-I use [this Anki add-on](https://ankiweb.net/shared/info/1225470483) to generate pitch accents.
+I use [this Anki add-on](https://tatsumoto.neocities.org/blog/anki-japanese-support) to generate pitch accents.
 
 The `Image` field will be shown on the front
 if a card has `imageonfront` tag.
