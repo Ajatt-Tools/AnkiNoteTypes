@@ -1,0 +1,59 @@
+@charset "utf-8";
+@font-face {
+    font-family: "My Yu Mincho";
+    src: local("Yu Mincho"), local("游明朝"), url("_yumin.woff2");
+}
+.card {
+    font-family: "Noto Sans", "Noto Sans CJK JP", "Liberation Sans", Helvetica, Arial, sans-serif;
+    background-color: #fffaf0;
+    text-align: center;
+    font-size: 25px;
+}
+.kana_char {
+    text-align: center;
+    font-family: "Yu Mincho", "My Yu Mincho", Serif;
+    font-size: 150px;
+    line-height: 160px;
+}
+.replaybutton {
+    margin: 0;
+    margin-right: 3px;
+    text-decoration: none;
+}
+.replaybutton span {
+    padding: 0;
+    font-size: 16px;
+    height: 16px;
+    vertical-align: baseline;
+}
+.replaybutton span svg {
+    fill: #fffaf0;
+    background: #333;
+    border-radius: 3px;
+    vertical-align: top;
+    min-width: 16px;
+    min-height: 16px;
+}
+a.replay-button {
+    top: -0.125em;
+    position: relative;
+}
+a.replay-button svg {
+    height: 1em;
+    width: 1em;
+}
+a.replay-button svg path {
+    fill: #fffaf0;
+}
+a.replay-button svg circle {
+    fill: #333;
+}
+.audio_files br {
+    display: none;
+}
+.char_type.katakana {
+    color: #ff6207;
+}
+.char_type.hiragana {
+    color: #637c8b;
+}

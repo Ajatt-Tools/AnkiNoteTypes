@@ -1,0 +1,13 @@
+{
+    "modelName": "Japanese kana recognition",
+    "inOrderFields": [
+        "Kana",
+        "Romaji",
+        "Hiragana",
+        "Pronunciation",
+        "Hint"
+    ],
+    "cardTemplates": [
+        "仮名 production"
+    ]
+}
