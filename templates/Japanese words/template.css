@@ -33,6 +33,7 @@
     --color-link: #532f2f;
     --color-link-hover: #722a2a;
     --color-headword: #ad1b82;
+    --color-hr: #ddd5c8;
     /* Tags (pitch, note tags) */
     --color-text-tags: #fffaf0;
     --color-background-tags: #333;
@@ -129,7 +130,7 @@ hr {
     margin: 8px 0;
     clear: both;
     border: 0;
-    border-top: 2px solid #ddd5c8;
+    border-top: 2px solid var(--color-hr, red);
 }
 
 /* links */
