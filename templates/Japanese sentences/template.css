@@ -139,6 +139,8 @@ ruby rt {
     }
 }
 
+/* HR */
+
 hr {
     margin: 8px 0;
     clear: both;
@@ -147,6 +149,7 @@ hr {
 }
 
 /* links */
+
 a {
     color: var(--color-link, pink);
 }
