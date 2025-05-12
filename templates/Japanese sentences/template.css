@@ -263,7 +263,7 @@ div.ensentence > a.hint:hover {
 .pitch_number,
 .tags {
     font-family: "Noto Sans", "Droid Sans", "DejaVu Sans", "Liberation Sans", Roboto, Cantarell, "Segoe UI", Arial,
-        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", Sans, sans-serif;
+        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", IPAGothic, "Yu Gothic", Sans, sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
