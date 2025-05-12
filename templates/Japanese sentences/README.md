@@ -33,12 +33,14 @@ The back of the card includes a stroke order diagram for the target word.
 
 For further explanation, see [Writing Japanese guide](https://tatsumoto-ren.github.io/blog/writing-japanese.html).
 
-## Yomichan settings
+## Rikaitan settings
 
 ![screenshot](yomichan_anki_settings.webp)
 
 Adding `{cloze-prefix}<b>{cloze-body}</b>{cloze-suffix}` to the settings
 lets you automatically highlight the target word.
+
+For details, see [Setting up Rikaitan](https://tatsumoto.neocities.org/blog/setting-up-yomichan).
 
 ## Japanese Support settings
 
