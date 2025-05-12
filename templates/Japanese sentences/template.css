@@ -95,12 +95,16 @@ strong {
 .card {
     background-color: var(--color-background, pink);
     color: var(--color-text, pink);
-    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif",
-        "Times New Roman", Times, Georgia, Serif;
     font-size: 24px;
     text-align: left;
     line-height: 1.4;
     margin: 0 auto;
+}
+
+.card,
+ruby rt {
+    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif",
+        "Times New Roman", Times, Georgia, Serif;
 }
 
 .card1 {
