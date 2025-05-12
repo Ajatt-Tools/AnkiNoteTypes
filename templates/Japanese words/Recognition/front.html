@@ -1,47 +1,176 @@
 <!--
-Simple Word Cards, version 7.0
-Thu May  2 01:59:45 PM UTC 2024
+Simple Word Cards, version 8.0
+Fri May  9 11:48:36 PM UTC 2025
 -->
 <div class="wrap">
     {{#Tags}}
-        <header>
-            <div class="tags">{{Tags}}</div>
-        </header>
+    <header>
+        <div class="tags">{{Tags}}</div>
+    </header>
     {{/Tags}}
-    <div class="japanese question" id="question">
-        {{edit:furigana:VocabKanji}}
+
+    <!-- Used to print JS-related errors to the user. -->
+    <div id="error_report">
+        <pre class="error_msg"></pre>
+    </div>
+
+    <!-- Front side. This tag is hidden on the back. -->
+    <div class="swc__front_side">
+        <div class="japanese question" id="question">{{edit:furigana:VocabKanji}}</div>
+    </div>
+
+    <!-- Back side. This tag is hidden on the front. -->
+    <div class="swc__back_side">
+        <div class="japanese">{{edit:furigana:VocabFurigana}}</div>
+        <div class="pronunciation">{{VocabPitchPattern}}</div>
+        {{#VocabDef}}
+        <div class="definition">{{edit:furigana:VocabDef}}</div>
+        {{/VocabDef}}
+
+        <!-- Image -->
+        {{#Image}}
+        <details id="details" class="images-details">
+            <summary>Image</summary>
+            <div class="images">{{Image}}</div>
+        </details>
+        {{/Image}}
+
+        <!-- Audio -->
+        {{#VocabAudio}}
+        <div class="pronunciation" id="audio_pronunciation"></div>
+        {{/VocabAudio}}
+
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <a href="https://jisho.org/search/{{kanji:text:VocabKanji}}">Jisho</a
+            ><a href="https://duckduckgo.com/?q={{kanji:text:VocabKanji}}&iax=images&ia=images&kp=-2&kl=jp-jp">Images</a
+            ><a href="http://www.weblio.jp/content/{{kanji:text:VocabKanji}}">Weblio</a
+            ><a href="https://wadoku.de/search/?q={{kanji:text:VocabKanji}}">Wadoku</a
+            ><a
+                href="https://chan.sankakucomplex.com/post/index?tags={{kanji:text:VocabKanji}} order:popular solo rating:safe"
+                >Sankaku</a
+            >
+        </footer>
     </div>
 </div>
 
 <script>
-    function highlightNames() {
-        const tags_elems = document.getElementsByClassName("tags");
-        for (const tag_elem of tags_elems) {
-            if (tag_elem.innerHTML.includes("キャラ") || tag_elem.innerHTML.includes("有名人")) {
-                tag_elem.style.backgroundColor = "brown";
-            } else if (tag_elem.innerHTML.includes("部首")) {
-                tag_elem.style.backgroundColor = "green";
+    (function () {
+        "use strict";
+        const HIDDEN_TAGS = new Set(["tolearn", "marked"]);
+
+        function is_back_revealed() {
+            return Boolean(document.querySelector(".swc__answer_revealed"));
+        }
+
+        function move_play_buttons_inside_headword() {
+            /*
+            Move play buttons inside the headword section.
+            Each play button looks like this:
+            <a class="replay-button"><svg><circle>...</circle>...</svg></a>
+            */
+            const audio_container = document.querySelector("#audio_pronunciation");
+            const audio_tag = document.querySelector("#vocab-audio");
+            if (audio_container && audio_tag) {
+                audio_container.appendChild(audio_tag);
             }
         }
-    }
 
-    function splitTagDiv() {
-        const header = document.querySelector("header");
-        if (header) {
-            const tags = `{{Tags}}`.split(" ");
+        function separate_tags_list() {
+            /* Splits tags into separate divs */
+            const header = document.querySelector("header");
+            if (!header) {
+                return;
+            }
+            const tags_split = new Set(`{{Focus}} {{Tags}}`.split(" ").filter((word) => word.length > 0));
+
             header.innerHTML = "";
-            for (const tag of tags) {
-                if (tag.includes("DisableGyousyo")) {
-                    continue;
-                }
+
+            for (const tag of tags_split.difference(HIDDEN_TAGS)) {
                 const tag_elem = document.createElement("div");
                 tag_elem.className = "tags";
-                tag_elem.innerHTML = tag;
+                tag_elem.innerText = tag;
                 header.appendChild(tag_elem);
             }
         }
-    }
 
-    splitTagDiv();
-    highlightNames();
+        function is_mobile_anki_app() {
+            /* Return true if running on AnkiDroid. */
+            return document.getElementsByTagName("html")[0].classList.contains("mobile");
+        }
+
+        function hide_images_details_on_mobile() {
+            /* Hide images on mobile devices. */
+            const is_mobile = is_mobile_anki_app();
+            for (const details_element of document.querySelectorAll(".images-details")) {
+                details_element.toggleAttribute("open", !is_mobile);
+            }
+        }
+
+        function remove_audio_if_marked_X() {
+            /* Insert x or × inside the VocabAudio field to hide it.
+               This mark is used to prevent AJT Japanese from attempting to fill the field
+               when the audio suggested by AJT Japanese is incorrect. */
+            const pr = document.getElementById("vocab-audio");
+            if (pr && pr.innerText.match(/^[x×]/i)) {
+                pr.style.display = "none";
+            }
+        }
+
+        function highlight_names() {
+            for (const tag_elem of document.getElementsByClassName("tags")) {
+                if (tag_elem.innerHTML.includes("キャラ") || tag_elem.innerHTML.includes("有名人")) {
+                    tag_elem.style.backgroundColor = "brown";
+                } else if (tag_elem.innerHTML.includes("部首")) {
+                    tag_elem.style.backgroundColor = "green";
+                }
+            }
+        }
+
+        function initialize() {
+            /* Entry point. */
+            console.log("Card script initializing...");
+            const isBack = is_back_revealed();
+
+            /* Functions that run on both front and back. */
+            separate_tags_list();
+            hide_images_details_on_mobile();
+            highlight_names();
+
+            if (isBack) {
+                console.log("Initializing the back side...");
+                remove_audio_if_marked_X();
+                move_play_buttons_inside_headword();
+            } else {
+                console.log("Initializing the front side...");
+            }
+            console.log("Card script initialization complete.");
+        }
+
+        function error_to_html(error_text) {
+            const err_div_element = document.getElementById("error_report");
+            const err_msg_element = err_div_element.querySelector(".error_msg");
+            err_div_element.setAttribute("error_occurred", true);
+            err_msg_element.innerText = error_text;
+        }
+
+        function initialize_and_catch_errors() {
+            try {
+                initialize();
+            } catch (ex) {
+                console.error("AJT Error", ex.name, ex.message);
+                error_to_html(ex.stack);
+                throw ex;
+            }
+        }
+
+        /* Wait for the DOM to be ready */
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initialize_and_catch_errors);
+        } else {
+            /* DOM is already ready */
+            initialize_and_catch_errors();
+        }
+    })();
 </script>

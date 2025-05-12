@@ -2,37 +2,77 @@
 
 @font-face {
     font-family: "KanjiStrokeOrders";
-    src:
-        local("KanjiStrokeOrders"),
-        url("_kso.woff2") format("woff2");
+    src: local("KanjiStrokeOrders"), url("_kso.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src:
-        local("Yu Mincho"),
-        local("游明朝"),
-        local("IPAexMincho"),
-        local("IPAex明朝"),
-        local("IPAMincho"),
-        local("IPA明朝"),
-        local("IPAPMincho"),
-        local("IPA P明朝"),
-        local("TakaoExMincho"),
-        local("TakaoEx明朝"),
-        url("_yumin.woff2") format("woff2");
+    src: local("Yu Mincho"), local("游明朝"), local("Noto Serif CJK JP"), local("IPAexMincho"), local("IPAex明朝"),
+        local("IPAMincho"), local("IPA明朝"), local("IPAPMincho"), local("IPA P明朝"), local("TakaoExMincho"),
+        local("TakaoEx明朝"), url("_yumin.woff2") format("woff2");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "Local Mincho";
-    src:
-        local("Noto Serif CJK JP SemiBold"),
-        local("Noto Serif CJK JP DemiLight"),
-        local("Yu Mincho Demibold"),
-        local("游明朝 Demibold"),
-        url("_yumindb.woff2") format("woff2");
+    src: local("Noto Serif CJK JP SemiBold"), local("Noto Serif CJK JP DemiLight"), local("Yu Mincho Demibold"),
+        local("游明朝 Demibold"), url("_yumindb.woff2") format("woff2");
     font-weight: 600;
+}
+
+/* Color schemes
+   Anki applies .card and .nightMode classes to <body>. */
+
+.card {
+    --color-side-bars: #e5d7c9;
+    --color-furigana: #000000;
+    --color-background: #fffaf0;
+    --color-text: #2a1b0a;
+    --color-background-wrap: #fffaf0;
+    --color-border-wrap: #c9bcbc;
+    --color-link: #532f2f;
+    --color-link-hover: #722a2a;
+    --color-headword: #ad1b82;
+    /* Tags (pitch, note tags) */
+    --color-text-tags: #fffaf0;
+    --color-background-tags: #333;
+    /* Hints (the English sentence is hidden under a hint) */
+    --color-text-hint: #555;
+    --color-hint-border: hsl(0deg 80% 50% / 15%);
+    --color-text-hint-hover: hsl(20deg 100% 20% / 80%);
+    --color-background-hint-hover: hsl(0deg 80% 50% / 3%);
+    /* Summary (labels for "notes" and "image")  */
+    --color-text-summary: hsl(0 80% 10% / 70%);
+    /* Audio replay button */
+    --color-play-symbol: #fffaf0;
+    --color-play-circle: var(--color-background-tags);
+    --color-play-circle-hover: #6b672f;
+}
+
+.card.nightMode {
+    --color-side-bars: #272413;
+    --color-furigana: #ffffff;
+    --color-background: #2f2f31;
+    --color-text: #ffffff;
+    --color-background-wrap: #221f15;
+    --color-border-wrap: #6d6868;
+    --color-link: #c7493a;
+    --color-link-hover: #a33327;
+    --color-headword: gray;
+    /* Tags (pitch numbers, note tags) */
+    --color-text-tags: #2f2f31;
+    --color-background-tags: #ffffff;
+    /* Hints (the English sentence is hidden under a hint) */
+    --color-text-hint: #fff;
+    --color-hint-border: #fff;
+    --color-text-hint-hover: gray;
+    --color-background-hint-hover: rgba(0, 0, 0, 0.2);
+    /* Summary (labels for "notes" and "image")  */
+    --color-text-summary: hsl(0 80% 100% / 70%);
+    /* Audio replay button */
+    --color-play-symbol: #2f2f31;
+    --color-play-circle: #ffffff;
+    --color-play-circle-hover: rgba(204, 223, 173, 0.8);
 }
 
 *,
@@ -49,32 +89,26 @@ strong {
 }
 
 .card {
+    background-color: var(--color-background, pink);
+    color: var(--color-text, pink);
     font-size: 24px;
     text-align: left;
-    background-color: #fffaf0;
-    color: #2a1b0a;
-    max-width: 800px;
+    line-height: 1.4;
     margin: 0 auto;
 }
 
 .card,
 ruby rt {
-    font-family:
-        "Noto Serif",
-        "Noto Serif CJK JP",
-        "IPAexMincho",
-        "Yu Mincho",
-        "Local Mincho",
-        "Liberation Serif",
-        "Times New Roman",
-        Times,
-        Georgia,
-        Serif;
+    font-family: "Noto Serif", "Noto Serif CJK JP", "IPAexMincho", "Yu Mincho", "Local Mincho", "Liberation Serif",
+        "Times New Roman", Times, Georgia, Serif;
 }
 
 @media screen and (min-width: 820px) {
-    .card {
-        background-color: #e5d7c9;
+    /* Large screens. */
+    .card,
+    .card.nightMode {
+        /* .card.nightMode fixes Anki's default CSS */
+        background-color: var(--color-side-bars, yellow);
         display: flex;
         justify-content: center;
     }
@@ -82,29 +116,31 @@ ruby rt {
     .wrap {
         width: 800px;
         padding: 0 5px 0;
-        background-color: #fffaf0;
-        border-left: 1px solid #c9bcbc;
-        border-right: 1px solid #c9bcbc;
+        background-color: var(--color-background-wrap, pink);
+        border-left: 1px solid var(--color-border-wrap, pink);
+        border-right: 1px solid var(--color-border-wrap, pink);
         min-height: 100vh;
     }
+}
 
-    .wrap .wrap {
-        width: auto;
-        padding: 0;
-        min-height: 0;
-        border: 0;
-    }
+/* HR */
+
+hr {
+    margin: 8px 0;
+    clear: both;
+    border: 0;
+    border-top: 2px solid #ddd5c8;
 }
 
 /* links */
 
 a {
-    color: #532f2f;
+    color: var(--color-link, pink);
     text-decoration: none;
 }
 
 a:hover {
-    color: #722a2a;
+    color: var(--color-link-hover, pink);
 }
 
 /* header */
@@ -112,31 +148,18 @@ a:hover {
 header {
     display: flex;
     clear: both;
-}
-
-header>div:not(:last-child) {
-    margin-right: 3px;
+    margin: 0 0 8px;
 }
 
 header .tags {
     border-radius: 0px 0px 3px 3px;
 }
 
-/* question */
-
-#question {
-    font-family:
-        "Noto Serif",
-        "Noto Serif CJK JP",
-        "IPAexMincho",
-        "Yu Mincho",
-        "Local Mincho",
-        "Liberation Serif",
-        "Times New Roman",
-        Times,
-        Georgia,
-        Serif;
+header > div:not(:last-child) {
+    margin-right: 3px;
 }
+
+/* question */
 
 .japanese {
     text-align: center;
@@ -159,13 +182,6 @@ header .tags {
     display: none;
 }
 
-hr {
-    margin: 2px 0;
-    clear: both;
-    border: 0;
-    border-top: 1px solid #c9bcbc;
-}
-
 /*
   Images
   Up to 3 columns, rows added automatically.
@@ -184,7 +200,7 @@ hr {
 }
 
 .images br,
-.images>* {
+.images > * {
     display: none;
 }
 
@@ -196,59 +212,37 @@ hr {
     max-height: 95vh;
 }
 
-.images img:nth-child(3n+1) {
+.images img:nth-child(3n + 1) {
     grid-column: 1;
 }
 
-.images img:nth-child(3n+2) {
+.images img:nth-child(3n + 2) {
     grid-column: 2;
 }
 
-.images img:nth-child(3n+3) {
+.images img:nth-child(3n + 3) {
     grid-column: 3;
 }
 
-/* Footer */
-
-footer {
-    font-size: 16px;
-    text-align: center;
-}
-
-footer>a:after {
-    content: "·";
-    color: brown;
-    display: inline-block;
-    width: 6px;
-}
-
-footer>a:last-child:after {
-    content: "";
-    width: 0;
-}
+/* Tags */
 
 .pitch_number,
 .tags {
-    font-family:
-        "Noto Sans",
-        "Noto Sans CJK JP",
-        "Liberation Sans",
-        Arial,
-        Sans,
-        IPAGothic,
-        Yu Gothic,
-        sans-serif;
+    font-family: "Noto Sans", "Droid Sans", "DejaVu Sans", "Liberation Sans", Roboto, Cantarell, "Segoe UI", Arial,
+        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", IPAGothic, "Yu Gothic", Sans, sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
-    background-color: #333;
-    color: #fffaf0;
+    background-color: var(--color-background-tags, pink);
+    color: var(--color-text-tags, pink);
     font-weight: bold;
     padding: 1px 3px;
+    margin: 0;
     cursor: pointer;
     border-radius: 3px;
     font-size: 12px;
     line-height: 14px;
+    user-select: none;
 }
 
 .pitch_number {
@@ -256,48 +250,75 @@ footer>a:last-child:after {
     vertical-align: top;
 }
 
-/*
-  AnkiDroid replay button
-  .replaybutton is an <a> tag with a <span> that has an <svg> inside
-*/
-.replaybutton {
-    margin: 0;
-    margin-right: 3px;
-    text-decoration: none;
-}
+/* AnkiDroid replay button = a.replay-button > span > svg
+   https://github.com/ankidroid/Anki-Android/blob/1994d46b7627bf82b89b054f2b7a5d8f60c33435/AnkiDroid/src/main/java/com/ichi2/libanki/Sound.kt#L130
+   PC replay button = a.replay-button > svg */
 
-.replaybutton span {
-    padding: 0;
-    font-size: 16px;
+#vocab-audio {
+    /* Fix for flexbox alignment */
+    display: contents;
 }
-
-.replaybutton span svg {
-    fill: #fffaf0;
-    background: #333;
-    border-radius: 3px;
-    vertical-align: top;
-    min-width: 16px;
-    min-height: 16px;
-}
-
-/* PC peplay button */
 
 a.replay-button {
-    top: -0.125em;
-    position: relative;
+    /* Draw a circle around the play symbol */
+    --replay-button-scale: 0.7rem;
+
+    display: inline-grid;
+    place-items: center;
+    margin: 0;
+    user-select: none;
+    cursor: pointer;
+    background-color: var(--color-play-circle, pink);
+    border-radius: 100vmax;
+    width: calc(2.25 * var(--replay-button-scale));
+    aspect-ratio: 1 / 1;
 }
 
-a.replay-button svg {
-    height: 1em;
-    width: 1em;
+a.replay-button:hover,
+a.replay-button:focus-visible {
+    background-color: var(--color-play-circle-hover, yellow);
 }
 
-a.replay-button svg path {
-    fill: #fffaf0;
+a.replay-button > * {
+    /* Delete the svg icon Anki places inside the link by default. */
+    display: none;
 }
 
-a.replay-button svg circle {
-    fill: #333;
+a.replay-button::after {
+    /* The play symbol ▶️ */
+    user-select: none;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: calc(0.2 * var(--replay-button-scale));
+    border-top: calc(0.5 * var(--replay-button-scale)) solid transparent;
+    border-bottom: calc(0.5 * var(--replay-button-scale)) solid transparent;
+    border-left: calc(0.8 * var(--replay-button-scale)) solid var(--color-play-symbol, pink);
+}
+
+/* Footer and links */
+
+footer {
+    font-size: 16px;
+    word-break: keep-all;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer > a:not(:last-child)::after {
+    content: "·";
+    color: brown;
+    display: inline-block;
+    padding: 0 2px;
 }
 
 /* Fix for Yomichan */
@@ -310,84 +331,78 @@ ol {
     padding: 0px;
 }
 
-ul li+li,
-ol li+li {
+ul li + li,
+ol li + li {
     margin-block-start: 0.33em;
 }
 
-.pronunciation ol>li {
+.pronunciation ol > li {
     display: inline;
 }
 
-.pronunciation ol>li:after {
+.pronunciation ol > li:after {
     content: "・";
 }
 
-.pronunciation ol>li:last-child:after {
+.pronunciation ol > li:last-child:after {
     content: "";
-}
-
-/* Night Mode */
-
-.nightMode.card,
-.nightMode .wrap {
-    color: #FFFFFF;
-    background-color: #2F2F31;
-}
-
-.nightMode .tags {
-    background-color: #FFFFFF;
-    color: #2F2F31;
-}
-
-.nightMode a.replay-button svg path {
-    fill: #2F2F31;
-}
-
-.nightMode a.replay-button svg circle {
-    fill: #FFFFFF;
-}
-
-.nightMode .replaybutton span svg {
-    fill: #2F2F31;
-    background: #FFFFFF;
-}
-
-.nightMode a {
-    color: #c7493a;
-}
-
-.nightMode a:hover {
-    color: #a33327;
-}
-
-.nightMode .images>img {
-    filter: sepia(0%);
-}
-
-/* Dim furigana color on the front (if present) */
-
-.japanese.question ruby rt {
-    opacity: 0.15;
-    transition: opacity 0.15s;
-}
-
-.japanese.question:hover ruby rt {
-    opacity: 1;
 }
 
 /* Details */
 
-details, .definition {
+details,
+.definition {
     background-color: hsl(0deg 80% 50% / 3%);
     border-radius: 4px;
     padding: 3px;
     margin-block-end: 0.4rem;
-    border: 1px solid hsl(0deg 80% 50% / 15%);;
+    border: 1px solid hsl(0deg 80% 50% / 15%);
 }
+
 summary {
     font-size: 18px;
-    color: hsl(0 80% 10% / 70%);
+    color: var(--color-text-summary, pink);
     font-weight: 500;
     user-select: none;
+}
+
+/* Hide the front side when the back is shown. */
+
+body:has(.swc__answer_revealed) .swc__front_side {
+    display: none;
+}
+
+/* Hide the back side until the user reveals it. */
+
+body:not(:has(.swc__answer_revealed)) .swc__back_side {
+    display: none;
+}
+
+/* Dim furigana color on the front (if present)
+   Furigana on the front is used to exclude a possible reading, e.g. to write 雁[×かり] or 雪洞[×せつどう] */
+
+body:not(:has(.swc__answer_revealed)) .japanese.question ruby rt {
+    opacity: 0.15;
+    transition: opacity 0.15s;
+}
+
+body:not(:has(.swc__answer_revealed)) .japanese.question:hover ruby rt {
+    opacity: 1;
+}
+
+/* Error reporting. Used to show JS errors.
+   Under normal circumstances, the user should never see this. */
+
+#error_report {
+    border: 2px brown solid;
+    background-color: #ecd4d4;
+    color: #2e0b0b;
+    display: none;
+    font-size: 1rem;
+    padding: 0.4rem;
+    overflow-x: auto;
+}
+
+#error_report[error_occurred="true"] {
+    display: block;
 }
