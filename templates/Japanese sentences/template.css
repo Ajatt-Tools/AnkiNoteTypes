@@ -264,7 +264,8 @@ div.ensentence > a.hint:hover {
 .pitch_number,
 .tags {
     font-family: "Noto Sans", "Droid Sans", "DejaVu Sans", "Liberation Sans", Roboto, Cantarell, "Segoe UI", Arial,
-        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", IPAGothic, "Yu Gothic", Sans, sans-serif;
+        Meiryo, Oxygen, Ubuntu, "Helvetica Neue", Helvetica, "Noto Color Emoji", "Noto Sans CJK JP", IPAGothic,
+        "Yu Gothic", Sans, sans-serif;
     text-align: center;
     display: inline-block;
     text-transform: lowercase;
@@ -555,15 +556,15 @@ summary {
     padding: 8px 4px;
     border-radius: 4px;
     background-color: var(--color-background-tags, yellow);
-    color: #fffaf0;
+    color: var(--color-text-tags, red);
     border: 0;
     outline: 0;
     margin: 0 0 6px;
 }
 .toggle_furigana_button:hover,
 .toggle_furigana_button:active {
-    background-color: #4f4f4f;
-    background: #4f4f4f;
+    background-color: var(--color-play-circle-hover, #4f4f4f);
+    background: var(--color-play-circle-hover, #4f4f4f);
     border: none;
 }
 
