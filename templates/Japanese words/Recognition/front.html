@@ -77,6 +77,21 @@ Fri May  9 11:48:36 PM UTC 2025
             }
         }
 
+        function exclude_tags(all_tags, excluded_tags) {
+            try {
+                /*
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/difference
+                */
+                return all_tags.difference(excluded_tags);
+            } catch (e) {
+                /*
+                Some users have reported that the difference method does not work on Anki on Windows.
+                */
+                console.log("Set.prototype.difference() is not available.");
+                return new Set([...all_tags].filter((elem) => !excluded_tags.has(elem)));
+            }
+        }
+
         function separate_tags_list() {
             /* Splits tags into separate divs */
             const header = document.querySelector("header");
@@ -87,7 +102,7 @@ Fri May  9 11:48:36 PM UTC 2025
 
             header.innerHTML = "";
 
-            for (const tag of tags_split.difference(HIDDEN_TAGS)) {
+            for (const tag of exclude_tags(tags_split, HIDDEN_TAGS)) {
                 const tag_elem = document.createElement("div");
                 tag_elem.className = "tags";
                 tag_elem.innerText = tag;
