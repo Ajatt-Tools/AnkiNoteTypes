@@ -382,7 +382,8 @@ footer > a:not(:last-child)::after {
     display: inline-block;
 }
 
-.vocab br {
+.vocab br,
+#tsc__backside_audio br {
     display: none;
 }
 
