@@ -384,6 +384,7 @@ footer > a:not(:last-child)::after {
 
 .vocab br,
 #tsc__backside_audio br {
+    /* ignore line breaks: play buttons, readings, and headword should be in one line */
     display: none;
 }
 
