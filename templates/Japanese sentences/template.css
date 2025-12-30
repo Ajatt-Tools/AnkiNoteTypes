@@ -254,6 +254,20 @@ div.ensentence > a.hint:hover {
 
 /* Definition */
 
+div.definitions > #definitions-hint > a.hint {
+    color: var(--color-text-hint, pink);
+    display: block;
+    border: 1px solid var(--color-hint-border, pink);
+    border-radius: 2.2px;
+    padding: 2px 10px;
+    margin: 0.4rem 0;
+}
+
+div.definitions > #definitions-hint > a.hint:hover {
+    color: var(--color-text-hint-hover, pink);
+    background-color: var(--color-background-hint-hover, pink);
+}
+
 .definitions,
 .notes {
     font-weight: 300;

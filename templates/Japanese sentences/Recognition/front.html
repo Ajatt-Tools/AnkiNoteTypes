@@ -88,7 +88,15 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 <div class="target_word" lang="ja">{{text:kanji:VocabKanji}}</div>
                 {{/VocabKanji}}
             </div>
-            <div class="definitions">{{edit:furigana:VocabDef}}</div>
+            <div class="definitions">
+                <span id="definitions-normal">
+                    {{edit:furigana:VocabDef}}
+                </span>
+                <span id="definitions-hint" style="display:none;">
+                    {{edit:hint:furigana:VocabDef}}
+                </span>
+            </div>
+
         </section>
         {{/VocabDef}}
 
@@ -143,7 +151,8 @@ Wed Apr 30 11:17:13 AM UTC 2025
     (function () {
         "use strict";
         const IMG_ON_FRONT_TAG = "imageonfront";
-        const HIDDEN_TAGS = new Set([IMG_ON_FRONT_TAG, "tolearn", "marked"]);
+        const HINT_DEFINITION_TAG = "hintdefinition";
+        const HIDDEN_TAGS = new Set([HINT_DEFINITION_TAG, IMG_ON_FRONT_TAG, "tolearn", "marked"]);
         const JP1K_TAG = "jp1k";
         const IS_JP1K_MODE = `{{Tags}}`.toLowerCase().split(" ").includes(JP1K_TAG);
 
@@ -219,6 +228,30 @@ Wed Apr 30 11:17:13 AM UTC 2025
             console.log(`Images on front are ${images_on_front_enabled ? "enabled" : "disabled"}.`);
             for (const img_container of document.querySelectorAll(".images-details")) {
                 img_container.setAttribute("images_on_front", images_on_front_enabled);
+            }
+        }
+
+        function hint_definition_from_tags() {
+            /* If a card has the "hintDefinition" tag set, make the definition click to reveal. */
+            const hint_definition_enabled = `{{Tags}}`.split(" ").includes(HINT_DEFINITION_TAG);
+            console.log(`Hint definition is ${hint_definition_enabled ? "enabled" : "disabled"}.`);
+
+            const def_normal = document.getElementById("definitions-normal");
+            const def_hidden = document.getElementById("definitions-hint");
+
+            if (hint_definition_enabled) {
+                def_normal.style.display = "none";
+                def_hidden.style.display = "inline";
+
+                /* Change the text on the button that reveals the definition. */
+                const elem = document.querySelector("div.definitions > #definitions-hint > a.hint");
+                if (elem) {
+                    elem.innerText = "Reveal definition";
+                    elem.setAttribute("title", "Press X to reveal the definition.");
+                }
+            } else {
+                def_normal.style.display = "inline";
+                def_hidden.style.display = "none";
             }
         }
 
@@ -339,6 +372,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 remove_audio_if_marked_X();
                 remove_pitch_brackets();
                 hide_duplicate_pitch_number();
+                hint_definition_from_tags();
             } else {
                 console.log("Initializing the front side...");
                 toggle_visible_images_on_front();
