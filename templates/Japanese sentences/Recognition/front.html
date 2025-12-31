@@ -89,7 +89,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
                 {{/VocabKanji}}
             </div>
             <div class="definitions">
-                <span id="definitions-normal">
+                <span id="definitions-normal" style="display:inline;">
                     {{edit:furigana:VocabDef}}
                 </span>
                 <span id="definitions-hint" style="display:none;">
@@ -233,7 +233,7 @@ Wed Apr 30 11:17:13 AM UTC 2025
 
         function hint_definition_from_tags() {
             /* If a card has the "hintDefinition" tag set, make the definition click to reveal. */
-            const hint_definition_enabled = `{{Tags}}`.split(" ").includes(HINT_DEFINITION_TAG);
+            const hint_definition_enabled = `{{Tags}}`.toLowerCase().split(" ").includes(HINT_DEFINITION_TAG);
             console.log(`Hint definition is ${hint_definition_enabled ? "enabled" : "disabled"}.`);
 
             const def_normal = document.getElementById("definitions-normal");
