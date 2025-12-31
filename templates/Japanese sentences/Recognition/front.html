@@ -239,6 +239,10 @@ Wed Apr 30 11:17:13 AM UTC 2025
             const def_normal = document.getElementById("definitions-normal");
             const def_hidden = document.getElementById("definitions-hint");
 
+            if (!def_normal || !def_hidden) {
+                return;
+            }
+
             if (hint_definition_enabled) {
                 def_normal.style.display = "none";
                 def_hidden.style.display = "inline";
